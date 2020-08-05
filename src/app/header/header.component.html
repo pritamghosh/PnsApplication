@@ -1,0 +1,39 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <!-- <div routerLink="/" style="cursor: pointer;">
+      <img src="assets/img/logo.png" alt="PNS" />
+    </div> -->
+    <h1><a routerLink="/" style="color: white;">PNS</a></h1>
+    <span class="menu-spacer"></span>
+    <div class="sm-hide">
+      <button mat-button [routerLink]="['customer']">
+        Customer
+      </button>
+      <button mat-button [routerLink]="['equipment']">
+        Equipment</button
+      ><button mat-button [routerLink]="['contract']">
+        Contract
+      </button>
+    </div>
+    <div style="flex-grow: 1;"></div>
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="userMenu" class="sm-hide">
+        <mat-icon>person</mat-icon>
+      </button>
+      <!--<button mat-icon-button [matMenuTriggerFor]="mainMenu" class="sm-show">
+        <mat-icon>menu</mat-icon>
+      </button> -->
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item [routerLink]="['login']" [hidden]="isLoggedIn">
+          Login
+        </button>
+        <button mat-menu-item [routerLink]="['profile']" [hidden]="!isLoggedIn">
+          Profile
+        </button>
+        <button mat-menu-item (click)="signOut()" [hidden]="!isLoggedIn">
+          Sign Out
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

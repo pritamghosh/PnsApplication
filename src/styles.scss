@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.pns-radio-group {
+  display: flex;
+  margin: 15px 0;
+}
+
+.pns-radio-button {
+  margin: 5px;
+}
+.box {
+  margin: 10px;
+  padding: 10px;
+}
+
+.details {
+  border-color: silver;
+  border-style: groove;
+  border-width: 2px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  span {
+    font-weight: bold;
+  }
+  div {
+    margin-top: 10px;
+  }
+}

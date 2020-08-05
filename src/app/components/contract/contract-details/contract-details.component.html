@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-12" *ngFor="let contract of contracts">
+    <div class="details">
+      <span style="font-size: 15px;">Cutomer Details:</span>
+      <br />
+      <span> Name: {{ contract.customer.name }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>Region: {{ contract.customer.region }}</span>
+      <hr />
+      <span style="font-size: 15px;">Equipment Details:</span>
+      <span>Equipment Model: {{ contract.equipmentItem.equipment.model }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>Serial Number: {{ contract.equipmentItem.serialNumber }}</span>
+      <br />
+      <span
+        >Description: {{ contract.equipmentItem.equipment.description }}</span
+      >
+      <hr />
+      <span>Amc Start Date: {{ contract.amcStartDate | date }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>Amc End Date: {{ contract.amcEndDate | date }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>Billing Cycle: {{ contract.billingCycle }}</span>
+      <br />
+      <span>Basic Amount: {{ contract.amcBasicAmount }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>Tax: {{ contract.amcTax }}%</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>Total Amount: {{ contract.amcTotalAmount }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span *ngIf="contract.note"> Note: {{ contract.note }} </span>
+      <hr />
+      <div>
+        <button
+          type="button"
+          mat-mini-fab
+          color
+          color="accent"
+          (click)="edit(contract)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          type="button"
+          mat-raised-button
+          color="primary"
+          (click)="renewContracts(contract)"
+          style="float: right;"
+        >
+          Renew Contract
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

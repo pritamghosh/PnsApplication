@@ -1,0 +1,50 @@
+<div mat-dialog-content style="min-width: 400px;">
+  <span>Find Customer by Name</span>
+  <br />
+  <mat-form-field>
+    <mat-label>Enter Customer Name</mat-label>
+    <input matInput [formControl]="searchKeyControl" />
+  </mat-form-field>
+  <button
+    mat-mini-fab
+    color="primary"
+    type="button"
+    (click)="search()"
+    [disabled]="!searchKeyControl.valid"
+    style="float: right;"
+  >
+    <mat-icon>search</mat-icon>
+  </button>
+</div>
+<hr />
+<mat-selection-list
+  #customerSelected
+  [multiple]="false"
+  (selectionChange)="onSelection(customerSelected.selectedOptions.selected)"
+>
+  <mat-list-option *ngFor="let customer of customerResp" [value]="customer">
+    {{ customer.name }} ({{ customer.region }})
+  </mat-list-option>
+</mat-selection-list>
+<hr *ngIf="customerResp" />
+<p>
+  Selected Customer :
+  <span *ngIf="customerSelected.selectedOptions.selected[0]">
+    {{ customerSelected.selectedOptions.selected[0]?.value.name }} ({{
+      customerSelected.selectedOptions.selected[0]?.value.region
+    }})</span
+  >
+</p>
+<hr />
+<div class="row">
+  <div class="col-lg-12" style="margin-top: 20px; text-align: center;">
+    <button
+      mat-raised-button
+      color="primary"
+      matDialogClose
+      [disabled]="!customerSelected.selectedOptions.selected[0]"
+    >
+      Select
+    </button>
+  </div>
+</div>

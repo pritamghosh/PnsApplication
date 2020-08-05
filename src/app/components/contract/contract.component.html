@@ -1,0 +1,55 @@
+<div class="container">
+  <mat-tab-group [(selectedIndex)]="selectedTab">
+    <mat-tab label="View/Search Contract">
+      <!-- search panel start -->
+      <div class="box">
+        <label id="pns-radio-group-label">Select Your Option</label>
+        <mat-radio-group
+          aria-labelledby="pns-radio-group-label"
+          class="pns-radio-group"
+          [(ngModel)]="selectedOption"
+          style="flex-direction: row;"
+        >
+          <mat-radio-button
+            class="pns-radio-button"
+            *ngFor="let option of searchOption"
+            [value]="option"
+          >
+            {{ option.value }}
+          </mat-radio-button>
+        </mat-radio-group>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field style="width: 100%;">
+              <mat-label>{{ selectedOption.searchFieldName }}</mat-label>
+              <input
+                matInput
+                [formControl]="seachKeyControl"
+                [disabled]="isSeachFieldDisabled()"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <button
+              mat-raised-button
+              color="primary"
+              type="button"
+              [disabled]="isSeachButtonDisabled()"
+              (click)="findContract()"
+            >
+              {{ selectedOption.searchButtonName }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- search panel end -->
+      <hr />
+      <div class="box" *ngIf="isSearched">
+        <app-contract-details [contracts]="contractResp"></app-contract-details>
+      </div>
+    </mat-tab>
+    <mat-tab label="Add Contract">
+      <app-contract-form></app-contract-form>
+    </mat-tab>
+  </mat-tab-group>
+</div>
