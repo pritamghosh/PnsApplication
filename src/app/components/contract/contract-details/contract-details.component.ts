@@ -14,4 +14,5 @@ export class ContractDetailsComponent implements OnInit {
 
   renewContracts(contract: ContractModel) {}
   edit(contract: ContractModel) {}
+  print(contract: ContractModel) {}
 }

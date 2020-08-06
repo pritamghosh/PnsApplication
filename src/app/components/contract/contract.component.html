@@ -19,7 +19,7 @@
           </mat-radio-button>
         </mat-radio-group>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6" *ngIf="selectedOption.type != 'byDateRange'">
             <mat-form-field style="width: 100%;">
               <mat-label>{{ selectedOption.searchFieldName }}</mat-label>
               <input
@@ -27,6 +27,36 @@
                 [formControl]="seachKeyControl"
                 [disabled]="isSeachFieldDisabled()"
               />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3" *ngIf="selectedOption.type == 'byDateRange'">
+            <mat-form-field style="width: 100%;">
+              <mat-label>Select Amc Start Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="startDatefor"
+                [formControl]="startDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="startDatefor"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #startDatefor></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3" *ngIf="selectedOption.type == 'byDateRange'">
+            <mat-form-field style="width: 100%;">
+              <mat-label>Select Amc End Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="endDatefor"
+                [formControl]="endDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="endDatefor"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #endDatefor></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="col-md-6">

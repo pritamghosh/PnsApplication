@@ -101,14 +101,10 @@ export class ContractFormComponent implements OnInit {
         equipment._id = dialogConfig.data.equipment._id;
         equipment.model = dialogConfig.data.equipment.model;
         equipment.description = dialogConfig.data.equipment.description;
-        console.log(equipment);
-
         this.contractForm
           .get("equipmentItem")
           .get("equipment")
           .setValue(equipment);
-        console.log(this.contractForm.get("equipmentItem").get("equipment"));
-        console.log(this.contractForm.value);
       }
     });
   }

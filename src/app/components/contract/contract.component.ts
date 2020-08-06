@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ContractService } from "src/app/services/contract.service";
 import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { ContractModel } from "src/app/models/contract.model ";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-contract",
@@ -14,6 +15,8 @@ export class ContractComponent implements OnInit {
   contractResp: ContractModel[];
 
   seachKeyControl = new FormControl(null, [Validators.required]);
+  startDate = new FormControl(null, [Validators.required]);
+  endDate = new FormControl(null, [Validators.required]);
   searchOption = [
     {
       value: "Find All",
@@ -35,12 +38,29 @@ export class ContractComponent implements OnInit {
   ];
 
   selectedOption = this.searchOption[0];
-  constructor(private service: ContractService) {}
+  constructor(
+    private service: ContractService,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      if (params["customerId"]) {
+        this.search(`/customer/${params["customerId"]}`);
+      } else if (params["equipmentId"]) {
+        this.search(`/equipment/${params["equipmentId"]}`);
+      }
+    });
+  }
 
   isSeachButtonDisabled() {
-    return this.selectedOption.type != "all" && !this.seachKeyControl.valid;
+    if (this.selectedOption.type == "all") {
+      return false;
+    }
+    if (this.selectedOption.type == "byDateRange") {
+      return !(this.endDate.valid && this.startDate.valid);
+    }
+    return false;
   }
 
   isSeachFieldDisabled() {
@@ -67,6 +87,10 @@ export class ContractComponent implements OnInit {
         break;
       }
     }
+    this.search(url);
+  }
+
+  search(url: string) {
     this.service.get(url).subscribe((res: ContractModel[]) => {
       this.contractResp = res;
       this.isSearched = true;

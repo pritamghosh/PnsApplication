@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { EquipmentModel } from "src/app/models/equipment.model ";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-equipment-details",
@@ -8,11 +9,15 @@ import { EquipmentModel } from "src/app/models/equipment.model ";
 })
 export class EquipmentDetailsComponent implements OnInit {
   @Input("equipments") equipments: EquipmentModel[];
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
-  viewContracts(equipment: EquipmentModel) {}
+  viewContracts(equipment: EquipmentModel) {
+    this.router.navigate(["contract"], {
+      queryParams: { equipmentId: equipment._id },
+    });
+  }
   delete(equipment: EquipmentModel) {}
   edit(equipment: EquipmentModel) {}
 }

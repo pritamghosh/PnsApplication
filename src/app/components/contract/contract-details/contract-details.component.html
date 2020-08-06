@@ -34,11 +34,19 @@
         <button
           type="button"
           mat-mini-fab
-          color
           color="accent"
           (click)="edit(contract)"
         >
           <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-mini-fab
+          color="accent"
+          type="button"
+          (click)="print(contract)"
+          class="m-l-20"
+        >
+          <mat-icon>print</mat-icon>
         </button>
         <button
           type="button"
