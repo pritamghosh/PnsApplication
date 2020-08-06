@@ -10,7 +10,7 @@
           mat-mini-fab
           color
           color="warn"
-          (click)="delete(customer)"
+          (click)="onDelete(customer)"
         >
           <mat-icon>delete</mat-icon>
         </button>
@@ -19,7 +19,7 @@
           mat-mini-fab
           color
           color="accent"
-          (click)="edit(customer)"
+          (click)="onEdit(customer)"
           style="margin-left: 10px;"
         >
           <mat-icon>edit</mat-icon>
@@ -31,7 +31,7 @@
           (click)="viewContracts(customer)"
           style="float: right;"
         >
-          View Contract
+          View Contracts
         </button>
       </div>
     </div>

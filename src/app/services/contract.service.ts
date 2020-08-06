@@ -11,8 +11,16 @@ export class ContractService {
   constructor(private http: HttpClient, private alertService: AlertService) {}
 
   public add(req: any) {
-    this.http.put(this.baseUrl, req).subscribe((resp: any) => {
-      this.alertService.openDiaolog("Contract Added Successfully!!");
+    return new Observable((observer) => {
+      this.http.put(this.baseUrl, req).subscribe((resp: any) => {
+        this.alertService
+          .openDiaolog("Contract Added Successfully!!")
+          .afterClosed()
+          .subscribe((resp) => {
+            observer.next(resp);
+            observer.complete();
+          });
+      });
     });
   }
 

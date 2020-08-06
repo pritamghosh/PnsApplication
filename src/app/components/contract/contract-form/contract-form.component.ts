@@ -67,7 +67,9 @@ export class ContractFormComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    this.service.add(this.contractForm.value);
+    this.service
+      .add(this.contractForm.value)
+      .subscribe((resp) => this.contractForm.reset());
   }
 
   onReset() {

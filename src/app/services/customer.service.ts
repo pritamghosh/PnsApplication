@@ -11,8 +11,30 @@ export class CustomerService {
   baseUrl = "/pns/customer";
 
   public add(req: any) {
-    this.http.put(this.baseUrl, req).subscribe((resp: any) => {
-      this.alertService.openDiaolog("Customer Added Successfully!!");
+    return new Observable((observer) => {
+      this.http.put(this.baseUrl, req).subscribe((resp: any) => {
+        this.alertService
+          .openDiaolog("Customer Added Successfully!!")
+          .afterClosed()
+          .subscribe((resp) => {
+            observer.next(resp);
+            observer.complete();
+          });
+      });
+    });
+  }
+
+  public update(req: any) {
+    return new Observable((observer) => {
+      this.http.post(this.baseUrl, req).subscribe((res: any) => {
+        this.alertService
+          .openDiaolog("Customer Updated Successfully!!")
+          .afterClosed()
+          .subscribe((resp) => {
+            observer.next(res);
+            observer.complete();
+          });
+      });
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { CustomerModel } from "src/app/models/customer.model";
 import { Router } from "@angular/router";
 
@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 })
 export class CustomerDetailsComponent implements OnInit {
   @Input("customers") customers: CustomerModel[];
+  @Output() edit: EventEmitter<CustomerModel> = new EventEmitter();
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
@@ -18,6 +19,8 @@ export class CustomerDetailsComponent implements OnInit {
       queryParams: { customerId: customer._id },
     });
   }
-  delete(customer: CustomerModel) {}
-  edit(customer: CustomerModel) {}
+  onDelete(customer: CustomerModel) {}
+  onEdit(customer: CustomerModel) {
+    this.edit.emit(customer);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { EquipmentModel } from "src/app/models/equipment.model ";
 import { Router } from "@angular/router";
 
@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 })
 export class EquipmentDetailsComponent implements OnInit {
   @Input("equipments") equipments: EquipmentModel[];
+  @Output() edit: EventEmitter<EquipmentModel> = new EventEmitter();
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
@@ -18,6 +19,8 @@ export class EquipmentDetailsComponent implements OnInit {
       queryParams: { equipmentId: equipment._id },
     });
   }
-  delete(equipment: EquipmentModel) {}
-  edit(equipment: EquipmentModel) {}
+  OnDelete(equipment: EquipmentModel) {}
+  OnEdit(equipment: EquipmentModel) {
+    this.edit.emit(equipment);
+  }
 }

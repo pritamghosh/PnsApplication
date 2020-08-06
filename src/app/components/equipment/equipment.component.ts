@@ -11,7 +11,9 @@ import { EquipmentService } from "src/app/services/equipment.service";
 export class EquipmentComponent implements OnInit {
   selectedTab = 0;
   isSearched = false;
+  editTabShow = false;
   equipmentForm: FormGroup;
+  equipmentEditForm: FormGroup;
   equipmentResp: EquipmentModel[];
   seachKeyControl = new FormControl(null, [Validators.required]);
   searchOption = [
@@ -43,14 +45,47 @@ export class EquipmentComponent implements OnInit {
       model: new FormControl(null, [Validators.required]),
       description: new FormControl(null),
     });
+    this.equipmentEditForm = new FormGroup({
+      model: new FormControl(null, [Validators.required]),
+      description: new FormControl(null),
+    });
+  }
+  onEdit(equipment: EquipmentModel) {
+    this.equipmentEditForm = new FormGroup({
+      model: new FormControl(equipment.model, [Validators.required]),
+      _id: new FormControl(equipment._id, [Validators.required]),
+      description: new FormControl(equipment.description),
+    });
+    this.editTabShow = true;
+    this.selectedTab = 2;
   }
 
-  onSubmit() {
-    this.service.add(this.equipmentForm.value);
+  onAdd() {
+    this.service.add(this.equipmentForm.value).subscribe((resp) => {
+      this.equipmentForm.reset();
+    });
+  }
+
+  onUpdate() {
+    this.service.update(this.equipmentEditForm.value).subscribe((resp: any) => {
+      this.equipmentResp.forEach((element) => {
+        if (element._id == resp._id) {
+          element.model = resp.model;
+          element.description = resp.description;
+        }
+      });
+      this.editTabShow = false;
+      this.selectedTab = 0;
+    });
   }
 
   onReset() {
     this.equipmentForm.reset();
+  }
+
+  onCancel() {
+    this.editTabShow = false;
+    this.selectedTab = 0;
   }
 
   isSeachButtonDisabled() {

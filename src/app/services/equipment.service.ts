@@ -10,8 +10,30 @@ export class EquipmentService {
   baseUrl = "/pns/equipment";
   constructor(private http: HttpClient, private alertService: AlertService) {}
   add(req: any) {
-    this.http.put(this.baseUrl, req).subscribe((resp: any) => {
-      this.alertService.openDiaolog("Equipment Added Successfully!!");
+    return new Observable((observer) => {
+      this.http.put(this.baseUrl, req).subscribe((resp: any) => {
+        this.alertService
+          .openDiaolog("Equipment Added Successfully!!")
+          .afterClosed()
+          .subscribe((resp) => {
+            observer.next(resp);
+            observer.complete();
+          });
+      });
+    });
+  }
+
+  update(req: any) {
+    return new Observable((observer) => {
+      this.http.post(this.baseUrl, req).subscribe((res: any) => {
+        this.alertService
+          .openDiaolog("Equipment Updated Successfully!!")
+          .afterClosed()
+          .subscribe((resp) => {
+            observer.next(res);
+            observer.complete();
+          });
+      });
     });
   }
 
