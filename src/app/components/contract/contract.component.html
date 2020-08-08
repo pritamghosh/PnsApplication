@@ -75,11 +75,44 @@
       <!-- search panel end -->
       <hr />
       <div class="box" *ngIf="isSearched">
-        <app-contract-details [contracts]="contractResp"></app-contract-details>
+        <app-contract-details
+          [contracts]="contractResp"
+          (edit)="edit($event)"
+          (renew)="renew($event)"
+        ></app-contract-details>
       </div>
     </mat-tab>
     <mat-tab label="Add Contract">
-      <app-contract-form></app-contract-form>
+      <app-contract-form
+        secondButtonName="Reset"
+        secondButtonColor="accent"
+        (action)="add($event)"
+        title="Enter Contract Details"
+        actionButtonName="Create"
+      ></app-contract-form>
+    </mat-tab>
+    <mat-tab label="Edit Contract" *ngIf="contractToEdit">
+      <app-contract-form
+        [contract]="contractToEdit"
+        secondButtonName="Cancel"
+        secondButtonColor="warn"
+        (action)="update($event)"
+        (secondAction)="cancelUpdate()"
+        title="Update Contract Details"
+        actionButtonName="Update"
+      ></app-contract-form>
+    </mat-tab>
+    <mat-tab label="Renew Contract" *ngIf="contractToRenew">
+      <app-contract-form
+        isRenew="true"
+        [contract]="contractToRenew"
+        secondButtonName="Cancel"
+        secondButtonColor="warn"
+        (action)="onRenew($event)"
+        (secondAction)="cancelRenew()"
+        title="Renew Contract"
+        actionButtonName="Renew"
+      ></app-contract-form>
     </mat-tab>
   </mat-tab-group>
 </div>

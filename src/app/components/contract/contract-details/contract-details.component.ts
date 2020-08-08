@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { ContractModel } from "src/app/models/contract.model ";
+import { ContractService } from "src/app/services/contract.service";
 
 @Component({
   selector: "app-contract-details",
@@ -8,11 +9,21 @@ import { ContractModel } from "src/app/models/contract.model ";
 })
 export class ContractDetailsComponent implements OnInit {
   @Input("contracts") contracts: ContractModel[];
-  constructor() {}
+  @Output("edit") editEmitter: EventEmitter<ContractModel> = new EventEmitter();
+  @Output("renew") renewEmitter: EventEmitter<
+    ContractModel
+  > = new EventEmitter();
+  constructor(private service: ContractService) {}
 
   ngOnInit(): void {}
 
-  renewContracts(contract: ContractModel) {}
-  edit(contract: ContractModel) {}
-  print(contract: ContractModel) {}
+  renewContracts(contract: ContractModel) {
+    this.renewEmitter.emit(contract);
+  }
+  edit(contract: ContractModel) {
+    this.editEmitter.emit(contract);
+  }
+  print(contract: ContractModel) {
+    this.service.getReport(contract._id).subscribe();
+  }
 }

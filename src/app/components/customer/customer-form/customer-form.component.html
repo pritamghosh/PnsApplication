@@ -1,0 +1,67 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ title }}</mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="customerForm">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-5 col-lg-5 col-sm-12 col-12">
+          <mat-form-field style="width: 100%;">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-7 col-lg-7 col-sm-12 col-12">
+          <div class="row">
+            <div class="col-md-4 col-lg-4 col-sm-6 col-12">
+              <mat-form-field style="width: 100%; float: right;">
+                <mat-label>Region</mat-label>
+                <input matInput formControlName="region" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-6 col-12">
+              <mat-form-field style="width: 80%;">
+                <mat-label>GST No.</mat-label>
+                <input matInput formControlName="gstinNo" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-6 col-12">
+              <mat-form-field style="width: 100%; float: right;">
+                <mat-label>PAN</mat-label>
+                <input matInput formControlName="pan" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <mat-form-field style="width: 100%; float: right;">
+            <mat-label>Address</mat-label>
+            <textarea matInput formControlName="address"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-12 col-lg-12 col-sm-12">
+          <button
+            mat-raised-button
+            color="{{ secondButtonColor }}"
+            type="reset"
+            (click)="secondButtonAction()"
+          >
+            {{ secondButtonName }}
+          </button>
+          <div style="float: right;">
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="!customerForm.valid"
+              type="button"
+              (click)="submitAction()"
+            >
+              {{ submitButtonName }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </form>
+</mat-card>

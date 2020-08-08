@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ContractService } from "src/app/services/contract.service";
 import { EquipmentModel } from "src/app/models/equipment.model ";
@@ -6,6 +6,7 @@ import { environment } from "src/environments/environment";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { FindCustomerComponent } from "./find-customer/find-customer.component";
 import { FindEquipmentComponent } from "./find-equipment/find-equipment.component";
+import { ContractModel } from "src/app/models/contract.model ";
 
 @Component({
   selector: "app-contract-form",
@@ -14,6 +15,16 @@ import { FindEquipmentComponent } from "./find-equipment/find-equipment.componen
 })
 export class ContractFormComponent implements OnInit {
   @Input("isRenew") isRenew: boolean;
+  @Input("contract") contract: ContractModel;
+  @Output("action") submitEmitter: EventEmitter<
+    ContractModel
+  > = new EventEmitter();
+  @Output("secondAction") secondActionEmitter = new EventEmitter();
+  @Input("secondButtonColor") secondButtonColor: string;
+  @Input("secondButtonName") secondButtonName: string;
+  @Input("actionButtonName") actionButtonName: string;
+  @Input("title") title: string;
+
   calculate = true;
 
   contractForm: FormGroup;
@@ -22,6 +33,9 @@ export class ContractFormComponent implements OnInit {
       customer: new FormGroup({
         name: new FormControl(null, [Validators.required]),
         region: new FormControl(null, [Validators.required]),
+        address: new FormControl(null, [Validators.required]),
+        pan: new FormControl(null, [Validators.required]),
+        gstinNo: new FormControl(null, [Validators.required]),
         _id: new FormControl(null, [Validators.required]),
       }),
       equipmentItem: new FormGroup({
@@ -33,6 +47,8 @@ export class ContractFormComponent implements OnInit {
         _id: new FormControl(null),
         serialNumber: new FormControl(null, [Validators.required]),
       }),
+      _id: new FormControl(null),
+      proposalNo: new FormControl(null),
       amcStartDate: new FormControl(null, [Validators.required]),
       amcEndDate: new FormControl(null, [Validators.required]),
       amcBasicAmount: new FormControl(null, [Validators.required]),
@@ -41,6 +57,27 @@ export class ContractFormComponent implements OnInit {
       billingCycle: new FormControl(null, [Validators.required]),
       note: new FormControl(null),
     });
+  }
+  ngOnInit(): void {
+    if (this.contract != undefined) {
+      console.log(this.contract);
+
+      this.contractForm.patchValue(this.contract);
+      if (this.isRenew) {
+        let startdt: Date = new Date(this.contract.amcStartDate);
+        let endtdt: Date = new Date(this.contract.amcEndDate);
+
+        let duration =
+          endtdt.getTime() / (86400 * 1000) -
+          startdt.getTime() / (86400 * 1000);
+        startdt.setTime(endtdt.getTime() + 86400 * 1000);
+        endtdt.setTime(startdt.getTime() + duration * 86400 * 1000);
+
+        this.contractForm.get("_id").setValue(null);
+        this.contractForm.get("amcEndDate").setValue(endtdt);
+        this.contractForm.get("amcStartDate").setValue(startdt);
+      }
+    }
 
     this.contractForm.get("amcBasicAmount").valueChanges.subscribe((val) => {
       if (this.contractForm.get("amcBasicAmount").valid && this.calculate) {
@@ -64,16 +101,13 @@ export class ContractFormComponent implements OnInit {
       }
     });
   }
-  ngOnInit(): void {}
 
-  onSubmit() {
-    this.service
-      .add(this.contractForm.value)
-      .subscribe((resp) => this.contractForm.reset());
+  submitAction() {
+    this.submitEmitter.emit(this.contractForm.value);
   }
 
-  onReset() {
-    this.contractForm.reset();
+  secondAction() {
+    this.secondActionEmitter.emit(this.contractForm);
   }
 
   findCustomer() {
@@ -85,7 +119,9 @@ export class ContractFormComponent implements OnInit {
     const dialogRef = this.dialog.open(FindCustomerComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((resp) => {
       if (!dialogConfig.data.cancelled && dialogConfig.data.customer != null) {
-        this.contractForm.get("customer").setValue(dialogConfig.data.customer);
+        this.contractForm
+          .get("customer")
+          .patchValue(dialogConfig.data.customer);
       }
     });
   }

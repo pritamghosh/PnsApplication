@@ -11,6 +11,8 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class ContractComponent implements OnInit {
   selectedTab = 0;
+  contractToEdit: ContractModel;
+  contractToRenew: ContractModel;
   isSearched = false;
   contractResp: ContractModel[];
 
@@ -95,5 +97,42 @@ export class ContractComponent implements OnInit {
       this.contractResp = res;
       this.isSearched = true;
     });
+  }
+
+  add(contract: ContractModel) {
+    this.service.add(contract, false).subscribe();
+  }
+
+  onRenew(contract: ContractModel) {
+    this.service.add(contract, true).subscribe((res) => this.cancelRenew());
+  }
+
+  edit(contract: ContractModel) {
+    this.contractToEdit = contract;
+    this.selectedTab = 2;
+  }
+
+  renew(contract: ContractModel) {
+    this.contractToRenew = contract;
+    this.selectedTab = 3;
+  }
+
+  cancelUpdate() {
+    this.contractToEdit = null;
+    this.selectedTab = 0;
+  }
+
+  cancelRenew() {
+    this.contractToRenew = null;
+    this.selectedTab = 0;
+  }
+
+  reset(form: FormGroup) {
+    form.reset;
+    form.patchValue({ amcTax: 18 });
+  }
+
+  update(contract: ContractModel) {
+    this.service.update(contract).subscribe((resp) => this.cancelUpdate());
   }
 }

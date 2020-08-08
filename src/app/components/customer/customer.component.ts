@@ -11,10 +11,8 @@ import { CustomerModel } from "src/app/models/customer.model";
 export class CustomerComponent implements OnInit {
   selectedTab = 0;
   isSearched = false;
-  editTabShow = false;
-  customerForm: FormGroup;
   customerResp: CustomerModel[];
-  customerEditForm: FormGroup;
+  cutomerToEdit: CustomerModel;
 
   seachKeyControl = new FormControl(null, [Validators.required]);
   searchOption = [
@@ -46,55 +44,36 @@ export class CustomerComponent implements OnInit {
 
   selectedOption = this.searchOption[0];
   constructor(private service: CustomerService) {}
-  ngOnInit(): void {
-    this.customerForm = new FormGroup({
-      name: new FormControl(null, [Validators.required]),
-      region: new FormControl(null, [Validators.required]),
-    });
-    this.customerEditForm = new FormGroup({
-      name: new FormControl(null, [Validators.required]),
-      region: new FormControl(null, [Validators.required]),
-      _id: new FormControl(null, [Validators.required]),
-    });
-  }
+  ngOnInit(): void {}
 
   onEdit(customer: CustomerModel) {
-    this.customerEditForm = new FormGroup({
-      name: new FormControl(customer.name, [Validators.required]),
-      _id: new FormControl(customer._id, [Validators.required]),
-      region: new FormControl(customer.region, [Validators.required]),
-    });
-    this.editTabShow = true;
+    this.cutomerToEdit = customer;
     this.selectedTab = 2;
   }
 
-  onUpdate() {
-    this.service
-      .update(this.customerEditForm.value)
-      .subscribe((resp: CustomerModel) => {
-        this.customerResp.forEach((element) => {
-          if (element._id == resp._id) {
-            element.name = resp.name;
-            element.region = resp.region;
-          }
-        });
-        this.editTabShow = false;
-        this.selectedTab = 0;
+  onUpdate(customer: any) {
+    this.service.update(customer).subscribe((resp: CustomerModel) => {
+      this.customerResp.forEach((element) => {
+        if (element._id == resp._id) {
+          element.name = resp.name;
+          element.region = resp.region;
+          element.gstin = resp.gstin;
+          element.pan = resp.pan;
+          element.address = resp.address;
+        }
       });
+      this.onCancel();
+    });
   }
 
-  onAdd() {
-    this.service
-      .add(this.customerForm.value)
-      .subscribe((resp) => this.customerForm.reset());
+  onAdd(customer: any) {
+    this.service.add(customer).subscribe();
   }
-
-  onReset() {
-    this.customerForm.reset();
+  onReset(form: FormGroup) {
+    form.reset();
   }
-
   onCancel() {
-    this.editTabShow = false;
+    this.cutomerToEdit = null;
     this.selectedTab = 0;
   }
 

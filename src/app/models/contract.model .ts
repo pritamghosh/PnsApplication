@@ -5,10 +5,11 @@ export interface ContractModel {
   customer: CustomerModel;
   equipmentItem: EquipmnetItemModel;
   amcStartDate: Date;
-  amcEndDate: Date;
+  amcEndDate: any;
   amcBasicAmount: Date;
   amcTotalAmount: number;
   amcTax: number;
+  amcTaxAmount: number;
   billingCycle: string;
   note: string;
   _id: string;

@@ -47,6 +47,7 @@ import { ContractDetailsComponent } from "./components/contract/contract-details
 import { ContractFormComponent } from "./components/contract/contract-form/contract-form.component";
 import { FindCustomerComponent } from './components/contract/contract-form/find-customer/find-customer.component';
 import { FindEquipmentComponent } from './components/contract/contract-form/find-equipment/find-equipment.component';
+import { CustomerFormComponent } from './components/customer/customer-form/customer-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { FindEquipmentComponent } from './components/contract/contract-form/find
     ContractFormComponent,
     FindCustomerComponent,
     FindEquipmentComponent,
+    CustomerFormComponent,
   ],
   imports: [
     BrowserModule,
