@@ -19,6 +19,7 @@ export class ContractComponent implements OnInit {
   seachKeyControl = new FormControl(null, [Validators.required]);
   startDate = new FormControl(null, [Validators.required]);
   endDate = new FormControl(null, [Validators.required]);
+  contractDate = new FormControl(null, [Validators.required]);
   searchOption = [
     {
       value: "Find All",
@@ -29,6 +30,11 @@ export class ContractComponent implements OnInit {
     {
       value: "Find By Date Range",
       type: "byDateRange",
+      searchButtonName: "Find By Date",
+    },
+    {
+      value: "Find By Contract Create/Renew Date",
+      type: "byDate",
       searchButtonName: "Find By Date",
     },
     {
@@ -62,7 +68,10 @@ export class ContractComponent implements OnInit {
     if (this.selectedOption.type == "byDateRange") {
       return !(this.endDate.valid && this.startDate.valid);
     }
-    return false;
+    if (this.selectedOption.type == "byDate") {
+      return !this.contractDate.valid;
+    }
+    return !this.seachKeyControl.valid;
   }
 
   isSeachFieldDisabled() {
