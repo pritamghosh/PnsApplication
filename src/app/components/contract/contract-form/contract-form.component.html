@@ -16,6 +16,7 @@
                   formControlName="name"
                   readonly
                   [disabled]="isRenew"
+                  test-id="add_contract.customer_name"
                 />
               </mat-form-field>
             </div>
@@ -27,6 +28,7 @@
                   formControlName="region"
                   readonly
                   [disabled]="isRenew"
+                  test-id="add_contract.customer_region"
                 />
               </mat-form-field>
             </div>
@@ -38,6 +40,7 @@
                 (click)="findCustomer()"
                 style="float: right;"
                 [disabled]="isRenew"
+                test-id="add_contract.find_customer_button"
               >
                 Find Customer
               </button>
@@ -55,6 +58,7 @@
                   formControlName="model"
                   readonly
                   [disabled]="isRenew"
+                  test-id="add_contract.model_name"
                 />
               </mat-form-field>
             </div>
@@ -65,6 +69,7 @@
                   matInput
                   formControlName="serialNumber"
                   [disabled]="isRenew"
+                  test-id="add_contract.serial_number"
                 />
               </mat-form-field>
             </div>
@@ -76,6 +81,7 @@
                 (click)="findEquipment()"
                 style="float: right;"
                 [disabled]="isRenew"
+                test-id="add_contract.fina_equipment_button"
               >
                 Find Equipment
               </button>
@@ -92,6 +98,7 @@
               matInput
               [matDatepicker]="amcStartDate"
               formControlName="amcStartDate"
+              test-id="add_contract.amc_start_date"
             />
             <mat-datepicker-toggle
               matSuffix
@@ -107,6 +114,7 @@
               matInput
               [matDatepicker]="amcEndDate"
               formControlName="amcEndDate"
+              test-id="add_contract.amc_end_date"
               [min]="minEndDate"
             />
             <mat-datepicker-toggle
@@ -122,19 +130,30 @@
         <div class="col-md-2 col-lg-2 col-sm-6">
           <mat-form-field style="width: 100%;">
             <mat-label>Basic Amount</mat-label>
-            <input matInput formControlName="amcBasicAmount" />
+            <input 
+            matInput formControlName="amcBasicAmount"
+            test-id="add_contract.basic_amount"
+            />
           </mat-form-field>
         </div>
         <div class="col-md-2 col-lg-2 col-sm-6">
           <mat-form-field style="width: 100%;">
             <mat-label>Tax (%)</mat-label>
-            <input matInput formControlName="amcTax" readonly />
+            <input 
+            matInput formControlName="amcTax" 
+            readonly
+            test-id="add_contract.amc_tax"
+            />
           </mat-form-field>
         </div>
         <div class="col-md-2 col-lg-2 col-sm-6">
           <mat-form-field style="width: 100%;">
             <mat-label>Total Amount</mat-label>
-            <input matInput formControlName="amcTotalAmount" />
+            <input 
+            matInput 
+            formControlName="amcTotalAmount"
+            test-id="add_contract.total_amount"
+            />
           </mat-form-field>
         </div>
 
@@ -142,13 +161,21 @@
         <div class="col-md-2 col-lg-2 col-sm-6">
           <mat-form-field style="width: 100%;">
             <mat-label>Billing Cycle</mat-label>
-            <input matInput formControlName="billingCycle" />
+            <input 
+            matInput 
+            formControlName="billingCycle"
+            test-id="add_contract.billing_cycle"
+            />
           </mat-form-field>
         </div>
         <div class="col-md-12 col-lg-12 col-sm-12">
           <mat-form-field style="width: 100%;">
             <mat-label>Note</mat-label>
-            <textarea matInput formControlName="note"></textarea>
+            <textarea 
+            matInput 
+            formControlName="note"
+            test-id="add_contract.note"
+            ></textarea>
           </mat-form-field>
         </div>
         <!-- Button panel start -->
@@ -158,16 +185,18 @@
             color="{{ secondButtonColor }}"
             type="button"
             (click)="secondAction()"
+            test-id="add_contract.reset-button"
           >
             {{ secondButtonName }}
           </button>
-          <div style="float: right;">
+            <div style="float: right;">
             <button
               mat-raised-button
               color="primary"
               [disabled]="!contractForm.valid"
               type="button"
               (click)="submitAction()"
+              test-id="add_contract.create_button"
             >
               {{ actionButtonName }}
             </button>

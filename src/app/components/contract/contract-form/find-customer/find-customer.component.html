@@ -3,7 +3,10 @@
   <br />
   <mat-form-field>
     <mat-label>Enter Customer Name</mat-label>
-    <input matInput [formControl]="searchKeyControl" />
+    <input 
+    matInput 
+    [formControl]="searchKeyControl"
+    test-id="find_customer_pop_up.name" />
   </mat-form-field>
   <button
     mat-mini-fab
@@ -12,6 +15,7 @@
     (click)="search()"
     [disabled]="!searchKeyControl.valid"
     style="float: right;"
+    test-id="find_customer_pop_up.name_search"
   >
     <mat-icon>search</mat-icon>
   </button>
@@ -21,6 +25,7 @@
   #customerSelected
   [multiple]="false"
   (selectionChange)="onSelection(customerSelected.selectedOptions.selected)"
+  test-id="find_customer_pop_up.selection_list"
 >
   <mat-list-option *ngFor="let customer of customerResp" [value]="customer">
     {{ customer.name }} ({{ customer.region }})
@@ -43,6 +48,7 @@
       color="primary"
       matDialogClose
       [disabled]="!customerSelected.selectedOptions.selected[0]"
+      test-id="find_customer_pop_up.select_button"
     >
       Select
     </button>
