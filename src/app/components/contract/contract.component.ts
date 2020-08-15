@@ -20,7 +20,6 @@ export class ContractComponent implements OnInit {
   seachKeyControl = new FormControl(null, [Validators.required]);
   startDate = new FormControl(null, [Validators.required]);
   endDate = new FormControl(null, [Validators.required]);
-  contractDate = new FormControl(null, [Validators.required]);
   searchOption = [
     {
       value: "Find All",
