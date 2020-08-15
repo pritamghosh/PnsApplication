@@ -1,0 +1,31 @@
+@import "~@angular/material/_theming.scss";
+
+@include mat-core();
+
+$pns-blue: (
+  500: #6200ee,
+  contrast: (
+    500: white,
+  ),
+);
+
+$pns-teal: (
+  500: #03dac5,
+  contrast: (
+    500: white,
+  ),
+);
+
+$pns-red: (
+  500: #cc1442,
+  contrast: (
+    500: white,
+  ),
+);
+$primary: mat-palette($pns-blue, 500);
+$accent: mat-palette($pns-teal, 500);
+$warn: mat-palette($pns-red, 500);
+
+$app-theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($app-theme);
