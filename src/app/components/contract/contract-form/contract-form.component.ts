@@ -1,5 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+} from "@angular/core";
+import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { ContractService } from "src/app/services/contract.service";
 import { EquipmentModel } from "src/app/models/equipment.model ";
 import { environment } from "src/environments/environment";
@@ -14,11 +21,10 @@ import { ContractModel } from "src/app/models/contract.model ";
   styleUrls: ["./contract-form.component.scss"],
 })
 export class ContractFormComponent implements OnInit {
+  @ViewChild("form") fromElement: NgForm;
   @Input("isRenew") isRenew: boolean;
   @Input("contract") contract: ContractModel;
-  @Output("action") submitEmitter: EventEmitter<
-    ContractModel
-  > = new EventEmitter();
+  @Output("action") submitEmitter = new EventEmitter();
   @Output("secondAction") secondActionEmitter = new EventEmitter();
   @Input("secondButtonColor") secondButtonColor: string;
   @Input("secondButtonName") secondButtonName: string;
@@ -60,8 +66,6 @@ export class ContractFormComponent implements OnInit {
   }
   ngOnInit(): void {
     if (this.contract != undefined) {
-      console.log(this.contract);
-
       this.contractForm.patchValue(this.contract);
       if (this.isRenew) {
         let startdt: Date = new Date(this.contract.amcStartDate);
@@ -102,8 +106,15 @@ export class ContractFormComponent implements OnInit {
     });
   }
 
+  get minEndDate() {
+    return this.contractForm.get("amcStartDate").value;
+  }
+
   submitAction() {
-    this.submitEmitter.emit(this.contractForm.value);
+    this.submitEmitter.emit({
+      contract: this.contractForm.value,
+      form: this.fromElement,
+    });
   }
 
   secondAction() {

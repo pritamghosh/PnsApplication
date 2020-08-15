@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { EquipmentModel } from "src/app/models/equipment.model ";
 import { EquipmentService } from "src/app/services/equipment.service";
 
@@ -9,6 +9,7 @@ import { EquipmentService } from "src/app/services/equipment.service";
   styleUrls: ["./equipment.component.scss"],
 })
 export class EquipmentComponent implements OnInit {
+  @ViewChild("form") fromElement: NgForm;
   selectedTab = 0;
   isSearched = false;
   editTabShow = false;
@@ -62,7 +63,7 @@ export class EquipmentComponent implements OnInit {
 
   onAdd() {
     this.service.add(this.equipmentForm.value).subscribe((resp) => {
-      this.equipmentForm.reset();
+      this.fromElement.resetForm();
     });
   }
 

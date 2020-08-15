@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title>{{ title }}</mat-card-title>
   </mat-card-header>
-  <form [formGroup]="contractForm">
+  <form [formGroup]="contractForm" #form="ngForm">
     <mat-card-content>
       <div class="row">
         <div class="col-lg-12">
@@ -115,6 +115,7 @@
               [matDatepicker]="amcEndDate"
               formControlName="amcEndDate"
               test-id="add_contract.amc_end_date"
+              [min]="minEndDate"
             />
             <mat-datepicker-toggle
               matSuffix
