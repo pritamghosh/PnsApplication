@@ -108,12 +108,16 @@ export class ContractComponent implements OnInit {
     });
   }
 
-  add(contract: ContractModel) {
-    this.service.add(contract, false).subscribe();
+  add(event: any) {
+    this.service.add(event.contract, false).subscribe((val) => {
+      event.form.reset();
+    });
   }
 
-  onRenew(contract: ContractModel) {
-    this.service.add(contract, true).subscribe((res) => this.cancelRenew());
+  onRenew(event: any) {
+    this.service
+      .add(event.contract, true)
+      .subscribe((res) => this.cancelRenew());
   }
 
   edit(contract: ContractModel) {
@@ -141,7 +145,11 @@ export class ContractComponent implements OnInit {
     form.patchValue({ amcTax: 18 });
   }
 
-  update(contract: ContractModel) {
-    this.service.update(contract).subscribe((resp) => this.cancelUpdate());
+  update(event: any) {
+    console.log("update");
+
+    this.service
+      .update(event.contract)
+      .subscribe((resp) => this.cancelUpdate());
   }
 }
