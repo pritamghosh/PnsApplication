@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { CustomerService } from "src/app/services/customer.service";
 import { CustomerModel } from "src/app/models/customer.model";
 
@@ -51,8 +51,8 @@ export class CustomerComponent implements OnInit {
     this.selectedTab = 2;
   }
 
-  onUpdate(customer: any) {
-    this.service.update(customer).subscribe((resp: CustomerModel) => {
+  onUpdate(event: any) {
+    this.service.update(event.customer).subscribe((resp: CustomerModel) => {
       this.customerResp.forEach((element) => {
         if (element._id == resp._id) {
           element.name = resp.name;
@@ -66,8 +66,10 @@ export class CustomerComponent implements OnInit {
     });
   }
 
-  onAdd(customer: any) {
-    this.service.add(customer).subscribe();
+  onAdd(event: any) {
+    this.service.add(event.customer).subscribe((val) => {
+      return event.form.reset();
+    });
   }
   onReset(form: FormGroup) {
     form.reset();

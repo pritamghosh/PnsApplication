@@ -1,5 +1,12 @@
-import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
-import { FormGroup, Validators, FormControl } from "@angular/forms";
+import {
+  Component,
+  OnInit,
+  Input,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from "@angular/core";
+import { FormGroup, Validators, FormControl, NgForm } from "@angular/forms";
 import { CustomerModel } from "src/app/models/customer.model";
 
 @Component({
@@ -9,10 +16,10 @@ import { CustomerModel } from "src/app/models/customer.model";
 })
 export class CustomerFormComponent implements OnInit {
   constructor() {}
+
+  @ViewChild("form") fromElement: NgForm;
   @Input("customer") customer: CustomerModel;
-  @Output("action") submitEmitter: EventEmitter<
-    CustomerModel
-  > = new EventEmitter();
+  @Output("action") submitEmitter = new EventEmitter();
   @Output("secondAction") secondActionEmitter = new EventEmitter();
   submitButtonName: string;
   secondButtonName: string;
@@ -46,7 +53,10 @@ export class CustomerFormComponent implements OnInit {
     }
   }
   submitAction() {
-    this.submitEmitter.emit(this.customerForm.value);
+    this.submitEmitter.emit({
+      customer: this.customerForm.value,
+      form: this.fromElement,
+    });
   }
   secondButtonAction() {
     this.secondActionEmitter.emit(this.customerForm);

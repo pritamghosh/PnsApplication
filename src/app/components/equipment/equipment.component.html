@@ -56,7 +56,7 @@
         <mat-card-header>
           <mat-card-title>Enter Equipment Details</mat-card-title>
         </mat-card-header>
-        <form [formGroup]="equipmentForm" (ngSubmit)="onAdd()">
+        <form [formGroup]="equipmentForm" (ngSubmit)="onAdd()" #form="ngForm">
           <mat-card-content>
             <div class="row">
               <div class="col-md-6 col-lg-6 col-sm-12">
@@ -75,7 +75,7 @@
                 <button
                   mat-raised-button
                   color="accent"
-                  type="reset"
+                  type="button"
                   (click)="onReset()"
                 >
                   Reset
