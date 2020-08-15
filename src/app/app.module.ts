@@ -45,9 +45,10 @@ import { CustomerDetailsComponent } from "./components/customer/customer-details
 import { EquipmentDetailsComponent } from "./components/equipment/equipment-details/equipment-details.component";
 import { ContractDetailsComponent } from "./components/contract/contract-details/contract-details.component";
 import { ContractFormComponent } from "./components/contract/contract-form/contract-form.component";
-import { FindCustomerComponent } from './components/contract/contract-form/find-customer/find-customer.component';
-import { FindEquipmentComponent } from './components/contract/contract-form/find-equipment/find-equipment.component';
-import { CustomerFormComponent } from './components/customer/customer-form/customer-form.component';
+import { FindCustomerComponent } from "./components/contract/contract-form/find-customer/find-customer.component";
+import { FindEquipmentComponent } from "./components/contract/contract-form/find-equipment/find-equipment.component";
+import { CustomerFormComponent } from "./components/customer/customer-form/customer-form.component";
+import { DatePipe } from "@angular/common";
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,7 +100,7 @@ import { CustomerFormComponent } from './components/customer/customer-form/custo
     MatChipsModule,
     MatDialogModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

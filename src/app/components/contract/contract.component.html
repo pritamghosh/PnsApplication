@@ -22,8 +22,8 @@
           <div
             class="col-md-6"
             *ngIf="
-              selectedOption.type != 'byDateRange' &&
-              selectedOption.type != 'byDate'
+              selectedOption.type != 'byAmcDateRange' &&
+              selectedOption.type != 'byCreationDateRange'
             "
           >
             <mat-form-field style="width: 100%;">
@@ -31,13 +31,20 @@
               <input
                 matInput
                 [formControl]="seachKeyControl"
+                disabled
                 [disabled]="isSeachFieldDisabled()"
               />
             </mat-form-field>
           </div>
-          <div class="col-md-3" *ngIf="selectedOption.type == 'byDateRange'">
+          <div
+            class="col-md-3"
+            *ngIf="
+              selectedOption.type == 'byAmcDateRange' ||
+              selectedOption.type == 'byCreationDateRange'
+            "
+          >
             <mat-form-field style="width: 100%;">
-              <mat-label>Select Amc Start Date</mat-label>
+              <mat-label>Select Start Date</mat-label>
               <input
                 matInput
                 [matDatepicker]="startDatefor"
@@ -50,13 +57,20 @@
               <mat-datepicker #startDatefor></mat-datepicker>
             </mat-form-field>
           </div>
-          <div class="col-md-3" *ngIf="selectedOption.type == 'byDateRange'">
+          <div
+            class="col-md-3"
+            *ngIf="
+              selectedOption.type == 'byAmcDateRange' ||
+              selectedOption.type == 'byCreationDateRange'
+            "
+          >
             <mat-form-field style="width: 100%;">
-              <mat-label>Select Amc End Date</mat-label>
+              <mat-label>Select End Date</mat-label>
               <input
                 matInput
                 [matDatepicker]="endDatefor"
                 [formControl]="endDate"
+                [min]="minSearchDate"
               />
               <mat-datepicker-toggle
                 matSuffix
@@ -65,25 +79,6 @@
               <mat-datepicker #endDatefor></mat-datepicker>
             </mat-form-field>
           </div>
-          <div class="col-md-4" *ngIf="selectedOption.type == 'byDate'">
-            <mat-form-field style="width: 100%;">
-              <mat-label>Select Contract Create/Renew Date</mat-label>
-              <input
-                matInput
-                [matDatepicker]="contractDatefor"
-                [formControl]="contractDate"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="contractDatefor"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #contractDatefor></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <div
-            class="col-md-2 col-sm-0"
-            *ngIf="selectedOption.type == 'byDate'"
-          ></div>
           <div class="col-md-6">
             <button
               mat-raised-button

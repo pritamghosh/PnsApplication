@@ -3,6 +3,7 @@ import { ContractService } from "src/app/services/contract.service";
 import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { ContractModel } from "src/app/models/contract.model ";
 import { ActivatedRoute } from "@angular/router";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-contract",
@@ -28,13 +29,13 @@ export class ContractComponent implements OnInit {
       searchButtonName: "Find All",
     },
     {
-      value: "Find By Date Range",
-      type: "byDateRange",
+      value: "Find By AMC Date Range",
+      type: "byAmcDateRange",
       searchButtonName: "Find By Date",
     },
     {
-      value: "Find By Contract Create/Renew Date",
-      type: "byDate",
+      value: "Find By Contract Create/Renew Date Range",
+      type: "byCreationDateRange",
       searchButtonName: "Find By Date",
     },
     {
@@ -48,7 +49,8 @@ export class ContractComponent implements OnInit {
   selectedOption = this.searchOption[0];
   constructor(
     private service: ContractService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -60,16 +62,18 @@ export class ContractComponent implements OnInit {
       }
     });
   }
-
+  get minSearchDate() {
+    return this.startDate.value;
+  }
   isSeachButtonDisabled() {
     if (this.selectedOption.type == "all") {
       return false;
     }
-    if (this.selectedOption.type == "byDateRange") {
+    if (
+      this.selectedOption.type == "byAmcDateRange" ||
+      this.selectedOption.type == "byCreationDateRange"
+    ) {
       return !(this.endDate.valid && this.startDate.valid);
-    }
-    if (this.selectedOption.type == "byDate") {
-      return !this.contractDate.valid;
     }
     return !this.seachKeyControl.valid;
   }
@@ -85,12 +89,21 @@ export class ContractComponent implements OnInit {
   findContract() {
     let url = "";
     switch (this.selectedOption.type) {
-      case "byName": {
-        url = `${url}?name=${this.seachKeyControl.value}`;
+      case "byCreationDateRange": {
+        url = `${url}?form=${this.datePipe.transform(
+          this.startDate.value,
+          "yyyy-MM-dd"
+        )}&to=${this.datePipe.transform(
+          this.endDate.value,
+          "yyyy-MM-dd"
+        )}&create=true`;
         break;
       }
-      case "byDateRange": {
-        url = `${url}?region=${this.seachKeyControl.value}`;
+      case "byAmcDateRange": {
+        url = `${url}?form=${this.datePipe.transform(
+          this.startDate.value,
+          "yyyy-MM-dd"
+        )}&to=${this.datePipe.transform(this.endDate.value, "yyyy-MM-dd")}`;
         break;
       }
       case "search": {
@@ -141,7 +154,6 @@ export class ContractComponent implements OnInit {
   }
 
   reset(form: FormGroup) {
-    form.reset;
     form.patchValue({ amcTax: 18 });
   }
 
