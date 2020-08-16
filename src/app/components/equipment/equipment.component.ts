@@ -17,6 +17,9 @@ export class EquipmentComponent implements OnInit {
   equipmentEditForm: FormGroup;
   equipmentResp: EquipmentModel[];
   seachKeyControl = new FormControl(null, [Validators.required]);
+  pageCount = 0;
+  url = "";
+  page = 1;
   searchOption = [
     {
       value: "Find All",
@@ -112,10 +115,24 @@ export class EquipmentComponent implements OnInit {
         url = `${url}/search?query=${this.seachKeyControl.value}`;
         break;
       }
+      case "all": {
+        url = `${url}?`;
+        break;
+      }
     }
-    this.service.get(url).subscribe((res: EquipmentModel[]) => {
-      this.equipmentResp = res;
+    this.url = url;
+    this.getServiceCall(this.url);
+  }
+
+  getServiceCall(url: String, pageNo?: number) {
+    this.service.get(url).subscribe((res: any) => {
+      this.equipmentResp = res.result;
       this.isSearched = true;
+      this.pageCount = res.pageCount;
+      this.page = res.pageCount > 0 ? (pageNo > 0 ? pageNo : 0) : 0;
     });
+  }
+  changePage(pageNo: any) {
+    this.getServiceCall(`${this.url}&page=${pageNo}`, pageNo);
   }
 }

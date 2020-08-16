@@ -49,6 +49,17 @@
           [equipments]="equipmentResp"
           (edit)="onEdit($event)"
         ></app-equipment-details>
+        <div class="paginationdiv" *ngIf="pageCount > 0">
+          <ngb-pagination
+            class="d-flex justify-content-center"
+            [collectionSize]="pageCount"
+            [(page)]="page"
+            [pageSize]="1"
+            [maxSize]="5"
+            [boundaryLinks]="true"
+            (pageChange)="changePage($event)"
+          ></ngb-pagination>
+        </div>
       </div>
     </mat-tab>
     <mat-tab label="Add Equipment">

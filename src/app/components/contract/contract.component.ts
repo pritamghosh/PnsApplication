@@ -15,6 +15,9 @@ export class ContractComponent implements OnInit {
   contractToEdit: ContractModel;
   contractToRenew: ContractModel;
   isSearched = false;
+  pageCount = 0;
+  url = "";
+  page = 1;
   contractResp: ContractModel[];
 
   seachKeyControl = new FormControl(null, [Validators.required]);
@@ -109,15 +112,26 @@ export class ContractComponent implements OnInit {
         url = `${url}/search?query=${this.seachKeyControl.value}`;
         break;
       }
+      case "all": {
+        url = `${url}?`;
+        break;
+      }
     }
+    this.url = url;
     this.search(url);
   }
 
-  search(url: string) {
-    this.service.get(url).subscribe((res: ContractModel[]) => {
-      this.contractResp = res;
+  search(url: string, pageNo?: number) {
+    this.service.get(url).subscribe((res: any) => {
+      this.contractResp = res.result;
       this.isSearched = true;
+      this.pageCount = res.pageCount;
+      this.page = res.pageCount > 0 ? (pageNo > 0 ? pageNo : 0) : 0;
     });
+  }
+
+  changePage(pageNo: any) {
+    this.search(`${this.url}&page=${pageNo}`, pageNo);
   }
 
   add(event: any) {

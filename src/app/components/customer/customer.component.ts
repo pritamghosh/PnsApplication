@@ -12,8 +12,8 @@ export class CustomerComponent implements OnInit {
   selectedTab = 0;
   isSearched = false;
   customerResp: CustomerModel[];
-  pageCount = 0;
   cutomerToEdit: CustomerModel;
+  pageCount = 0;
   url = "";
   page = 1;
 
@@ -118,14 +118,15 @@ export class CustomerComponent implements OnInit {
     this.getServiceCall(this.url);
   }
 
-  getServiceCall(url: string) {
+  getServiceCall(url: String, pageNo?: number) {
     this.service.get(url).subscribe((res: any) => {
       this.customerResp = res.result;
       this.pageCount = res.pageCount;
       this.isSearched = true;
+      this.page = res.pageCount > 0 ? (pageNo > 0 ? pageNo : 0) : 0;
     });
   }
   changePage(pageNo: any) {
-    this.getServiceCall(`${this.url}&page=${pageNo}`);
+    this.getServiceCall(`${this.url}&page=${pageNo}`, pageNo);
   }
 }
