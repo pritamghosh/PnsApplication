@@ -36,6 +36,18 @@
         <button
           type="button"
           mat-mini-fab
+          color="warn"
+          #tooltip="matTooltip"
+          matTooltip="Delete Contract"
+          (click)="onDelete(contract)"
+          test-id="view_search_contract.searched_contract.delete"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button
+          class="m-l-20"
+          type="button"
+          mat-mini-fab
           color="accent"
           #tooltip="matTooltip"
           matTooltip="Edit Contract"

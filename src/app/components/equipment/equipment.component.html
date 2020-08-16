@@ -48,6 +48,7 @@
         <app-equipment-details
           [equipments]="equipmentResp"
           (edit)="onEdit($event)"
+          (delete)="onDelete($event)"
         ></app-equipment-details>
         <div class="paginationdiv" *ngIf="pageCount > 0">
           <ngb-pagination

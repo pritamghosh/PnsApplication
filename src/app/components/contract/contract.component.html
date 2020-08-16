@@ -101,6 +101,7 @@
         <app-contract-details
           [contracts]="contractResp"
           (edit)="edit($event)"
+          (delete)="onDelete($event)"
           (renew)="renew($event)"
         ></app-contract-details>
         <div class="paginationdiv" *ngIf="pageCount > 0">

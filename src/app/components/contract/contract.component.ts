@@ -118,7 +118,7 @@ export class ContractComponent implements OnInit {
       }
     }
     this.url = url;
-    this.search(url);
+    this.changePage(1);
   }
 
   search(url: string, pageNo?: number) {
@@ -177,5 +177,19 @@ export class ContractComponent implements OnInit {
     this.service
       .update(event.contract)
       .subscribe((resp) => this.cancelUpdate());
+  }
+
+  onDelete(contract: ContractModel) {
+    this.service.delete(contract._id).subscribe((c) => {
+      if (this.page < this.pageCount || this.contractResp.length != 1) {
+        this.changePage(this.page);
+      } else if (this.page > 1) {
+        this.changePage(this.page - 1);
+      } else {
+        this.contractResp = [];
+        this.pageCount = 0;
+        this.page = 0;
+      }
+    });
   }
 }

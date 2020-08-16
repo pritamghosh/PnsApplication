@@ -64,6 +64,20 @@ export class EquipmentComponent implements OnInit {
     this.selectedTab = 2;
   }
 
+  onDelete(equipment: EquipmentModel) {
+    this.service.delete(equipment._id).subscribe((c) => {
+      if (this.page < this.pageCount || this.equipmentResp.length != 1) {
+        this.changePage(this.page);
+      } else if (this.page > 1) {
+        this.changePage(this.page - 1);
+      } else {
+        this.equipmentResp = [];
+        this.pageCount = 0;
+        this.page = 0;
+      }
+    });
+  }
+
   onAdd() {
     this.service.add(this.equipmentForm.value).subscribe((resp) => {
       this.fromElement.resetForm();
@@ -121,7 +135,7 @@ export class EquipmentComponent implements OnInit {
       }
     }
     this.url = url;
-    this.getServiceCall(this.url);
+    this.changePage(1);
   }
 
   getServiceCall(url: String, pageNo?: number) {

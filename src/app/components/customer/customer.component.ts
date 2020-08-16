@@ -115,7 +115,7 @@ export class CustomerComponent implements OnInit {
       }
     }
     this.url = url;
-    this.getServiceCall(this.url);
+    this.changePage(1);
   }
 
   getServiceCall(url: String, pageNo?: number) {
@@ -126,7 +126,23 @@ export class CustomerComponent implements OnInit {
       this.page = res.pageCount > 0 ? (pageNo > 0 ? pageNo : 0) : 0;
     });
   }
+
+  onDelete(customer: CustomerModel) {
+    this.service.delete(customer._id).subscribe((c) => {
+      if (this.page < this.pageCount || this.customerResp.length != 1) {
+        this.changePage(this.page);
+      } else if (this.page > 1) {
+        this.changePage(this.page - 1);
+      } else {
+        this.customerResp = [];
+        this.pageCount = 0;
+        this.page = 0;
+      }
+    });
+  }
   changePage(pageNo: any) {
+    console.log(1);
+
     this.getServiceCall(`${this.url}&page=${pageNo}`, pageNo);
   }
 }

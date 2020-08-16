@@ -78,4 +78,13 @@ export class ContractService {
       });
     });
   }
+
+  public delete(id: string) {
+    return new Observable((observer) => {
+      this.http.delete(`${this.baseUrl}/${id}`).subscribe((res: any) => {
+        observer.next(res);
+        observer.complete();
+      });
+    });
+  }
 }

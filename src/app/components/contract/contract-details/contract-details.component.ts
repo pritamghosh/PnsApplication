@@ -10,6 +10,7 @@ import { ContractService } from "src/app/services/contract.service";
 export class ContractDetailsComponent implements OnInit {
   @Input("contracts") contracts: ContractModel[];
   @Output("edit") editEmitter: EventEmitter<ContractModel> = new EventEmitter();
+  @Output("delete") delete: EventEmitter<ContractModel> = new EventEmitter();
   @Output("renew") renewEmitter: EventEmitter<
     ContractModel
   > = new EventEmitter();
@@ -25,5 +26,11 @@ export class ContractDetailsComponent implements OnInit {
   }
   print(contract: ContractModel) {
     this.service.getReport(contract._id).subscribe();
+  }
+
+  onDelete(contract: ContractModel) {
+    if (window.confirm("Are You Sure To Delete This Contract")) {
+      this.delete.emit(contract);
+    }
   }
 }

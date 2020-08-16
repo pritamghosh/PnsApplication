@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 export class EquipmentDetailsComponent implements OnInit {
   @Input("equipments") equipments: EquipmentModel[];
   @Output() edit: EventEmitter<EquipmentModel> = new EventEmitter();
+  @Output() delete: EventEmitter<EquipmentModel> = new EventEmitter();
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
@@ -19,7 +20,11 @@ export class EquipmentDetailsComponent implements OnInit {
       queryParams: { equipmentId: equipment._id },
     });
   }
-  OnDelete(equipment: EquipmentModel) {}
+  OnDelete(equipment: EquipmentModel) {
+    if (window.confirm("Are You Sure To Delete This Model")) {
+      this.delete.emit(equipment);
+    }
+  }
   OnEdit(equipment: EquipmentModel) {
     this.edit.emit(equipment);
   }

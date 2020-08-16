@@ -48,6 +48,7 @@
         <app-customer-details
           [customers]="customerResp"
           (edit)="onEdit($event)"
+          (delete)="onDelete($event)"
           (secondAction)="onReset($event)"
         ></app-customer-details>
         <div class="paginationdiv" *ngIf="pageCount > 0">
