@@ -95,7 +95,7 @@ export class CustomerComponent implements OnInit {
   }
 
   findCustomer() {
-    let url = "?";
+    let url = "";
     switch (this.selectedOption.type) {
       case "byName": {
         url = `${url}?name=${this.seachKeyControl.value}`;
@@ -107,6 +107,10 @@ export class CustomerComponent implements OnInit {
       }
       case "search": {
         url = `${url}/search?query=${this.seachKeyControl.value}`;
+        break;
+      }
+      case "all": {
+        url = `${url}?`;
         break;
       }
     }
