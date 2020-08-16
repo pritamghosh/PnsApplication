@@ -1,39 +1,48 @@
 <div class="row">
   <div class="col-md-4 col-sm-6 col-12" *ngFor="let equipment of equipments">
     <div class="details">
-      <span>Equipment Model: {{ equipment.model }}</span>
-      <br />
-      <span>Description: {{ equipment.description }}</span>
-      <div>
-        <button
-          type="button"
-          mat-mini-fab
-          color
-          color="warn"
-          (click)="OnDelete(equipment)"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-        <button
-          type="button"
-          mat-mini-fab
-          color
-          color="accent"
-          (click)="OnEdit(equipment)"
-          class="m-l-10"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button
-          type="button"
-          mat-raised-button
-          color="primary"
-          (click)="viewContracts(equipment)"
-          style="float: right;"
-        >
-          View Contracts
-        </button>
-      </div>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ equipment.model }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <hr />
+          <p>{{ equipment.description }}</p>
+          <hr />
+        </mat-card-content>
+        <mat-card-actions>
+          <div>
+            <button
+              type="button"
+              mat-mini-fab
+              color
+              color="warn"
+              (click)="OnDelete(equipment)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button
+              type="button"
+              mat-mini-fab
+              color
+              color="accent"
+              (click)="OnEdit(equipment)"
+              class="m-l-10"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="viewContracts(equipment)"
+              style="float: right;"
+            >
+              View Contracts
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 </div>

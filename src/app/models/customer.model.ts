@@ -3,6 +3,6 @@ export interface CustomerModel {
   region: string;
   _id: string;
   pan: string;
-  gstin: string;
+  gstinNo: string;
   address: string;
 }

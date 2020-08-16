@@ -13,4 +13,6 @@ export interface ContractModel {
   billingCycle: string;
   note: string;
   _id: string;
+  contractDate: Date;
+  proposalNo: string;
 }

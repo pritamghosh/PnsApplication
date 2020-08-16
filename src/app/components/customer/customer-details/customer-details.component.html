@@ -1,39 +1,54 @@
 <div class="row">
-  <div class="col-md-4 col-sm-6 col-12" *ngFor="let customer of customers">
+  <div class="col-md-6 col-sm-6 col-12" *ngFor="let customer of customers">
     <div class="details">
-      <span>Customer Name: {{ customer.name }}</span>
-      <br />
-      <span>Region: {{ customer.region }}</span>
-      <div>
-        <button
-          type="button"
-          mat-mini-fab
-          color
-          color="warn"
-          (click)="onDelete(customer)"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-        <button
-          type="button"
-          mat-mini-fab
-          color
-          color="accent"
-          (click)="onEdit(customer)"
-          style="margin-left: 10px;"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button
-          type="button"
-          mat-raised-button
-          color="primary"
-          (click)="viewContracts(customer)"
-          style="float: right;"
-        >
-          View Contracts
-        </button>
-      </div>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ customer.name }}</mat-card-title>
+          <mat-card-subtitle>{{ customer.region }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content
+          ><hr />
+          <span>Address: {{ customer.address }}</span>
+          <br />
+          <span
+            >GSTIN: {{ customer.gstinNo }}&nbsp;&nbsp;PAN:
+            {{ customer.pan }}</span
+          >
+          <hr />
+        </mat-card-content>
+        <mat-card-actions>
+          <div>
+            <button
+              type="button"
+              mat-mini-fab
+              color
+              color="warn"
+              (click)="onDelete(customer)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button
+              type="button"
+              mat-mini-fab
+              color
+              color="accent"
+              (click)="onEdit(customer)"
+              style="margin-left: 10px;"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="viewContracts(customer)"
+              style="float: right;"
+            >
+              View Contracts
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 </div>

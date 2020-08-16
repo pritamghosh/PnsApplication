@@ -1,86 +1,95 @@
 <div class="row">
   <div class="col-md-12 col-sm-12 col-12" *ngFor="let contract of contracts">
     <div class="details">
-      <div>
-        <span style="font-size: 15px;">Cutomer Details:</span>
-        <br />
-        <span> Name: {{ contract.customer.name }}</span>
-        <span>&nbsp;&nbsp;&nbsp;</span>
-        <span>Region: {{ contract.customer.region }}</span>
-      </div>
-      <hr />
-      <span style="font-size: 15px;">Equipment Details:</span>
-      <span>Equipment Model: {{ contract.equipmentItem.equipment.model }}</span>
-      <span>&nbsp;&nbsp;&nbsp;</span>
-      <span>Serial Number: {{ contract.equipmentItem.serialNumber }}</span>
-      <br />
-      <span
-        >Description: {{ contract.equipmentItem.equipment.description }}</span
-      >
-      <hr />
-      <span>Amc Start Date: {{ contract.amcStartDate | date }}</span>
-      <span>&nbsp;&nbsp;&nbsp;</span>
-      <span>Amc End Date: {{ contract.amcEndDate | date }}</span>
-      <span>&nbsp;&nbsp;&nbsp;</span>
-      <span>Billing Cycle: {{ contract.billingCycle }}</span>
-      <br />
-      <span>Basic Amount: {{ contract.amcBasicAmount }}</span>
-      <span>&nbsp;&nbsp;&nbsp;</span>
-      <span>Tax: {{ contract.amcTax }}%</span>
-      <span>&nbsp;&nbsp;&nbsp;</span>
-      <span>Total Amount: {{ contract.amcTotalAmount }}</span>
-      <span>&nbsp;&nbsp;&nbsp;</span>
-      <span *ngIf="contract.note"> Note: {{ contract.note }} </span>
-      <hr />
-      <div>
-        <button
-          type="button"
-          mat-mini-fab
-          color="warn"
-          #tooltip="matTooltip"
-          matTooltip="Delete Contract"
-          (click)="onDelete(contract)"
-          test-id="view_search_contract.searched_contract.delete"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-        <button
-          class="m-l-20"
-          type="button"
-          mat-mini-fab
-          color="accent"
-          #tooltip="matTooltip"
-          matTooltip="Edit Contract"
-          (click)="edit(contract)"
-          test-id="view_search_contract.searched_contract.edit"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button
-          mat-mini-fab
-          color="accent"
-          type="button"
-          #tooltip="matTooltip"
-          matTooltip="Print Contract"
-          (click)="print(contract)"
-          class="m-l-20"
-          test-id="view_search_contract.searched_contract.download_pdf"
-        >
-          <mat-icon>picture_as_pdf</mat-icon>
-        </button>
-        <button
-          type="button"
-          #tooltip="matTooltip"
-          matTooltip="Renew Contract"
-          mat-raised-button
-          color="primary"
-          (click)="renewContracts(contract)"
-          style="float: right;"
-          test-id="view_search_contract.searched_contract.renew_contract"
-        >
-          Renew Contract
-        </button>
-      </div>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title
+            >{{ contract.customer.name }}({{ contract.customer.region }})
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <hr />
+          <span
+            >Equipment Model: {{ contract.equipmentItem.equipment.model }}</span
+          >
+          <span>&nbsp;&nbsp;&nbsp;</span>
+          <span>Serial Number: {{ contract.equipmentItem.serialNumber }}</span>
+          <br />
+          <span
+            >Description:
+            {{ contract.equipmentItem.equipment.description }}</span
+          >
+          <hr />
+          <span>Amc Start Date: {{ contract.amcStartDate | date }}</span>
+          <span>&nbsp;&nbsp;&nbsp;</span>
+          <span>Amc End Date: {{ contract.amcEndDate | date }}</span>
+          <span>&nbsp;&nbsp;&nbsp;</span>
+          <span>Billing Cycle: {{ contract.billingCycle }}</span>
+          <br />
+          <span>Date: {{ contract.contractDate }}</span>
+          <span>&nbsp;&nbsp;&nbsp;</span>
+          <span>Basic Amount: {{ contract.amcBasicAmount }}</span>
+          <span>&nbsp;&nbsp;&nbsp;</span>
+          <span>Tax: {{ contract.amcTax }}%</span>
+          <span>&nbsp;&nbsp;&nbsp;</span>
+          <span>Total Amount: {{ contract.amcTotalAmount }}</span>
+          <span>&nbsp;&nbsp;&nbsp;</span>
+          <span>Proposal No: {{ contract.proposalNo }}</span>
+          <span *ngIf="contract.note"> <br />Note: {{ contract.note }} </span>
+          <hr />
+        </mat-card-content>
+        <mat-card-actions>
+          <div>
+            <button
+              type="button"
+              mat-mini-fab
+              color="warn"
+              #tooltip="matTooltip"
+              matTooltip="Delete Contract"
+              (click)="onDelete(contract)"
+              test-id="view_search_contract.searched_contract.delete"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button
+              class="m-l-20"
+              type="button"
+              mat-mini-fab
+              color="accent"
+              #tooltip="matTooltip"
+              matTooltip="Edit Contract"
+              (click)="edit(contract)"
+              test-id="view_search_contract.searched_contract.edit"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-mini-fab
+              color="accent"
+              type="button"
+              #tooltip="matTooltip"
+              matTooltip="Print Contract"
+              (click)="print(contract)"
+              class="m-l-20"
+              test-id="view_search_contract.searched_contract.download_pdf"
+            >
+              <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+            <button
+              type="button"
+              #tooltip="matTooltip"
+              matTooltip="Renew Contract"
+              mat-raised-button
+              color="primary"
+              (click)="renewContracts(contract)"
+              style="float: right;"
+              test-id="view_search_contract.searched_contract.renew_contract"
+            >
+              Renew Contract
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 </div>
