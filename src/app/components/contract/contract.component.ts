@@ -166,8 +166,9 @@ export class ContractComponent implements OnInit {
     this.selectedTab = 0;
   }
 
-  reset(form: FormGroup) {
-    form.patchValue({ amcTax: 18 });
+  reset(event: any) {
+    event.formGroup.patchValue({ amcTax: 18 });
+    event.form.reset();
   }
 
   update(event: any) {

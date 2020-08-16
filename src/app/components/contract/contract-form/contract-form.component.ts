@@ -118,7 +118,10 @@ export class ContractFormComponent implements OnInit {
   }
 
   secondAction() {
-    this.secondActionEmitter.emit(this.contractForm);
+    this.secondActionEmitter.emit({
+      formGroup: this.contractForm,
+      form: this.fromElement,
+    });
   }
 
   findCustomer() {
