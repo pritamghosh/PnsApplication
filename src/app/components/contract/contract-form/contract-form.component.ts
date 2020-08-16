@@ -14,6 +14,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { FindCustomerComponent } from "./find-customer/find-customer.component";
 import { FindEquipmentComponent } from "./find-equipment/find-equipment.component";
 import { ContractModel } from "src/app/models/contract.model ";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-contract-form",
@@ -34,7 +35,11 @@ export class ContractFormComponent implements OnInit {
   calculate = true;
 
   contractForm: FormGroup;
-  constructor(private service: ContractService, public dialog: MatDialog) {
+  constructor(
+    private service: ContractService,
+    public dialog: MatDialog,
+    private datePipe: DatePipe
+  ) {
     this.contractForm = new FormGroup({
       customer: new FormGroup({
         name: new FormControl(null, [Validators.required]),
@@ -111,8 +116,17 @@ export class ContractFormComponent implements OnInit {
   }
 
   submitAction() {
+    let contract = this.contractForm.value;
+    contract.amcStartDate = this.datePipe.transform(
+      contract.amcStartDate,
+      "yyyy-MM-dd"
+    );
+    contract.amcEndDate = this.datePipe.transform(
+      contract.amcEndDate,
+      "yyyy-MM-dd"
+    );
     this.submitEmitter.emit({
-      contract: this.contractForm.value,
+      contract: contract,
       form: this.fromElement,
     });
   }
