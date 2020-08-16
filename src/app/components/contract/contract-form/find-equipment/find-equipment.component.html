@@ -3,7 +3,11 @@
   <br />
   <mat-form-field>
     <mat-label>Enter Equipment Model</mat-label>
-    <input matInput [formControl]="searchKeyControl" />
+    <input 
+    matInput
+    [formControl]="searchKeyControl"
+    test-id="find_equipment_pop_up.equipment_model"
+    />
   </mat-form-field>
   <button
     mat-mini-fab
@@ -12,6 +16,7 @@
     (click)="search()"
     [disabled]="!searchKeyControl.valid"
     style="float: right;"
+    test-id="find_equipment_pop_up.search_button"
   >
     <mat-icon>search</mat-icon>
   </button>
@@ -21,6 +26,7 @@
   #equipmentSelected
   [multiple]="false"
   (selectionChange)="onSelection(equipmentSelected.selectedOptions.selected)"
+  test-id="find_equipment_pop_up.selection_list"
 >
   <mat-list-option *ngFor="let equipment of equipmentResp" [value]="equipment">
     {{ equipment.model }}
@@ -41,6 +47,7 @@
       color="primary"
       matDialogClose
       [disabled]="!equipmentSelected.selectedOptions.selected[0]"
+      test-id="find_equipment_pop_up.select_button"
     >
       Select
     </button>
