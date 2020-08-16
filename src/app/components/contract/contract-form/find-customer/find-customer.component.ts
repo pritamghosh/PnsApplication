@@ -29,8 +29,8 @@ export class FindCustomerComponent implements OnInit {
   search() {
     this.service
       .get(`/search?query=${this.searchKeyControl.value}`)
-      .subscribe((res: CustomerModel[]) => {
-        this.customerResp = res;
+      .subscribe((res: any) => {
+        this.customerResp = res.result;
       });
   }
 }

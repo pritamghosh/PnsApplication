@@ -29,8 +29,8 @@ export class FindEquipmentComponent implements OnInit {
   search() {
     this.service
       .get(`/search?query=${this.searchKeyControl.value}`)
-      .subscribe((res: EquipmentModel[]) => {
-        this.equipmentResp = res;
+      .subscribe((res: any) => {
+        this.equipmentResp = res.result;
       });
   }
 }
