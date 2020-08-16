@@ -12,7 +12,10 @@ export class CustomerComponent implements OnInit {
   selectedTab = 0;
   isSearched = false;
   customerResp: CustomerModel[];
+  pageCount = 0;
   cutomerToEdit: CustomerModel;
+  url = "";
+  page = 1;
 
   seachKeyControl = new FormControl(null, [Validators.required]);
   searchOption = [
@@ -92,7 +95,7 @@ export class CustomerComponent implements OnInit {
   }
 
   findCustomer() {
-    let url = "";
+    let url = "?";
     switch (this.selectedOption.type) {
       case "byName": {
         url = `${url}?name=${this.seachKeyControl.value}`;
@@ -107,9 +110,18 @@ export class CustomerComponent implements OnInit {
         break;
       }
     }
-    this.service.get(url).subscribe((res: CustomerModel[]) => {
-      this.customerResp = res;
+    this.url = url;
+    this.getServiceCall(this.url);
+  }
+
+  getServiceCall(url: string) {
+    this.service.get(url).subscribe((res: any) => {
+      this.customerResp = res.result;
+      this.pageCount = res.pageCount;
       this.isSearched = true;
     });
+  }
+  changePage(pageNo: any) {
+    this.getServiceCall(`${this.url}&page=${pageNo}`);
   }
 }

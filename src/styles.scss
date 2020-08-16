@@ -42,3 +42,10 @@ body {
 .m-l-10 {
   margin-left: 20px !important;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+.paginationdiv {
+  margin-top: 20px;
+}

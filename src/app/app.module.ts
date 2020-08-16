@@ -49,6 +49,8 @@ import { FindCustomerComponent } from "./components/contract/contract-form/find-
 import { FindEquipmentComponent } from "./components/contract/contract-form/find-equipment/find-equipment.component";
 import { CustomerFormComponent } from "./components/customer/customer-form/customer-form.component";
 import { DatePipe } from "@angular/common";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +76,7 @@ import { DatePipe } from "@angular/common";
     ReactiveFormsModule,
     HttpClientModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatInputModule,
     MatMenuModule,
     MatButtonModule,
@@ -99,6 +102,7 @@ import { DatePipe } from "@angular/common";
     MatStepperModule,
     MatChipsModule,
     MatDialogModule,
+    NgbModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
