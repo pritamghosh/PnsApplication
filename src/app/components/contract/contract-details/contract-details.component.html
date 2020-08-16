@@ -40,6 +40,7 @@
           #tooltip="matTooltip"
           matTooltip="Edit Contract"
           (click)="edit(contract)"
+          test-id="view_search_contract.searched_contract.edit"
         >
           <mat-icon>edit</mat-icon>
         </button>
@@ -51,6 +52,7 @@
           matTooltip="Print Contract"
           (click)="print(contract)"
           class="m-l-20"
+          test-id="view_search_contract.searched_contract.download_pdf"
         >
           <mat-icon>picture_as_pdf</mat-icon>
         </button>
@@ -62,6 +64,7 @@
           color="primary"
           (click)="renewContracts(contract)"
           style="float: right;"
+          test-id="view_search_contract.searched_contract.renew_contract"
         >
           Renew Contract
         </button>
