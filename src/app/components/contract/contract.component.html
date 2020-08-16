@@ -9,6 +9,7 @@
           class="pns-radio-group"
           [(ngModel)]="selectedOption"
           style="flex-direction: row;"
+          test-id="view_search_contract.option_radio"
         >
           <mat-radio-button
             class="pns-radio-button"
@@ -33,6 +34,7 @@
                 [formControl]="seachKeyControl"
                 disabled
                 [disabled]="isSeachFieldDisabled()"
+                test-id="view_search_contract.search_input"
               />
             </mat-form-field>
           </div>
@@ -86,6 +88,7 @@
               type="button"
               [disabled]="isSeachButtonDisabled()"
               (click)="findContract()"
+              test-id="view_search_contract.search_button"
             >
               {{ selectedOption.searchButtonName }}
             </button>
