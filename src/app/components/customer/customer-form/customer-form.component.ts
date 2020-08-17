@@ -42,7 +42,7 @@ export class CustomerFormComponent implements OnInit {
     if (this.customer == undefined) {
       this.secondButtonName = "Reset";
       this.submitButtonName = "Add";
-      this.secondButtonColor = "accent";
+      this.secondButtonColor = "warn";
       this.title = "Enter Customer Details";
     } else {
       this.secondButtonName = "Cancel";
