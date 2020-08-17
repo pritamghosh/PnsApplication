@@ -65,7 +65,7 @@
     </mat-tab>
     <mat-tab label="Add Equipment">
       <mat-card>
-        <mat-card-header>
+        <mat-card-header class="center">
           <mat-card-title>Enter Equipment Details</mat-card-title>
         </mat-card-header>
         <form [formGroup]="equipmentForm" (ngSubmit)="onAdd()" #form="ngForm">
@@ -109,7 +109,7 @@
     </mat-tab>
     <mat-tab label="Edit Equipment" *ngIf="editTabShow">
       <mat-card>
-        <mat-card-header>
+        <mat-card-header class="center">
           <mat-card-title>Enter Equipment Details</mat-card-title>
         </mat-card-header>
         <form [formGroup]="equipmentEditForm" (ngSubmit)="onUpdate()">

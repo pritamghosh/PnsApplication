@@ -2,15 +2,15 @@
 
 @include mat-core();
 
-$pns-blue: (
-  500: #6200ee,
+$pns-col1: (
+  500: #05557b,
   contrast: (
     500: white,
   ),
 );
 
-$pns-teal: (
-  500: #07cfbb,
+$pns-col2: (
+  500: #6da943,
   contrast: (
     500: white,
   ),
@@ -22,8 +22,8 @@ $pns-red: (
     500: white,
   ),
 );
-$primary: mat-palette($pns-blue, 500);
-$accent: mat-palette($pns-teal, 500);
+$primary: mat-palette($pns-col1, 500);
+$accent: mat-palette($pns-col2, 500);
 $warn: mat-palette($pns-red, 500);
 
 $app-theme: mat-light-theme($primary, $accent, $warn);

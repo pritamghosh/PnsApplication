@@ -39,11 +39,16 @@ export class ContractFormComponent implements OnInit {
     private service: ContractService,
     public dialog: MatDialog,
     private datePipe: DatePipe
-  ) {
+  ) {}
+  ngOnInit(): void {
     this.contractForm = new FormGroup({
       customer: new FormGroup({
-        name: new FormControl(null, [Validators.required]),
-        region: new FormControl(null, [Validators.required]),
+        name: new FormControl({ disabled: true, value: null }, [
+          Validators.required,
+        ]),
+        region: new FormControl({ disabled: true, value: null }, [
+          Validators.required,
+        ]),
         address: new FormControl(null, [Validators.required]),
         pan: new FormControl(null, [Validators.required]),
         gstinNo: new FormControl(null, [Validators.required]),
@@ -51,12 +56,16 @@ export class ContractFormComponent implements OnInit {
       }),
       equipmentItem: new FormGroup({
         equipment: new FormGroup({
-          model: new FormControl(null, [Validators.required]),
+          model: new FormControl({ disabled: true, value: null }, [
+            Validators.required,
+          ]),
           description: new FormControl(null),
           _id: new FormControl(null, [Validators.required]),
         }),
         _id: new FormControl(null),
-        serialNumber: new FormControl(null, [Validators.required]),
+        serialNumber: new FormControl({ disabled: this.isRenew, value: null }, [
+          Validators.required,
+        ]),
       }),
       _id: new FormControl(null),
       proposalNo: new FormControl(null),
@@ -64,12 +73,12 @@ export class ContractFormComponent implements OnInit {
       amcEndDate: new FormControl(null, [Validators.required]),
       amcBasicAmount: new FormControl(null, [Validators.required]),
       amcTotalAmount: new FormControl(null, [Validators.required]),
-      amcTax: new FormControl(environment.tax, [Validators.required]),
+      amcTax: new FormControl({ disabled: true, value: environment.tax }, [
+        Validators.required,
+      ]),
       billingCycle: new FormControl(null, [Validators.required]),
       note: new FormControl(null),
     });
-  }
-  ngOnInit(): void {
     if (this.contract != undefined) {
       this.contractForm.patchValue(this.contract);
       if (this.isRenew) {

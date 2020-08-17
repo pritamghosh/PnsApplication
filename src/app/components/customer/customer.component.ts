@@ -141,8 +141,6 @@ export class CustomerComponent implements OnInit {
     });
   }
   changePage(pageNo: any) {
-    console.log(1);
-
     this.getServiceCall(`${this.url}&page=${pageNo}`, pageNo);
   }
 }

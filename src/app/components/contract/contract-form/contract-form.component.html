@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-header>
+  <mat-card-header class="center">
     <mat-card-title>{{ title }}</mat-card-title>
   </mat-card-header>
   <form [formGroup]="contractForm" #form="ngForm">
@@ -8,14 +8,24 @@
         <div class="col-lg-12">
           <!-- customer panel start -->
           <div class="row" formGroupName="customer">
-            <div class="col-md-6 col-lg-6 col-sm-12">
+            <div class="col-md-3 col-lg-2 col-sm-12">
+              <button
+                mat-raised-button
+                color="primary"
+                type="button"
+                (click)="findCustomer()"
+                [disabled]="isRenew"
+                test-id="add_contract.find_customer_button"
+              >
+                Find Customer
+              </button>
+            </div>
+            <div class="col-md-5 col-lg-6 col-sm-12">
               <mat-form-field style="width: 100%;">
                 <mat-label>Name</mat-label>
                 <input
                   matInput
                   formControlName="name"
-                  readonly
-                  [disabled]="isRenew"
                   test-id="add_contract.customer_name"
                 />
               </mat-form-field>
@@ -26,38 +36,33 @@
                 <input
                   matInput
                   formControlName="region"
-                  readonly
-                  [disabled]="isRenew"
                   test-id="add_contract.customer_region"
                 />
               </mat-form-field>
-            </div>
-            <div class="col-md-2 col-lg-2 col-sm-12">
-              <button
-                mat-raised-button
-                color="accent"
-                type="button"
-                (click)="findCustomer()"
-                style="float: right;"
-                [disabled]="isRenew"
-                test-id="add_contract.find_customer_button"
-              >
-                Find Customer
-              </button>
             </div>
           </div>
           <!-- customer panel end -->
           <hr />
           <!-- equipment panel start -->
           <div class="row" formGroupName="equipmentItem">
-            <div class="col-md-6 col-lg-6 col-sm-12" formGroupName="equipment">
+            <div class="col-md-3 col-lg-2 col-sm-12">
+              <button
+                mat-raised-button
+                color="primary"
+                type="button"
+                (click)="findEquipment()"
+                [disabled]="isRenew"
+                test-id="add_contract.fina_equipment_button"
+              >
+                Find Equipment
+              </button>
+            </div>
+            <div class="col-md-5 col-lg-6 col-sm-12" formGroupName="equipment">
               <mat-form-field style="width: 100%;">
                 <mat-label>Model Name</mat-label>
                 <input
                   matInput
                   formControlName="model"
-                  readonly
-                  [disabled]="isRenew"
                   test-id="add_contract.model_name"
                 />
               </mat-form-field>
@@ -68,30 +73,16 @@
                 <input
                   matInput
                   formControlName="serialNumber"
-                  [disabled]="isRenew"
                   test-id="add_contract.serial_number"
                 />
               </mat-form-field>
-            </div>
-            <div class="col-md-2 col-lg-2 col-sm-12">
-              <button
-                mat-raised-button
-                color="accent"
-                type="button"
-                (click)="findEquipment()"
-                style="float: right;"
-                [disabled]="isRenew"
-                test-id="add_contract.fina_equipment_button"
-              >
-                Find Equipment
-              </button>
             </div>
           </div>
           <!-- equipment panel end -->
           <hr />
         </div>
         <!-- Date panel start -->
-        <div class="col-md-2 col-lg-2 col-sm-6">
+        <div class="col-md-4 col-lg-4 col-sm-12">
           <mat-form-field style="width: 100%;">
             <mat-label>Amc Start Date</mat-label>
             <input
@@ -107,7 +98,7 @@
             <mat-datepicker #amcStartDate></mat-datepicker>
           </mat-form-field>
         </div>
-        <div class="col-md-2 col-lg-2 col-sm-6">
+        <div class="col-md-4 col-lg-4 col-sm-12">
           <mat-form-field style="width: 100%;">
             <mat-label>Amc End Date</mat-label>
             <input
@@ -125,63 +116,66 @@
           </mat-form-field>
         </div>
         <!-- Date panel end -->
-
-        <!-- Price panel start -->
-        <div class="col-md-2 col-lg-2 col-sm-6">
-          <mat-form-field style="width: 100%;">
-            <mat-label>Basic Amount</mat-label>
-            <input 
-            matInput formControlName="amcBasicAmount"
-            test-id="add_contract.basic_amount"
-            />
-          </mat-form-field>
-        </div>
-        <div class="col-md-2 col-lg-2 col-sm-6">
-          <mat-form-field style="width: 100%;">
-            <mat-label>Tax (%)</mat-label>
-            <input 
-            matInput formControlName="amcTax" 
-            readonly
-            test-id="add_contract.amc_tax"
-            />
-          </mat-form-field>
-        </div>
-        <div class="col-md-2 col-lg-2 col-sm-6">
-          <mat-form-field style="width: 100%;">
-            <mat-label>Total Amount</mat-label>
-            <input 
-            matInput 
-            formControlName="amcTotalAmount"
-            test-id="add_contract.total_amount"
-            />
-          </mat-form-field>
-        </div>
-
-        <!-- Price panel end -->
-        <div class="col-md-2 col-lg-2 col-sm-6">
+        <div class="col-md-4 col-lg-4 col-sm-12">
           <mat-form-field style="width: 100%;">
             <mat-label>Billing Cycle</mat-label>
-            <input 
-            matInput 
-            formControlName="billingCycle"
-            test-id="add_contract.billing_cycle"
+            <input
+              matInput
+              formControlName="billingCycle"
+              test-id="add_contract.billing_cycle"
             />
           </mat-form-field>
         </div>
+        <div class="col-lg-12"><hr /></div>
+        <!-- Price panel start -->
+        <div class="col-md-4 col-lg-4 col-sm-12">
+          <mat-form-field style="width: 100%;">
+            <mat-label>Basic Amount</mat-label>
+            <input
+              matInput
+              formControlName="amcBasicAmount"
+              test-id="add_contract.basic_amount"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+          <mat-form-field style="width: 100%;">
+            <mat-label>Tax (%)</mat-label>
+            <input
+              matInput
+              formControlName="amcTax"
+              readonly
+              test-id="add_contract.amc_tax"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-12">
+          <mat-form-field style="width: 100%;">
+            <mat-label>Total Amount</mat-label>
+            <input
+              matInput
+              formControlName="amcTotalAmount"
+              test-id="add_contract.total_amount"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-lg-12"><hr /></div>
+        <!-- Price panel end -->
+
         <div class="col-md-12 col-lg-12 col-sm-12">
           <mat-form-field style="width: 100%;">
             <mat-label>Note</mat-label>
-            <textarea 
-            matInput 
-            formControlName="note"
-            test-id="add_contract.note"
+            <textarea
+              matInput
+              formControlName="note"
+              test-id="add_contract.note"
             ></textarea>
           </mat-form-field>
         </div>
         <!-- Button panel start -->
         <div class="col-md-12 col-lg-12 col-sm-12">
           <button
-            mat-raised-button
+            mat-flat-button
             color="{{ secondButtonColor }}"
             type="button"
             (click)="secondAction()"
@@ -189,7 +183,7 @@
           >
             {{ secondButtonName }}
           </button>
-            <div style="float: right;">
+          <div style="float: right;">
             <button
               mat-raised-button
               color="primary"
