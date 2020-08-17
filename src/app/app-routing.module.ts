@@ -3,12 +3,13 @@ import { Routes, RouterModule } from "@angular/router";
 import { CustomerComponent } from "./components/customer/customer.component";
 import { ContractComponent } from "./components/contract/contract.component";
 import { EquipmentComponent } from "./components/equipment/equipment.component";
-import { AuthGuardService } from "./services/auth-guard.service";
+import { AuthGuardService } from "./services/auth.guard.service";
 
 const routes: Routes = [
   {
     path: "customer",
     canActivate: [AuthGuardService],
+    data: { roles: ["admin"] },
     component: CustomerComponent,
   },
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: "contract",
-    canActivate: [AuthGuardService],
+    // canActivate: [AuthGuardService],
     component: ContractComponent,
   },
 ];

@@ -2,9 +2,15 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// Add here your keycloak setup infos
 export const environment = {
   production: false,
   tax: 18,
+  keycloak: {
+    issuer: "http://localhost:8080/auth/",
+    realm: "PNS_REALM",
+    clientId: "pns-ui",
+  },
 };
 
 /*

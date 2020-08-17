@@ -21,13 +21,13 @@
         </mat-radio-group>
         <div class="row">
           <div
-            class="col-md-6"
+            class="col-md-10 col-lg-6 col-sm-12"
             *ngIf="
               selectedOption.type != 'byAmcDateRange' &&
               selectedOption.type != 'byCreationDateRange'
             "
           >
-            <mat-form-field style="width: 100%;">
+            <mat-form-field>
               <mat-label>{{ selectedOption.searchFieldName }}</mat-label>
               <input
                 matInput
@@ -39,13 +39,13 @@
             </mat-form-field>
           </div>
           <div
-            class="col-md-3"
+            class="col-md-5 col-lg-3 col-sm-12"
             *ngIf="
               selectedOption.type == 'byAmcDateRange' ||
               selectedOption.type == 'byCreationDateRange'
             "
           >
-            <mat-form-field style="width: 100%;">
+            <mat-form-field>
               <mat-label>Select Start Date</mat-label>
               <input
                 matInput
@@ -60,13 +60,13 @@
             </mat-form-field>
           </div>
           <div
-            class="col-md-3"
+            class="col-md-5 col-lg-3 col-sm-12"
             *ngIf="
               selectedOption.type == 'byAmcDateRange' ||
               selectedOption.type == 'byCreationDateRange'
             "
           >
-            <mat-form-field style="width: 100%;">
+            <mat-form-field>
               <mat-label>Select End Date</mat-label>
               <input
                 matInput
@@ -81,17 +81,19 @@
               <mat-datepicker #endDatefor></mat-datepicker>
             </mat-form-field>
           </div>
-          <div class="col-md-6">
-            <button
-              mat-raised-button
-              color="primary"
-              type="button"
-              [disabled]="isSeachButtonDisabled()"
-              (click)="findContract()"
-              test-id="view_search_contract.search_button"
-            >
-              {{ selectedOption.searchButtonName }}
-            </button>
+          <div class="col-md-2 col-lg-4 col-sm-12">
+            <div class="center">
+              <button
+                mat-raised-button
+                color="primary"
+                type="button"
+                [disabled]="isSeachButtonDisabled()"
+                (click)="findContract()"
+                test-id="view_search_contract.search_button"
+              >
+                {{ selectedOption.searchButtonName }}
+              </button>
+            </div>
           </div>
         </div>
       </div>

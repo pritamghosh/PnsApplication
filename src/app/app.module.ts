@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
-import { NgModule } from "@angular/core";
+import { NgModule, APP_INITIALIZER } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -50,7 +50,10 @@ import { FindEquipmentComponent } from "./components/contract/contract-form/find
 import { CustomerFormComponent } from "./components/customer/customer-form/customer-form.component";
 import { DatePipe } from "@angular/common";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { initializer } from "./init/auth-init";
+import { KeycloakService, KeycloakAngularModule } from "keycloak-angular";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,8 +106,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatChipsModule,
     MatDialogModule,
     NgbModule,
+    KeycloakAngularModule,
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializer,
+      deps: [KeycloakService],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

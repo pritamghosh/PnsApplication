@@ -11,10 +11,10 @@
       </button>
       <button mat-button [routerLink]="['equipment']">
         Equipment</button
-      ><button 
-      mat-button 
-      [routerLink]="['contract']"
-      test-id="contract-tab-option"
+      ><button
+        mat-button
+        [routerLink]="['contract']"
+        test-id="contract-tab-option"
       >
         Contract
       </button>
@@ -24,20 +24,39 @@
       <button mat-icon-button [matMenuTriggerFor]="userMenu" class="sm-hide">
         <mat-icon>person</mat-icon>
       </button>
-      <!--<button mat-icon-button [matMenuTriggerFor]="mainMenu" class="sm-show">
+      <button mat-icon-button [matMenuTriggerFor]="mainMenu" class="sm-show">
         <mat-icon>menu</mat-icon>
-      </button> -->
-      <mat-menu #userMenu="matMenu">
-        <button mat-menu-item [routerLink]="['login']" [hidden]="isLoggedIn">
-          Login
-        </button>
-        <button mat-menu-item [routerLink]="['profile']" [hidden]="!isLoggedIn">
-          Profile
-        </button>
-        <button mat-menu-item (click)="signOut()" [hidden]="!isLoggedIn">
-          Sign Out
-        </button>
-      </mat-menu>
+      </button>
     </div>
+    <mat-menu #mainMenu="matMenu" class="primary">
+      <button mat-menu-item [routerLink]="['customer']" class="primary">
+        Customer
+      </button>
+      <button mat-menu-item [routerLink]="['equipment']" class="primary">
+        Equipment
+      </button>
+      <button
+        mat-menu-item
+        class="primary"
+        [routerLink]="['contract']"
+        test-id="contract-tab-option"
+      >
+        Contract
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="userMenu">
+        <mat-icon>person</mat-icon>
+      </button>
+    </mat-menu>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item [routerLink]="['login']" [hidden]="isLoggedIn">
+        Login
+      </button>
+      <button mat-menu-item [routerLink]="['profile']" [hidden]="!isLoggedIn">
+        Profile
+      </button>
+      <button mat-menu-item (click)="signOut()" [hidden]="!isLoggedIn">
+        Sign Out
+      </button>
+    </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>

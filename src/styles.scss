@@ -10,7 +10,7 @@ body {
 }
 
 .pns-radio-group {
-  display: flex;
+  display: table;
   margin: 15px 0;
 }
 
@@ -47,6 +47,16 @@ body {
 }
 button {
   outline: none !important;
+}
+
+mat-form-field {
+  width: 100% !important;
+}
+
+.col-sm-12 {
+  .center {
+    text-align: center;
+  }
 }
 
 .center {
