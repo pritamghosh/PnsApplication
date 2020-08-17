@@ -60,7 +60,7 @@ export class CustomerComponent implements OnInit {
         if (element._id == resp._id) {
           element.name = resp.name;
           element.region = resp.region;
-          element.gstin = resp.gstin;
+          element.gstinNo = resp.gstinNo;
           element.pan = resp.pan;
           element.address = resp.address;
         }
