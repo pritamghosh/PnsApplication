@@ -1,12 +1,13 @@
 <div mat-dialog-content style="min-width: 400px;">
   <span>Find Customer by Name</span>
   <br />
-  <mat-form-field>
+  <mat-form-field style="width: 80% !important;">
     <mat-label>Enter Customer Name</mat-label>
-    <input 
-    matInput 
-    [formControl]="searchKeyControl"
-    test-id="find_customer_pop_up.name" />
+    <input
+      matInput
+      [formControl]="searchKeyControl"
+      test-id="find_customer_pop_up.name"
+    />
   </mat-form-field>
   <button
     mat-mini-fab

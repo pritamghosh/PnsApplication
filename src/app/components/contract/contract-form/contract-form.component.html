@@ -26,6 +26,7 @@
                 <input
                   matInput
                   formControlName="name"
+                  readonly
                   test-id="add_contract.customer_name"
                 />
               </mat-form-field>
@@ -35,6 +36,7 @@
                 <mat-label>Region</mat-label>
                 <input
                   matInput
+                  readonly
                   formControlName="region"
                   test-id="add_contract.customer_region"
                 />
@@ -63,6 +65,7 @@
                 <input
                   matInput
                   formControlName="model"
+                  readonly
                   test-id="add_contract.model_name"
                 />
               </mat-form-field>
@@ -72,6 +75,7 @@
                 <mat-label>Serial Number</mat-label>
                 <input
                   matInput
+                  [readonly]="isRenew"
                   formControlName="serialNumber"
                   test-id="add_contract.serial_number"
                 />
