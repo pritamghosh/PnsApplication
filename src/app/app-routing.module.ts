@@ -22,6 +22,7 @@ const routes: Routes = [
     // canActivate: [AuthGuardService],
     component: ContractComponent,
   },
+  { path: "", redirectTo: "contract", pathMatch: "full" },
 ];
 
 @NgModule({
