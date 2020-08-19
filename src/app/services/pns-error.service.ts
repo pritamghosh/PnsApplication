@@ -15,22 +15,32 @@ export class PnsErrorService implements ErrorHandler {
   ) {}
 
   handleError(error: HttpErrorResponse) {
-    console.error(error);
     this.ngzone.run(() => {
       this.busyDisplayService.hide();
     });
-    if (
+    console.error(error);
+    if (error.status != null && (error.status == 403 || error.status == 401)) {
+      this.showErrorMessage(
+        "Unable to Perform the Action Beacuse of Insufficient Privileges!"
+      );
+    } else if (error.status != null && error.status == 400) {
+      this.showErrorMessage("Invalid Request!");
+    } else if (
       error.error != null &&
       error.error.message != null &&
       error.error.message != ""
     ) {
       this.ngzone.run(() => {
-        this.openDialog(error.error);
+        this.openDialog(error.error.message);
       });
     }
   }
-
-  openDialog(error: any): void {
+  showErrorMessage(msg: any) {
+    this.ngzone.run(() => {
+      this.openDialog(msg);
+    });
+  }
+  openDialog(message: any): void {
     let dialog: MatDialog = this.injector.get(MatDialog);
     const dialogConfig = new MatDialogConfig();
 
@@ -38,7 +48,7 @@ export class PnsErrorService implements ErrorHandler {
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
-      msg: error.message,
+      msg: message,
       buttonName: "Ok",
     };
     dialog.open(AlertComponent, dialogConfig);

@@ -184,6 +184,7 @@ export class ContractComponent implements OnInit {
           element.customer = resp.customer;
           element.equipmentItem = resp.equipmentItem;
           element.amcBasicAmount = resp.amcBasicAmount;
+          element.amcTotalAmount = resp.amcTotalAmount;
           element.amcTax = resp.amcTax;
           element.amcTaxAmount = resp.amcTaxAmount;
           element.billingCycle = resp.billingCycle;
