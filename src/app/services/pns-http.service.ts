@@ -28,7 +28,6 @@ export class PnsHttpService {
     return new Observable((observer) => {
       this.http.post<any>(url, req, options).subscribe((resp: any) => {
         this.busyDisplay.hide();
-        this.busyDisplay.show();
         observer.next(resp);
         observer.complete();
       });
