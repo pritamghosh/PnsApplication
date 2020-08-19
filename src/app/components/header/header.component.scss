@@ -1,13 +1,14 @@
-a:hover {
-  color: white;
-  text-decoration: none;
+button:hover {
+  background-color: rgb(109 169 67) !important;
 }
+// button:active {
+//   background-color: red !important;
+// }
 .sm-hide {
   @media (max-width: 600px) {
     display: none;
   }
 }
-
 .sm-show {
   @media (min-width: 601px) {
     display: none;

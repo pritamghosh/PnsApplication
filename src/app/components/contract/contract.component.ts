@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { ContractModel } from "src/app/models/contract.model ";
 import { ActivatedRoute } from "@angular/router";
 import { DatePipe } from "@angular/common";
+import { RoleService } from "src/app/utility/services/role.service";
 
 @Component({
   selector: "app-contract",
@@ -52,15 +53,18 @@ export class ContractComponent implements OnInit {
   constructor(
     private service: ContractService,
     private route: ActivatedRoute,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    public role: RoleService
   ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       if (params["customerId"]) {
-        this.search(`/customer/${params["customerId"]}`);
+        this.url = `/customer/${params["customerId"]}?`;
+        this.changePage(1);
       } else if (params["equipmentId"]) {
-        this.search(`/equipment/${params["equipmentId"]}`);
+        this.url = `/equipment/${params["equipmentId"]}?`;
+        this.changePage(1);
       }
     });
   }
@@ -174,9 +178,22 @@ export class ContractComponent implements OnInit {
   update(event: any) {
     console.log("update");
 
-    this.service
-      .update(event.contract)
-      .subscribe((resp) => this.cancelUpdate());
+    this.service.update(event.contract).subscribe((resp: ContractModel) => {
+      this.contractResp.forEach((element: ContractModel) => {
+        if (element._id == resp._id) {
+          element.customer = resp.customer;
+          element.equipmentItem = resp.equipmentItem;
+          element.amcBasicAmount = resp.amcBasicAmount;
+          element.amcTax = resp.amcTax;
+          element.amcTaxAmount = resp.amcTaxAmount;
+          element.billingCycle = resp.billingCycle;
+          element.amcStartDate = resp.amcStartDate;
+          element.amcEndDate = resp.amcEndDate;
+          element.note = resp.note;
+        }
+      });
+      this.cancelUpdate();
+    });
   }
 
   onDelete(contract: ContractModel) {

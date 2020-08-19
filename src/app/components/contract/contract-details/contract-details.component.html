@@ -1,4 +1,7 @@
 <div class="row">
+  <div class="center" *ngIf="!contracts || contracts.length == 0">
+    <app-no-records-found></app-no-records-found>
+  </div>
   <div class="col-md-12 col-sm-12 col-12" *ngFor="let contract of contracts">
     <div class="details">
       <mat-card>
@@ -47,19 +50,22 @@
               #tooltip="matTooltip"
               matTooltip="Delete Contract"
               (click)="onDelete(contract)"
+              [disabled]="!role.hasDelete()"
               test-id="view_search_contract.searched_contract.delete"
+              class="m-r-20"
             >
               <mat-icon>delete</mat-icon>
             </button>
             <button
-              class="m-l-20"
               type="button"
               mat-mini-fab
               color="accent"
               #tooltip="matTooltip"
               matTooltip="Edit Contract"
               (click)="edit(contract)"
+              [disabled]="!role.hasEdit()"
               test-id="view_search_contract.searched_contract.edit"
+              class="m-r-20"
             >
               <mat-icon>edit</mat-icon>
             </button>
@@ -70,7 +76,7 @@
               #tooltip="matTooltip"
               matTooltip="Print Contract"
               (click)="print(contract)"
-              class="m-l-20"
+              [disabled]="!role.hasView()"
               test-id="view_search_contract.searched_contract.download_pdf"
             >
               <mat-icon>picture_as_pdf</mat-icon>
@@ -82,6 +88,7 @@
               mat-raised-button
               color="primary"
               (click)="renewContracts(contract)"
+              [disabled]="!role.hasView()"
               style="float: right;"
               test-id="view_search_contract.searched_contract.renew_contract"
             >

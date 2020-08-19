@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { ContractModel } from "src/app/models/contract.model ";
 import { ContractService } from "src/app/services/contract.service";
+import { RoleService } from "src/app/utility/services/role.service";
 
 @Component({
   selector: "app-contract-details",
@@ -14,7 +15,7 @@ export class ContractDetailsComponent implements OnInit {
   @Output("renew") renewEmitter: EventEmitter<
     ContractModel
   > = new EventEmitter();
-  constructor(private service: ContractService) {}
+  constructor(private service: ContractService, public role: RoleService) {}
 
   ngOnInit(): void {}
 

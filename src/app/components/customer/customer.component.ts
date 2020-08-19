@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { CustomerService } from "src/app/services/customer.service";
 import { CustomerModel } from "src/app/models/customer.model";
+import { RoleService } from "src/app/utility/services/role.service";
 
 @Component({
   selector: "app-customer",
@@ -46,7 +47,7 @@ export class CustomerComponent implements OnInit {
   ];
 
   selectedOption = this.searchOption[0];
-  constructor(private service: CustomerService) {}
+  constructor(private service: CustomerService, public role: RoleService) {}
   ngOnInit(): void {}
 
   onEdit(customer: CustomerModel) {

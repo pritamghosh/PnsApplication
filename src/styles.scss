@@ -35,10 +35,12 @@ body {
 .m-l-20 {
   margin-left: 20px !important;
 }
-.m-l-10 {
-  margin-left: 20px !important;
+.m-r-10 {
+  margin-right: 10px !important;
 }
-
+.m-r-20 {
+  margin-right: 20px !important;
+}
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
 
@@ -53,12 +55,14 @@ mat-form-field {
   width: 100% !important;
 }
 
-.col-sm-12 {
-  .center {
+.sm-center {
+  @media (max-width: 765px) {
     text-align: center;
   }
 }
 
 .center {
+  width: 100%;
+  text-align: center;
   justify-content: center;
 }

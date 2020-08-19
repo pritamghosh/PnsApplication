@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { EquipmentModel } from "src/app/models/equipment.model ";
 import { EquipmentService } from "src/app/services/equipment.service";
+import { RoleService } from "src/app/utility/services/role.service";
 
 @Component({
   selector: "app-equipment",
@@ -42,7 +43,7 @@ export class EquipmentComponent implements OnInit {
   ];
 
   selectedOption = this.searchOption[0];
-  constructor(private service: EquipmentService) {}
+  constructor(private service: EquipmentService, public role: RoleService) {}
 
   ngOnInit(): void {
     this.equipmentForm = new FormGroup({

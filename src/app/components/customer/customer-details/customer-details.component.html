@@ -1,4 +1,7 @@
 <div class="row">
+  <div class="center" *ngIf="!customers || customers.length == 0">
+    <app-no-records-found></app-no-records-found>
+  </div>
   <div
     class="col-md-12 col-sm-12 col-12 col-lg-6"
     *ngFor="let customer of customers"
@@ -27,6 +30,8 @@
               color
               color="warn"
               (click)="onDelete(customer)"
+              class="m-r-10"
+              [disabled]="!role.hasDelete()"
             >
               <mat-icon>delete</mat-icon>
             </button>
@@ -36,7 +41,7 @@
               color
               color="accent"
               (click)="onEdit(customer)"
-              style="margin-left: 10px;"
+              [disabled]="!role.hasEdit()"
             >
               <mat-icon>edit</mat-icon>
             </button>
@@ -45,6 +50,7 @@
               mat-raised-button
               color="primary"
               (click)="viewContracts(customer)"
+              [disabled]="!role.hasView()"
               style="float: right;"
             >
               View Contracts

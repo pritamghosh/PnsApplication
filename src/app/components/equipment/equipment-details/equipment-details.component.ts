@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { EquipmentModel } from "src/app/models/equipment.model ";
 import { Router } from "@angular/router";
+import { RoleService } from "src/app/utility/services/role.service";
 
 @Component({
   selector: "app-equipment-details",
@@ -11,7 +12,7 @@ export class EquipmentDetailsComponent implements OnInit {
   @Input("equipments") equipments: EquipmentModel[];
   @Output() edit: EventEmitter<EquipmentModel> = new EventEmitter();
   @Output() delete: EventEmitter<EquipmentModel> = new EventEmitter();
-  constructor(private router: Router) {}
+  constructor(private router: Router, public role: RoleService) {}
 
   ngOnInit(): void {}
 

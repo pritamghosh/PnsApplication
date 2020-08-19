@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { CustomerModel } from "src/app/models/customer.model";
 import { Router } from "@angular/router";
 import { CustomerService } from "src/app/services/customer.service";
+import { RoleService } from "src/app/utility/services/role.service";
 
 @Component({
   selector: "app-customer-details",
@@ -12,7 +13,7 @@ export class CustomerDetailsComponent implements OnInit {
   @Input("customers") customers: CustomerModel[];
   @Output() edit: EventEmitter<CustomerModel> = new EventEmitter();
   @Output() delete: EventEmitter<CustomerModel> = new EventEmitter();
-  constructor(private router: Router) {}
+  constructor(private router: Router, public role: RoleService) {}
 
   ngOnInit(): void {}
 

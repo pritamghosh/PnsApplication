@@ -1,5 +1,8 @@
 <div class="row">
-  <div class="col-md-4 col-sm-6 col-12" *ngFor="let equipment of equipments">
+  <div class="center" *ngIf="!equipments || equipments.length == 0">
+    <app-no-records-found></app-no-records-found>
+  </div>
+  <div class="col-lg-4 col-md-6 col-12" *ngFor="let equipment of equipments">
     <div class="details">
       <mat-card>
         <mat-card-header>
@@ -18,6 +21,8 @@
               color
               color="warn"
               (click)="OnDelete(equipment)"
+              [disabled]="!role.hasDelete()"
+              class="m-r-10"
             >
               <mat-icon>delete</mat-icon>
             </button>
@@ -27,7 +32,7 @@
               color
               color="accent"
               (click)="OnEdit(equipment)"
-              class="m-l-10"
+              [disabled]="!role.hasEdit()"
             >
               <mat-icon>edit</mat-icon>
             </button>
@@ -36,6 +41,7 @@
               mat-raised-button
               color="primary"
               (click)="viewContracts(equipment)"
+              [disabled]="!role.hasView()"
               style="float: right;"
             >
               View Contracts

@@ -1,14 +1,12 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { NgModule, APP_INITIALIZER } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HeaderComponent } from "./header/header.component";
-import { FooterComponent } from "./footer/footer.component";
 
 import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 import { MatInputModule } from "@angular/material/input";
@@ -28,6 +26,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatGridListModule } from "@angular/material/grid-list";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
@@ -53,6 +52,11 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { initializer } from "./init/auth-init";
 import { KeycloakService, KeycloakAngularModule } from "keycloak-angular";
+import { BusyDisplayComponent } from "./utility/busy-display/busy-display.component";
+import { PnsInterInterceptorService } from "./services/pns-inter-interceptor.service";
+import { NoRecordsFoundComponent } from "./utility/no-records-found/no-records-found.component";
+import { HeaderComponent } from "./components/header/header.component";
+import { FooterComponent } from "./components/footer/footer.component";
 
 @NgModule({
   declarations: [
@@ -70,6 +74,8 @@ import { KeycloakService, KeycloakAngularModule } from "keycloak-angular";
     FindCustomerComponent,
     FindEquipmentComponent,
     CustomerFormComponent,
+    BusyDisplayComponent,
+    NoRecordsFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,11 +111,17 @@ import { KeycloakService, KeycloakAngularModule } from "keycloak-angular";
     MatStepperModule,
     MatChipsModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     NgbModule,
     KeycloakAngularModule,
   ],
   providers: [
     DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: PnsInterInterceptorService,
+      multi: true,
+    },
     {
       provide: APP_INITIALIZER,
       useFactory: initializer,

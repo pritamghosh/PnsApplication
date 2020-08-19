@@ -12,7 +12,7 @@ export class CustomerService {
 
   public add(req: any) {
     return new Observable((observer) => {
-      this.http.put(this.baseUrl, req).subscribe((resp: any) => {
+      this.http.put<any>(this.baseUrl, req).subscribe((resp: any) => {
         this.alertService
           .openDiaolog("Customer Added Successfully!!")
           .afterClosed()
@@ -26,7 +26,7 @@ export class CustomerService {
 
   public update(req: any) {
     return new Observable((observer) => {
-      this.http.post(this.baseUrl, req).subscribe((res: any) => {
+      this.http.post<any>(this.baseUrl, req).subscribe((res: any) => {
         this.alertService
           .openDiaolog("Customer Updated Successfully!!")
           .afterClosed()
@@ -40,7 +40,7 @@ export class CustomerService {
 
   public get(reqUrl: any) {
     return new Observable((observer) => {
-      this.http.get(`${this.baseUrl}${reqUrl}`).subscribe((res: any) => {
+      this.http.get<any>(`${this.baseUrl}${reqUrl}`).subscribe((res: any) => {
         observer.next(res);
         observer.complete();
       });
@@ -49,7 +49,7 @@ export class CustomerService {
 
   public delete(id: string) {
     return new Observable((observer) => {
-      this.http.delete(`${this.baseUrl}/${id}`).subscribe((res: any) => {
+      this.http.delete<any>(`${this.baseUrl}/${id}`).subscribe((res: any) => {
         observer.next(res);
         observer.complete();
       });
