@@ -9,7 +9,12 @@ import { KeycloakService } from "keycloak-angular";
 export class HeaderComponent implements OnInit {
   constructor(private keacloak: KeycloakService) {}
 
-  ngOnInit(): void {}
+  username: string;
+  ngOnInit(): void {
+    this.keacloak.loadUserProfile().then((res) => {
+      this.username = res.firstName + " " + res.lastName;
+    });
+  }
 
   get isLoggedIn() {
     return this.keacloak.isLoggedIn();
@@ -17,6 +22,5 @@ export class HeaderComponent implements OnInit {
   signOut() {
     this.keacloak.getKeycloakInstance();
     this.keacloak.logout();
-    //this.router.navigateByUrl("/login");
   }
 }
