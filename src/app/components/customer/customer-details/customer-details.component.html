@@ -41,6 +41,7 @@
               color
               color="accent"
               (click)="onEdit(customer)"
+              [disabled]="!role.hasEdit()"
             >
               <mat-icon>edit</mat-icon>
             </button>
