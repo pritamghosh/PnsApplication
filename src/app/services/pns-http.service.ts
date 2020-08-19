@@ -12,10 +12,10 @@ export class PnsHttpService {
     private busyDisplay: BusyDisplayService
   ) {}
 
-  public put<T>(url: string, req: any) {
+  public put<T>(url: string, req: any, options?: any) {
     this.busyDisplay.show();
     return new Observable((observer) => {
-      this.http.put<any>(url, req).subscribe((resp: any) => {
+      this.http.put<any>(url, req, options).subscribe((resp: any) => {
         this.busyDisplay.hide();
         observer.next(resp);
         observer.complete();
@@ -23,10 +23,10 @@ export class PnsHttpService {
     });
   }
 
-  public post<T>(url: string, req: any) {
+  public post<T>(url: string, req: any, options?: any) {
     this.busyDisplay.show();
     return new Observable((observer) => {
-      this.http.post<any>(url, req).subscribe((resp: any) => {
+      this.http.post<any>(url, req, options).subscribe((resp: any) => {
         this.busyDisplay.hide();
         this.busyDisplay.show();
         observer.next(resp);
@@ -46,10 +46,10 @@ export class PnsHttpService {
     });
   }
 
-  public get<T>(url: string) {
+  public get<T>(url: string, options?: any) {
     return new Observable((observer) => {
       this.busyDisplay.show();
-      this.http.get<T>(url).subscribe((resp: any) => {
+      this.http.get<T>(url, options).subscribe((resp: any) => {
         this.busyDisplay.hide();
         observer.next(resp);
         observer.complete();

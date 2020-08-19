@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { AlertService } from "../alert.service";
 import { Observable } from "rxjs";
 import { PnsHttpService } from "./pns-http.service";

@@ -1,15 +1,18 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpHeaders } from "@angular/common/http";
 import { AlertService } from "../alert.service";
 import { Observable } from "rxjs";
-import { log } from "util";
+import { PnsHttpService } from "./pns-http.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class ContractService {
   baseUrl = "/pns/contract";
-  constructor(private http: HttpClient, private alertService: AlertService) {}
+  constructor(
+    private http: PnsHttpService,
+    private alertService: AlertService
+  ) {}
 
   public add(req: any, isrenew?: boolean) {
     return new Observable((observer) => {
