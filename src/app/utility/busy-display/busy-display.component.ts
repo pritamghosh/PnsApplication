@@ -15,7 +15,6 @@ export class BusyDisplayComponent implements OnInit, OnDestroy {
     this.subscription = this.service.showBusyDisplaySubject
       .asObservable()
       .subscribe((resp) => {
-        this.showBusiDisplay = resp;
         console.log(this.showBusiDisplay);
       });
   }

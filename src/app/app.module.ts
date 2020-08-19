@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
-import { NgModule, APP_INITIALIZER } from "@angular/core";
+import { NgModule, APP_INITIALIZER, ErrorHandler } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -57,6 +57,7 @@ import { PnsInterInterceptorService } from "./services/pns-inter-interceptor.ser
 import { NoRecordsFoundComponent } from "./utility/no-records-found/no-records-found.component";
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
+import { PnsErrorService } from "./services/pns-error.service";
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import { FooterComponent } from "./components/footer/footer.component";
       deps: [KeycloakService],
       multi: true,
     },
+    { provide: ErrorHandler, useClass: PnsErrorService },
   ],
   bootstrap: [AppComponent],
 })

@@ -2,17 +2,21 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { AlertService } from "../alert.service";
 import { Observable } from "rxjs";
+import { PnsHttpService } from "./pns-http.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class CustomerService {
-  constructor(private http: HttpClient, private alertService: AlertService) {}
+  constructor(
+    private http: PnsHttpService,
+    private alertService: AlertService
+  ) {}
   baseUrl = "/pns/customer";
 
   public add(req: any) {
     return new Observable((observer) => {
-      this.http.put<any>(this.baseUrl, req).subscribe((resp: any) => {
+      this.http.put(this.baseUrl, req).subscribe((resp: any) => {
         this.alertService
           .openDiaolog("Customer Added Successfully!!")
           .afterClosed()
@@ -26,7 +30,7 @@ export class CustomerService {
 
   public update(req: any) {
     return new Observable((observer) => {
-      this.http.post<any>(this.baseUrl, req).subscribe((res: any) => {
+      this.http.post(this.baseUrl, req).subscribe((res: any) => {
         this.alertService
           .openDiaolog("Customer Updated Successfully!!")
           .afterClosed()
@@ -40,7 +44,7 @@ export class CustomerService {
 
   public get(reqUrl: any) {
     return new Observable((observer) => {
-      this.http.get<any>(`${this.baseUrl}${reqUrl}`).subscribe((res: any) => {
+      this.http.get(`${this.baseUrl}${reqUrl}`).subscribe((res: any) => {
         observer.next(res);
         observer.complete();
       });
@@ -49,7 +53,7 @@ export class CustomerService {
 
   public delete(id: string) {
     return new Observable((observer) => {
-      this.http.delete<any>(`${this.baseUrl}/${id}`).subscribe((res: any) => {
+      this.http.delete(`${this.baseUrl}/${id}`).subscribe((res: any) => {
         observer.next(res);
         observer.complete();
       });
