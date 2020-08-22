@@ -23,11 +23,12 @@ export class EquipmentComponent implements OnInit {
   page = 1;
   searchOption = [
     {
-      value: "Find All",
-      type: "all",
-      searchFieldName: "Keep It Blank",
-      searchButtonName: "Find All",
+      value: "Search Equipment",
+      type: "search",
+      searchFieldName: "Enter Key for Searching",
+      searchButtonName: "Search",
     },
+
     {
       value: "Find By Model",
       type: "byModel",
@@ -35,10 +36,10 @@ export class EquipmentComponent implements OnInit {
       searchButtonName: "Find By Model",
     },
     {
-      value: "Search Equipment",
-      type: "search",
-      searchFieldName: "Enter Key for Searching",
-      searchButtonName: "Search",
+      value: "Find All",
+      type: "all",
+      searchFieldName: "Keep It Blank",
+      searchButtonName: "Find All",
     },
   ];
 

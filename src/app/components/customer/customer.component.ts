@@ -21,10 +21,10 @@ export class CustomerComponent implements OnInit {
   seachKeyControl = new FormControl(null, [Validators.required]);
   searchOption = [
     {
-      value: "Find All",
-      type: "all",
-      searchFieldName: "Keep It Blank",
-      searchButtonName: "Find All",
+      value: "Search Customer",
+      type: "search",
+      searchFieldName: "Enter Key for Searching",
+      searchButtonName: "Search",
     },
     {
       value: "Find By Name",
@@ -39,10 +39,10 @@ export class CustomerComponent implements OnInit {
       searchButtonName: "Find By Region",
     },
     {
-      value: "Search Customer",
-      type: "search",
-      searchFieldName: "Enter Key for Searching",
-      searchButtonName: "Search",
+      value: "Find All",
+      type: "all",
+      searchFieldName: "Keep It Blank",
+      searchButtonName: "Find All",
     },
   ];
 

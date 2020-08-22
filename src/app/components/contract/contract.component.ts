@@ -26,10 +26,10 @@ export class ContractComponent implements OnInit {
   endDate = new FormControl(null, [Validators.required]);
   searchOption = [
     {
-      value: "Find All",
-      type: "all",
-      searchFieldName: "Keep It Blank",
-      searchButtonName: "Find All",
+      value: "Search Contract",
+      type: "search",
+      searchFieldName: "Enter Key for Searching",
+      searchButtonName: "Search",
     },
     {
       value: "Find By AMC Date Range",
@@ -41,11 +41,12 @@ export class ContractComponent implements OnInit {
       type: "byCreationDateRange",
       searchButtonName: "Find By Date",
     },
+
     {
-      value: "Search Contract",
-      type: "search",
-      searchFieldName: "Enter Key for Searching",
-      searchButtonName: "Search",
+      value: "Find All",
+      type: "all",
+      searchFieldName: "Keep It Blank",
+      searchButtonName: "Find All",
     },
   ];
 
