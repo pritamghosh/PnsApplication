@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   tax: 18,
   keycloak: {
-    issuer: "http://localhost:8080/auth/",
+    issuer: "https://pns.southeastasia.cloudapp.azure.com/auth/",
     realm: "PNS_REALM",
     clientId: "pns-ui",
   },

@@ -14,8 +14,9 @@ export function initializer(keycloak: KeycloakService): () => Promise<any> {
           loadUserProfileAtStartUp: false,
           initOptions: {
             onLoad: "login-required",
-            checkLoginIframe: true,
+            //checkLoginIframe: false,
             //  promiseType: "native",
+            //flow: "implicit",
           },
 
           bearerExcludedUrls: [],

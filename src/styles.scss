@@ -73,3 +73,9 @@ mat-form-field {
   text-align: center;
   justify-content: center;
 }
+
+.sm-button {
+  @media (max-width: 765px) {
+    margin-bottom: 10px;
+  }
+}

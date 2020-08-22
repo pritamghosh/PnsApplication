@@ -20,7 +20,6 @@ export class HeaderComponent implements OnInit {
     return this.keacloak.isLoggedIn();
   }
   signOut() {
-    this.keacloak.getKeycloakInstance();
     this.keacloak.logout();
   }
 }
