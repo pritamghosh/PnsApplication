@@ -46,8 +46,8 @@ export class ContractFormComponent implements OnInit {
         name: new FormControl(null, [Validators.required]),
         region: new FormControl(null, [Validators.required]),
         address: new FormControl(null, [Validators.required]),
-        pan: new FormControl(null, [Validators.required]),
-        gstinNo: new FormControl(null, [Validators.required]),
+        pan: new FormControl(null),
+        gstinNo: new FormControl(null),
         _id: new FormControl(null, [Validators.required]),
       }),
       equipmentItem: new FormGroup({
@@ -63,8 +63,14 @@ export class ContractFormComponent implements OnInit {
       proposalNo: new FormControl(null),
       amcStartDate: new FormControl(null, [Validators.required]),
       amcEndDate: new FormControl(null, [Validators.required]),
-      amcBasicAmount: new FormControl(null, [Validators.required]),
-      amcTotalAmount: new FormControl(null, [Validators.required]),
+      amcBasicAmount: new FormControl(null, [
+        Validators.required,
+        Validators.pattern("\\d*[.]{0,1}\\d*"),
+      ]),
+      amcTotalAmount: new FormControl(null, [
+        Validators.required,
+        Validators.pattern("\\d*[.]{0,1}\\d*"),
+      ]),
       amcTax: new FormControl(environment.tax, [Validators.required]),
       billingCycle: new FormControl(null, [Validators.required]),
       note: new FormControl(null),

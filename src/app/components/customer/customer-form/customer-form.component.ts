@@ -31,8 +31,14 @@ export class CustomerFormComponent implements OnInit {
       name: new FormControl(null, [Validators.required]),
       region: new FormControl(null, [Validators.required]),
       address: new FormControl(null, [Validators.required]),
-      pan: new FormControl(null, [Validators.required]),
-      gstinNo: new FormControl(null, [Validators.required]),
+      pan: new FormControl(null, [
+        Validators.pattern("^[A-Za-z]{5}[0-9]{4}[A-Za-z]{5}$"),
+      ]),
+      gstinNo: new FormControl(null, [
+        Validators.pattern(
+          "^[0-9]{2}[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}[a-zA-Z1-9]{1}[zZ]{1}[0-9A-Za-z]$"
+        ),
+      ]),
       _id: new FormControl(null),
     });
     this.init();

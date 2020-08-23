@@ -16,10 +16,9 @@
           ><hr />
           <span>Address: {{ customer.address }}</span>
           <br />
-          <span
-            >GSTIN: {{ customer.gstinNo }}&nbsp;&nbsp;PAN:
-            {{ customer.pan }}</span
-          >
+          <span>GSTIN: {{ customer.gstinNo }}&nbsp;&nbsp;</span>
+          <span *ngIf="!customer.gstinNo" style="margin-right: 120px;"></span>
+          <span>PAN: {{ customer.pan }}</span>
           <hr />
         </mat-card-content>
         <mat-card-actions>
