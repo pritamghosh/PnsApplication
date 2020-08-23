@@ -19,7 +19,8 @@ export class HeaderComponent implements OnInit {
       if (event instanceof NavigationStart) {
         let arr: string[] = event.url.split("/");
         if (arr != undefined && arr.length > 1) {
-          this.activeRoute = arr[1].split("?")[0];
+          this.activeRoute =
+            arr[1].split("?")[0] == "" ? "contract" : arr[1].split("?")[0];
         }
       }
     });

@@ -43,7 +43,10 @@
           <span>&nbsp;&nbsp;&nbsp;</span>
           <span id="key">Proposal No: </span
           ><span>{{ contract.proposalNo }}</span>
-          <span *ngIf="contract.note"> <br />Note: {{ contract.note }} </span>
+          <div *ngIf="contract.note">
+            <hr />
+            <span id="key">Note: </span><span>{{ contract.note }}</span>
+          </div>
           <hr />
         </mat-card-content>
         <mat-card-actions>
