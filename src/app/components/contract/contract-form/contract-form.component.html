@@ -185,6 +185,7 @@
             color="{{ secondButtonColor }}"
             type="button"
             (click)="secondAction()"
+            [disabled]="secondButtonDisable"
             test-id="add_contract.reset-button"
           >
             {{ secondButtonName }}

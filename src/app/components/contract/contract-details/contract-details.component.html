@@ -12,32 +12,37 @@
         </mat-card-header>
         <mat-card-content>
           <hr />
-          <span
-            >Equipment Model: {{ contract.equipmentItem.equipment.model }}</span
-          >
+          <span id="key">Equipment Model: </span
+          ><span>{{ contract.equipmentItem.equipment.model }}</span>
           <span>&nbsp;&nbsp;&nbsp;</span>
-          <span>Serial Number: {{ contract.equipmentItem.serialNumber }}</span>
+          <span id="key">Serial Number: </span
+          ><span>{{ contract.equipmentItem.serialNumber }}</span>
           <br />
-          <span
-            >Description:
-            {{ contract.equipmentItem.equipment.description }}</span
-          >
+          <span id="key">Description: </span
+          ><span>{{ contract.equipmentItem.equipment.description }}</span>
           <hr />
-          <span>Amc Start Date: {{ contract.amcStartDate | date }}</span>
+          <span id="key">Amc Start Date: </span
+          ><span>{{ contract.amcStartDate | date }}</span>
           <span>&nbsp;&nbsp;&nbsp;</span>
-          <span>Amc End Date: {{ contract.amcEndDate | date }}</span>
+          <span id="key">Amc End Date: </span
+          ><span>{{ contract.amcEndDate | date }}</span>
           <span>&nbsp;&nbsp;&nbsp;</span>
-          <span>Billing Cycle: {{ contract.billingCycle }}</span>
+          <span id="key">Billing Cycle: </span
+          ><span>{{ contract.billingCycle }}</span>
           <br />
-          <span>Date: {{ contract.contractDate | date }}</span>
+          <span id="key">Date: </span
+          ><span>{{ contract.contractDate | date }}</span>
           <span>&nbsp;&nbsp;&nbsp;</span>
-          <span>Basic Amount: {{ contract.amcBasicAmount }}</span>
+          <span id="key">Basic Amount: </span
+          ><span>{{ contract.amcBasicAmount }}</span>
           <span>&nbsp;&nbsp;&nbsp;</span>
-          <span>Tax: {{ contract.amcTax }}%</span>
+          <span id="key">Tax: </span><span>{{ contract.amcTax }}%</span>
           <span>&nbsp;&nbsp;&nbsp;</span>
-          <span>Total Amount: {{ contract.amcTotalAmount }}</span>
+          <span id="key">Total Amount: </span
+          ><span>{{ contract.amcTotalAmount }}</span>
           <span>&nbsp;&nbsp;&nbsp;</span>
-          <span>Proposal No: {{ contract.proposalNo }}</span>
+          <span id="key">Proposal No: </span
+          ><span>{{ contract.proposalNo }}</span>
           <span *ngIf="contract.note"> <br />Note: {{ contract.note }} </span>
           <hr />
         </mat-card-content>

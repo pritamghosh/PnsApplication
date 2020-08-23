@@ -25,6 +25,7 @@ export class CustomerFormComponent implements OnInit {
   secondButtonName: string;
   secondButtonColor: string;
   customerForm: FormGroup;
+  isCreate = true;
   title: string;
   ngOnInit(): void {
     this.customerForm = new FormGroup({
@@ -51,6 +52,7 @@ export class CustomerFormComponent implements OnInit {
       this.secondButtonColor = "warn";
       this.title = "Enter Customer Details";
     } else {
+      this.isCreate = false;
       this.secondButtonName = "Cancel";
       this.submitButtonName = "Update";
       this.secondButtonColor = "warn";
@@ -66,5 +68,9 @@ export class CustomerFormComponent implements OnInit {
   }
   secondButtonAction() {
     this.secondActionEmitter.emit(this.customerForm);
+  }
+
+  get secondButtonDisable() {
+    return this.isCreate && this.customerForm.untouched;
   }
 }

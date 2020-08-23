@@ -32,12 +32,12 @@ export class ContractComponent implements OnInit {
       searchButtonName: "Search",
     },
     {
-      value: "Find By AMC Date Range",
+      value: "Find By AMC Date",
       type: "byAmcDateRange",
       searchButtonName: "Find By Date",
     },
     {
-      value: "Find By Contract Create/Renew Date Range",
+      value: "Find By Contract Create/Renew Date",
       type: "byCreationDateRange",
       searchButtonName: "Find By Date",
     },

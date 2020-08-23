@@ -53,6 +53,7 @@
             mat-raised-button
             color="{{ secondButtonColor }}"
             type="reset"
+            [disabled]="secondButtonDisable"
             (click)="secondButtonAction()"
           >
             {{ secondButtonName }}

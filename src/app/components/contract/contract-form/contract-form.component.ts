@@ -31,6 +31,7 @@ export class ContractFormComponent implements OnInit {
   @Input("secondButtonName") secondButtonName: string;
   @Input("actionButtonName") actionButtonName: string;
   @Input("title") title: string;
+  isCreate = true;
 
   calculate = true;
 
@@ -76,6 +77,7 @@ export class ContractFormComponent implements OnInit {
       note: new FormControl(null),
     });
     if (this.contract != undefined) {
+      this.isCreate = false;
       this.contractForm.patchValue(this.contract);
       if (this.isRenew) {
         let startdt: Date = new Date(this.contract.amcStartDate);
@@ -178,5 +180,9 @@ export class ContractFormComponent implements OnInit {
           .setValue(equipment);
       }
     });
+  }
+
+  get secondButtonDisable() {
+    return this.isCreate && this.contractForm.untouched;
   }
 }
