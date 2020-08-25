@@ -14,6 +14,7 @@
           <mat-radio-button
             class="pns-radio-button"
             *ngFor="let option of searchOption"
+            [hidden]="option.hidden"
             [value]="option"
           >
             {{ option.value }}

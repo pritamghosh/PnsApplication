@@ -15,4 +15,7 @@ export interface ContractModel {
   _id: string;
   contractDate: Date;
   proposalNo: string;
+  poFileContent: any;
+  poFileContentType: string;
+  poFileName: string;
 }

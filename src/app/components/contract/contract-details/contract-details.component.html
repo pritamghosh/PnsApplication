@@ -78,6 +78,19 @@
               <mat-icon>edit</mat-icon>
             </button>
             <button
+              type="button"
+              mat-mini-fab
+              color="accent"
+              #tooltip="matTooltip"
+              matTooltip="View PO"
+              (click)="viewPo(contract)"
+              [disabled]="!role.hasView() || contract.poFileContent == null"
+              test-id="view_search_contract.searched_contract.view_po"
+              class="m-r-20"
+            >
+              <mat-icon>attach_file</mat-icon>
+            </button>
+            <button
               mat-mini-fab
               color="accent"
               type="button"

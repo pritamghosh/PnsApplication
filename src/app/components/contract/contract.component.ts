@@ -5,6 +5,7 @@ import { ContractModel } from "src/app/models/contract.model ";
 import { ActivatedRoute } from "@angular/router";
 import { DatePipe } from "@angular/common";
 import { RoleService } from "src/app/utility/services/role.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-contract",
@@ -21,34 +22,10 @@ export class ContractComponent implements OnInit {
   page = 1;
   contractResp: ContractModel[];
 
-  seachKeyControl = new FormControl(null, [Validators.required]);
+  seachKeyControl: FormControl;
   startDate = new FormControl(null, [Validators.required]);
   endDate = new FormControl(null, [Validators.required]);
-  searchOption = [
-    {
-      value: "Search Contract",
-      type: "search",
-      searchFieldName: "Enter Key for Searching",
-      searchButtonName: "Search",
-    },
-    {
-      value: "Find By AMC Date",
-      type: "byAmcDateRange",
-      searchButtonName: "Find By Date",
-    },
-    {
-      value: "Find By Contract Create/Renew Date",
-      type: "byCreationDateRange",
-      searchButtonName: "Find By Date",
-    },
-
-    {
-      value: "Find All",
-      type: "all",
-      searchFieldName: "Keep It Blank",
-      searchButtonName: "Find All",
-    },
-  ];
+  searchOption = environment.contractSearchOption;
 
   selectedOption = this.searchOption[0];
   constructor(
@@ -59,6 +36,10 @@ export class ContractComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.seachKeyControl = new FormControl(
+      { value: null, disabled: this.selectedOption.type == "all" },
+      [Validators.required]
+    );
     this.route.queryParams.subscribe((params) => {
       if (params["customerId"]) {
         this.url = `/customer/${params["customerId"]}?`;
@@ -111,6 +92,10 @@ export class ContractComponent implements OnInit {
           this.startDate.value,
           "yyyy-MM-dd"
         )}&to=${this.datePipe.transform(this.endDate.value, "yyyy-MM-dd")}`;
+        break;
+      }
+      case "byProposalNo": {
+        url = `${url}?proposalNo=${this.seachKeyControl.value}`;
         break;
       }
       case "search": {
@@ -172,13 +157,11 @@ export class ContractComponent implements OnInit {
   }
 
   reset(event: any) {
-    event.formGroup.patchValue({ amcTax: 18 });
     event.form.reset();
+    event.formGroup.patchValue({ amcTax: 18 });
   }
 
   update(event: any) {
-    console.log("update");
-
     this.service.update(event.contract).subscribe((resp: ContractModel) => {
       this.contractResp.forEach((element: ContractModel) => {
         if (element._id == resp._id) {

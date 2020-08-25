@@ -32,7 +32,7 @@ export class ContractFormComponent implements OnInit {
   @Input("actionButtonName") actionButtonName: string;
   @Input("title") title: string;
   isCreate = true;
-
+  podocLabel = "Upload PO Document";
   calculate = true;
 
   contractForm: FormGroup;
@@ -75,9 +75,15 @@ export class ContractFormComponent implements OnInit {
       amcTax: new FormControl(environment.tax, [Validators.required]),
       billingCycle: new FormControl(null, [Validators.required]),
       note: new FormControl(null),
+      poFileName: new FormControl(null),
+      poFileContent: new FormControl(null),
+      poFileContentType: new FormControl(null),
     });
     if (this.contract != undefined) {
       this.isCreate = false;
+      if (this.contract.poFileContent != null) {
+        this.podocLabel = "Change PO Document";
+      }
       this.contractForm.patchValue(this.contract);
       if (this.isRenew) {
         let startdt: Date = new Date(this.contract.amcStartDate);
@@ -132,6 +138,12 @@ export class ContractFormComponent implements OnInit {
       contract.amcEndDate,
       "yyyy-MM-dd"
     );
+    if (contract.poFileContent != null) {
+      const BASE64_MARKER = ";base64,";
+      const parts = contract.poFileContent.split(BASE64_MARKER);
+      contract.poFileContentType = parts[0].split(":")[1];
+      contract.poFileContent = parts[1];
+    }
     this.submitEmitter.emit({
       contract: contract,
       form: this.fromElement,
@@ -184,5 +196,19 @@ export class ContractFormComponent implements OnInit {
 
   get secondButtonDisable() {
     return this.isCreate && this.contractForm.untouched;
+  }
+
+  uploadFile(event: any) {
+    let files = event.target.files;
+    let str = this.contractForm.get("poFileContent");
+    this.contractForm.get("poFileName").setValue(files[0].name);
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = function () {
+      str.setValue(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.error("Error: ", error);
+    };
   }
 }
