@@ -26,25 +26,45 @@ export class ContractDetailsComponent implements OnInit {
     this.editEmitter.emit(contract);
   }
   viewPo(contract: ContractModel) {
-    const raw = window.atob(contract.poFileContent);
-    const rawLength = raw.length;
-    const uInt8Array = new Uint8Array(rawLength);
-
-    for (let i = 0; i < rawLength; ++i) {
-      uInt8Array[i] = raw.charCodeAt(i);
-    }
-
-    let blob = new Blob([uInt8Array], { type: contract.poFileContentType });
-    let fileURL = URL.createObjectURL(blob);
-    window.open(fileURL);
+    this.service.viewPo(contract._id);
   }
-  print(contract: ContractModel) {
+  downloadConract(contract: ContractModel) {
     this.service.getReport(contract._id).subscribe();
   }
 
-  onDelete(contract: ContractModel) {
-    if (window.confirm("Are You Sure To Delete This Contract")) {
-      this.delete.emit(contract);
+  isDownloadPdfButtonDisabled(contract: ContractModel) {
+    return !(
+      this.role.hasContractApprover() ||
+      (this.role.hasView() && "APPROVED" == contract.status)
+    );
+  }
+
+  primaryAction(contract: ContractModel) {
+    this.renewContracts(contract);
+  }
+
+  getPrimaryActionButtonName(contract: ContractModel) {
+    if (contract.status == "PENDING") {
+      return "Approve Contract";
     }
+    return "Renew Contract";
+  }
+
+  getPrimaryMiniButtonName(contract: ContractModel) {
+    if (contract.status == "PENDING") {
+      return "thumb_up_alt";
+    }
+    return "autorenew";
+  }
+
+  isPrimaryButtonDisabled(contract: ContractModel) {
+    if (contract.status == "PENDING") {
+      return !this.role.hasContractApprover();
+    }
+    return !this.role.hasView();
+  }
+
+  onDelete(contract: ContractModel) {
+    this.delete.emit(contract);
   }
 }

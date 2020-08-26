@@ -54,13 +54,22 @@ button {
 mat-form-field {
   width: 100% !important;
 }
+.sm-hide {
+  @media (max-width: 600px) {
+    display: none !important;
+  }
+}
 
+.sm-show {
+  @media (min-width: 601px) {
+    display: none !important;
+  }
+}
 .sm-center {
   @media (max-width: 765px) {
     text-align: center;
   }
 }
-
 .center {
   width: 100%;
   text-align: center;
@@ -98,4 +107,7 @@ mat-form-field {
 #key {
   color: gray;
   font-weight: 500;
+}
+.mat-card-header-text {
+  width: 100% !important;
 }

@@ -22,4 +22,7 @@ export class RoleService {
   hasView() {
     return this.has("read");
   }
+  hasContractApprover() {
+    return this.has("contract_approver");
+  }
 }

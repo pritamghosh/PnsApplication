@@ -43,7 +43,7 @@ export class CustomerService {
 
   public get(reqUrl: any) {
     return new Observable((observer) => {
-      this.http.get(`${this.baseUrl}${reqUrl}`).subscribe((res: any) => {
+      this.http.get(`${this.baseUrl}${reqUrl}`, false).subscribe((res: any) => {
         observer.next(res);
         observer.complete();
       });

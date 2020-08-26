@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { ContractService } from "src/app/services/contract.service";
 import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { ContractModel } from "src/app/models/contract.model ";
@@ -19,10 +19,13 @@ export class ContractComponent implements OnInit {
   isSearched = false;
   pageCount = 0;
   url = "";
+  pendingUrl = "/approve";
   page = 1;
   contractResp: ContractModel[];
 
-  seachKeyControl: FormControl;
+  pendingContract: [];
+
+  seachKeyControl = new FormControl(null, [Validators.required]);
   startDate = new FormControl(null, [Validators.required]);
   endDate = new FormControl(null, [Validators.required]);
   searchOption = environment.contractSearchOption;
@@ -36,10 +39,6 @@ export class ContractComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.seachKeyControl = new FormControl(
-      { value: null, disabled: this.selectedOption.type == "all" },
-      [Validators.required]
-    );
     this.route.queryParams.subscribe((params) => {
       if (params["customerId"]) {
         this.url = `/customer/${params["customerId"]}?`;
@@ -50,6 +49,7 @@ export class ContractComponent implements OnInit {
       }
     });
   }
+
   get minSearchDate() {
     return this.startDate.value;
   }
@@ -127,6 +127,7 @@ export class ContractComponent implements OnInit {
   add(event: any) {
     this.service.add(event.contract, false).subscribe((val) => {
       event.form.reset();
+      event.formGroup.patchValue({ amcTax: environment.tax });
     });
   }
 
@@ -138,12 +139,12 @@ export class ContractComponent implements OnInit {
 
   edit(contract: ContractModel) {
     this.contractToEdit = contract;
-    this.selectedTab = 2;
+    this.selectedTab = 3;
   }
 
   renew(contract: ContractModel) {
     this.contractToRenew = contract;
-    this.selectedTab = 3;
+    this.selectedTab = 4;
   }
 
   cancelUpdate() {
@@ -158,7 +159,7 @@ export class ContractComponent implements OnInit {
 
   reset(event: any) {
     event.form.reset();
-    event.formGroup.patchValue({ amcTax: 18 });
+    event.formGroup.patchValue({ amcTax: environment.tax });
   }
 
   update(event: any) {
@@ -175,6 +176,9 @@ export class ContractComponent implements OnInit {
           element.amcStartDate = resp.amcStartDate;
           element.amcEndDate = resp.amcEndDate;
           element.note = resp.note;
+          element.poFileContent = resp.poFileContent;
+          element.poFileContentType = resp.poFileContentType;
+          element.poFileName = resp.poFileName;
         }
       });
       this.cancelUpdate();

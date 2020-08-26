@@ -82,38 +82,53 @@
               mat-mini-fab
               color="accent"
               #tooltip="matTooltip"
-              matTooltip="View PO"
+              matTooltip="View Purhcase Order"
               (click)="viewPo(contract)"
-              [disabled]="!role.hasView() || contract.poFileContent == null"
+              [disabled]="!role.hasView() || contract.poFileName == null"
               test-id="view_search_contract.searched_contract.view_po"
               class="m-r-20"
             >
-              <mat-icon>attach_file</mat-icon>
+              <mat-icon>description</mat-icon>
             </button>
             <button
               mat-mini-fab
               color="accent"
               type="button"
               #tooltip="matTooltip"
-              matTooltip="Print Contract"
-              (click)="print(contract)"
-              [disabled]="!role.hasView()"
+              matTooltip="Download Contract Invoice"
+              (click)="downloadConract(contract)"
+              [disabled]="isDownloadPdfButtonDisabled(contract)"
               test-id="view_search_contract.searched_contract.download_pdf"
             >
-              <mat-icon>picture_as_pdf</mat-icon>
+              <mat-icon>save_alt</mat-icon>
             </button>
             <button
+              class="sm-hide"
               type="button"
               #tooltip="matTooltip"
-              matTooltip="Renew Contract"
+              [matTooltip]="getPrimaryActionButtonName(contract)"
               mat-raised-button
               color="primary"
-              (click)="renewContracts(contract)"
-              [disabled]="!role.hasView()"
+              (click)="primaryAction(contract)"
+              [disabled]="isPrimaryButtonDisabled(contract)"
               style="float: right;"
               test-id="view_search_contract.searched_contract.renew_contract"
             >
-              Renew Contract
+              {{ getPrimaryActionButtonName(contract) }}
+            </button>
+            <button
+              class="sm-show"
+              type="button"
+              #tooltip="matTooltip"
+              [matTooltip]="getPrimaryActionButtonName(contract)"
+              mat-mini-fab
+              color="primary"
+              (click)="primaryAction(contract)"
+              [disabled]="isPrimaryButtonDisabled(contract)"
+              style="float: right;"
+              test-id="view_search_contract.searched_contract.renew_contract"
+            >
+              <mat-icon>{{ getPrimaryMiniButtonName(contract) }}</mat-icon>
             </button>
           </div>
         </mat-card-actions>

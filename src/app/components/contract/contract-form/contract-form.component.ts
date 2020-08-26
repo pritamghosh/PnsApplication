@@ -32,9 +32,8 @@ export class ContractFormComponent implements OnInit {
   @Input("actionButtonName") actionButtonName: string;
   @Input("title") title: string;
   isCreate = true;
-  podocLabel = "Upload PO Document";
   calculate = true;
-
+  newUploaded = false;
   contractForm: FormGroup;
   constructor(
     private service: ContractService,
@@ -44,8 +43,12 @@ export class ContractFormComponent implements OnInit {
   ngOnInit(): void {
     this.contractForm = new FormGroup({
       customer: new FormGroup({
-        name: new FormControl(null, [Validators.required]),
-        region: new FormControl(null, [Validators.required]),
+        name: new FormControl({ value: null, disabled: true }, [
+          Validators.required,
+        ]),
+        region: new FormControl({ value: null, disabled: true }, [
+          Validators.required,
+        ]),
         address: new FormControl(null, [Validators.required]),
         pan: new FormControl(null),
         gstinNo: new FormControl(null),
@@ -53,12 +56,17 @@ export class ContractFormComponent implements OnInit {
       }),
       equipmentItem: new FormGroup({
         equipment: new FormGroup({
-          model: new FormControl(null, [Validators.required]),
+          model: new FormControl({ value: null, disabled: true }, [
+            Validators.required,
+          ]),
           description: new FormControl(null),
           _id: new FormControl(null, [Validators.required]),
         }),
         _id: new FormControl(null),
-        serialNumber: new FormControl(null, [Validators.required]),
+        serialNumber: new FormControl(
+          { value: null, disabled: this.contract != undefined },
+          [Validators.required]
+        ),
       }),
       _id: new FormControl(null),
       proposalNo: new FormControl(null),
@@ -72,7 +80,9 @@ export class ContractFormComponent implements OnInit {
         Validators.required,
         Validators.pattern("\\d*[.]{0,1}\\d*"),
       ]),
-      amcTax: new FormControl(environment.tax, [Validators.required]),
+      amcTax: new FormControl({ value: environment.tax, disabled: true }, [
+        Validators.required,
+      ]),
       billingCycle: new FormControl(null, [Validators.required]),
       note: new FormControl(null),
       poFileName: new FormControl(null),
@@ -81,9 +91,6 @@ export class ContractFormComponent implements OnInit {
     });
     if (this.contract != undefined) {
       this.isCreate = false;
-      if (this.contract.poFileContent != null) {
-        this.podocLabel = "Change PO Document";
-      }
       this.contractForm.patchValue(this.contract);
       if (this.isRenew) {
         let startdt: Date = new Date(this.contract.amcStartDate);
@@ -129,23 +136,20 @@ export class ContractFormComponent implements OnInit {
   }
 
   submitAction() {
-    let contract = this.contractForm.value;
-    contract.amcStartDate = this.datePipe.transform(
+    let contractRaw = this.contractForm.getRawValue();
+    const contract = this.contractForm.value;
+    contractRaw.amcStartDate = this.datePipe.transform(
       contract.amcStartDate,
       "yyyy-MM-dd"
     );
-    contract.amcEndDate = this.datePipe.transform(
+    contractRaw.amcEndDate = this.datePipe.transform(
       contract.amcEndDate,
       "yyyy-MM-dd"
     );
-    if (contract.poFileContent != null) {
-      const BASE64_MARKER = ";base64,";
-      const parts = contract.poFileContent.split(BASE64_MARKER);
-      contract.poFileContentType = parts[0].split(":")[1];
-      contract.poFileContent = parts[1];
-    }
+
     this.submitEmitter.emit({
-      contract: contract,
+      contract: contractRaw,
+      formGroup: this.contractForm,
       form: this.fromElement,
     });
   }
@@ -200,12 +204,21 @@ export class ContractFormComponent implements OnInit {
 
   uploadFile(event: any) {
     let files = event.target.files;
-    let str = this.contractForm.get("poFileContent");
+    let poFileContent = this.contractForm.get("poFileContent");
+    let poFileContentType = this.contractForm.get("poFileContentType");
     this.contractForm.get("poFileName").setValue(files[0].name);
     const reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = function () {
-      str.setValue(reader.result);
+      if (reader.result != null) {
+        let str: String = new String(reader.result);
+
+        const BASE64_MARKER = ";base64,";
+        const parts = str.split(BASE64_MARKER);
+
+        poFileContentType.setValue(parts[0].split(":")[1]);
+        poFileContent.setValue(parts[1]);
+      }
     };
     reader.onerror = function (error) {
       console.error("Error: ", error);

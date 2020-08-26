@@ -28,6 +28,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatDividerModule } from "@angular/material/divider";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
@@ -58,6 +59,10 @@ import { NoRecordsFoundComponent } from "./utility/no-records-found/no-records-f
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { PnsErrorService } from "./services/pns-error.service";
+import { DisableControlDirective } from "./driectives/disable-control.directive";
+import { ContractApprovalComponent } from "./components/contract/contract-approval/contract-approval.component";
+import { ContractApprovalViewComponent } from "./components/contract/contract-approval-view/contract-approval-view.component";
+import { DiffrenceLabelComponent } from "./components/contract/contract-approval-view/diffrence-label/diffrence-label.component";
 
 @NgModule({
   declarations: [
@@ -77,6 +82,10 @@ import { PnsErrorService } from "./services/pns-error.service";
     CustomerFormComponent,
     BusyDisplayComponent,
     NoRecordsFoundComponent,
+    DisableControlDirective,
+    ContractApprovalComponent,
+    ContractApprovalViewComponent,
+    DiffrenceLabelComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,6 +124,7 @@ import { PnsErrorService } from "./services/pns-error.service";
     MatProgressSpinnerModule,
     NgbModule,
     KeycloakAngularModule,
+    MatSnackBarModule,
   ],
   providers: [
     DatePipe,

@@ -18,13 +18,13 @@ export const environment = {
       value: "Find By AMC Start Date",
       type: "byAmcDateRange",
       searchButtonName: "Find By Date",
-      hidden: false,
+      hidden: true,
     },
     {
       value: "Find By Contract Create/Renew Date",
       type: "byCreationDateRange",
       searchButtonName: "Find By Date",
-      hidden: false,
+      hidden: true,
     },
     {
       value: "Find By Proposal No",

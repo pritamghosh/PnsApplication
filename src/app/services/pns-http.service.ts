@@ -45,11 +45,26 @@ export class PnsHttpService {
     });
   }
 
-  public get<T>(url: string, options?: any) {
+  public patch<T>(url: string, req?: any) {
     return new Observable((observer) => {
       this.busyDisplay.show();
-      this.http.get<T>(url, options).subscribe((resp: any) => {
+      this.http.patch<any>(url, req).subscribe((resp: any) => {
         this.busyDisplay.hide();
+        observer.next(resp);
+        observer.complete();
+      });
+    });
+  }
+
+  public get<T>(url: string, busydiplayhide: boolean, options?: any) {
+    return new Observable((observer) => {
+      if (!busydiplayhide) {
+        this.busyDisplay.show();
+      }
+      this.http.get<T>(url, options).subscribe((resp: any) => {
+        if (!busydiplayhide) {
+          this.busyDisplay.hide();
+        }
         observer.next(resp);
         observer.complete();
       });

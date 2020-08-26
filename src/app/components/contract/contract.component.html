@@ -33,11 +33,12 @@
               <input
                 matInput
                 [formControl]="seachKeyControl"
-                [disabled]="isSeachFieldDisabled()"
+                [appDisableControl]="isSeachFieldDisabled()"
                 test-id="view_search_contract.search_input"
               />
             </mat-form-field>
           </div>
+
           <div
             class="col-md-5 col-lg-3 col-sm-12"
             *ngIf="
@@ -128,6 +129,11 @@
         title="Enter Contract Details"
         actionButtonName="Create"
       ></app-contract-form>
+    </mat-tab>
+    <mat-tab label="Approve Contract" *ngIf="role.hasContractApprover()">
+      <div class="box">
+        <app-contract-approval (edit)="edit($event)"></app-contract-approval>
+      </div>
     </mat-tab>
     <mat-tab label="Edit Contract" *ngIf="contractToEdit">
       <app-contract-form

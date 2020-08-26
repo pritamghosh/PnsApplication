@@ -18,4 +18,5 @@ export interface ContractModel {
   poFileContent: any;
   poFileContentType: string;
   poFileName: string;
+  status: "PENDING" | "APPROVED";
 }
