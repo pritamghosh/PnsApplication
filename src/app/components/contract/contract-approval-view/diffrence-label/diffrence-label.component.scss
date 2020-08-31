@@ -1,0 +1,27 @@
+.new {
+  color: #3914cc;
+}
+.old {
+  color: #cc1442;
+}
+.nc {
+  color: inherit;
+
+  sup {
+    mat-icon {
+      display: none;
+    }
+  }
+}
+
+sup {
+  mat-icon {
+    font-size: 15px;
+    padding-left: 2px;
+    color: black;
+  }
+}
+
+span {
+  line-height: 25px;
+}

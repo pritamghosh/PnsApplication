@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { CustomerModel } from "src/app/models/customer.model";
 import { Router } from "@angular/router";
 import { CustomerService } from "src/app/services/customer.service";
-import { RoleService } from "src/app/utility/services/role.service";
+import { RoleService } from "src/app/services/role.service";
 
 @Component({
   selector: "app-customer-details",

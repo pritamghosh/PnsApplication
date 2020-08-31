@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <div routerLink="/" style="outline: none; cursor: pointer;">
+    <div routerLink="/" style="outline: none; cursor: pointer">
       <img class="logo" src="assets/images/logo.png" alt="PNS" />
     </div>
     <!-- <h1><a routerLink="/" style="color: white;">PNS</a></h1> -->
@@ -10,6 +10,7 @@
         mat-button
         [routerLink]="['customer']"
         [ngStyle]="{ 'background-color': getBgColor('customer') }"
+        appHasRole="contractMenu"
       >
         Customer
       </button>
@@ -17,22 +18,38 @@
         mat-button
         [routerLink]="['equipment']"
         [ngStyle]="{ 'background-color': getBgColor('equipment') }"
+        appHasRole="contractMenu"
       >
         Equipment</button
       ><button
         mat-button
         [ngStyle]="{ 'background-color': getBgColor('contract') }"
+        appHasRole="contractMenu"
         test-id="contract-tab-option"
         [routerLink]="['contract']"
       >
         Contract
       </button>
+      <button
+        mat-button
+        [matMenuTriggerFor]="employyeMenu"
+        [ngStyle]="{ 'background-color': getBgColor('employee') }"
+        test-id="employee-menu-option"
+      >
+        Employee
+      </button>
     </div>
-    <div style="flex-grow: 1;"></div>
+    <div style="flex-grow: 1"></div>
     <div>
-      <!-- <span class="username sm-hide">Welcome&nbsp;{{ username }}</span> -->
       <button mat-icon-button [matMenuTriggerFor]="userMenu" class="sm-hide">
-        <mat-icon>person</mat-icon>
+        <div id="img">
+          <img src="{{ image }}" *ngIf="image != null; else initialBlock" />
+          <ng-template #initialBlock
+            ><div>
+              <p>{{ initial }}</p>
+            </div></ng-template
+          >
+        </div>
       </button>
       <button mat-icon-button [matMenuTriggerFor]="mainMenu" class="sm-show">
         <mat-icon>menu</mat-icon>
@@ -44,6 +61,7 @@
         [routerLink]="['customer']"
         class="primary"
         [ngStyle]="{ 'background-color': getBgColor('customer') }"
+        appHasRole="contractMenu"
       >
         Customer
       </button>
@@ -52,6 +70,7 @@
         [routerLink]="['equipment']"
         class="primary"
         [ngStyle]="{ 'background-color': getBgColor('equipment') }"
+        appHasRole="contractMenu"
       >
         Equipment
       </button>
@@ -59,10 +78,19 @@
         mat-menu-item
         class="primary"
         [ngStyle]="{ 'background-color': getBgColor('contract') }"
+        appHasRole="contractMenu"
         [routerLink]="['contract']"
         test-id="contract-tab-option"
       >
         Contract
+      </button>
+      <button
+        mat-menu-item
+        [matMenuTriggerFor]="employyeMenu"
+        [ngStyle]="{ 'background-color': getBgColor('employee') }"
+        test-id="employee-menu-option"
+      >
+        Employee
       </button>
       <button mat-menu-item [matMenuTriggerFor]="userMenu">
         <mat-icon>person</mat-icon>
@@ -72,11 +100,20 @@
       <button mat-menu-item [routerLink]="['login']" [hidden]="isLoggedIn">
         Login
       </button>
-      <button mat-menu-item [routerLink]="['profile']" hidden>
+      <button mat-menu-item [routerLink]="['profile']" [hidden]="!isLoggedIn">
         Profile
       </button>
       <button mat-menu-item (click)="signOut()" [hidden]="!isLoggedIn">
         Sign Out
+      </button>
+    </mat-menu>
+    <mat-menu #employyeMenu="matMenu" class="primary">
+      <button
+        mat-menu-item
+        [routerLink]="['employee/profile/create']"
+        class="primary"
+      >
+        Create Profile
       </button>
     </mat-menu>
   </mat-toolbar-row>

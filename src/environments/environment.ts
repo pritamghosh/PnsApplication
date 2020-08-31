@@ -46,6 +46,16 @@ export const environment = {
       hidden: false,
     },
   ],
+
+  designations: [
+    "Customer Executive",
+    "Engineer",
+    "Service Delivery Manager",
+    "Branch Manager",
+    "Operation Head",
+  ],
+
+  baseLocations: ["KOLKATA", "BHUBANESWAR"],
 };
 
 /*

@@ -1,0 +1,173 @@
+<div class="details">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ contract.customer.name }}({{ contract.customer.region }})
+        <label
+          class="status"
+          [ngClass]="contract.status"
+          style="float: right"
+          >{{ getStatus(contract.status) }}</label
+        >
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <hr />
+      <span id="key">Equipment Model: </span
+      ><span>{{ contract.equipmentItem.equipment.model }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span id="key">Serial Number: </span
+      ><span>{{ contract.equipmentItem.serialNumber }}</span>
+      <br />
+      <span id="key">Description: </span
+      ><span>{{ contract.equipmentItem.equipment.description }}</span>
+      <hr />
+      <span id="key">Amc Start Date: </span
+      ><span>{{ contract.amcStartDate | date }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span id="key">Amc End Date: </span
+      ><span>{{ contract.amcEndDate | date }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span id="key">Billing Cycle: </span
+      ><span>{{ contract.billingCycle }}</span>
+      <br />
+      <span id="key">Date: </span
+      ><span>{{ contract.contractDate | date }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span id="key">Basic Amount: </span
+      ><span>{{ contract.amcBasicAmount }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span id="key">Tax: </span><span>{{ contract.amcTax }}%</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span id="key">Total Amount: </span
+      ><span>{{ contract.amcTotalAmount }}</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span id="key">Proposal No: </span><span>{{ contract.proposalNo }}</span>
+      <div *ngIf="contract.note">
+        <hr />
+        <span id="key">Note: </span><span>{{ contract.note }}</span>
+      </div>
+      <hr />
+      <mat-form-field [hidden]="isApproveNotAllowed()">
+        <mat-label>Approver Comment</mat-label>
+        <textarea
+          matInput
+          [formControl]="comment"
+          test-id="approver.comment.search.text"
+        ></textarea>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <div>
+        <button
+          type="button"
+          mat-mini-fab
+          color="warn"
+          #tooltip="matTooltip"
+          matTooltip="Delete Contract"
+          (click)="onDelete()"
+          [hidden]="hideDelete()"
+          test-id="view_search_contract.searched_contract.delete"
+          class="m-r-20"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button
+          type="button"
+          mat-mini-fab
+          color="accent"
+          #tooltip="matTooltip"
+          matTooltip="Edit Contract"
+          (click)="edit()"
+          [hidden]="hideEdit()"
+          test-id="view_search_contract.searched_contract.edit"
+          class="m-r-20"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          type="button"
+          mat-mini-fab
+          color="accent"
+          #tooltip="matTooltip"
+          matTooltip="View Purhcase Order"
+          (click)="viewPo()"
+          [disabled]="!role.hasView() || contract.poFileName == null"
+          test-id="view_search_contract.searched_contract.view_po"
+          class="m-r-20"
+        >
+          <mat-icon>description</mat-icon>
+        </button>
+        <button
+          mat-mini-fab
+          color="accent"
+          type="button"
+          #tooltip="matTooltip"
+          matTooltip="Download Contract Invoice"
+          (click)="downloadConract()"
+          [disabled]="isDownloadPdfButtonDisabled()"
+          test-id="view_search_contract.searched_contract.download_pdf"
+        >
+          <mat-icon>save_alt</mat-icon>
+        </button>
+        <div style="float: right; margin-top: 0px">
+          <button
+            class="sm-show m-r-20"
+            type="button"
+            mat-mini-fab
+            [hidden]="isApproveNotAllowed()"
+            color="warn"
+            #tooltip="matTooltip"
+            matTooltip="Decline Contract"
+            (click)="declineContract()"
+            test-id="view_search_contract.decline_contract"
+            [disabled]="!comment.valid"
+          >
+            <mat-icon>thumb_down_alt</mat-icon>
+          </button>
+
+          <button
+            class="sm-hide"
+            type="button"
+            #tooltip="matTooltip"
+            matTooltip="Decline Contract"
+            mat-raised-button
+            color="warn"
+            [hidden]="isApproveNotAllowed()"
+            (click)="declineContract()"
+            test-id="view_search_contract.approve_contract.decline_contract"
+            [disabled]="!comment.valid"
+          >
+            Decline
+          </button>
+          <button
+            class="sm-show"
+            type="button"
+            #tooltip="matTooltip"
+            [matTooltip]="getPrimaryActionButtonName()"
+            mat-mini-fab
+            color="primary"
+            (click)="primaryAction()"
+            [disabled]="isPrimaryButtonDisabled()"
+            test-id="view_search_contract.searched_contract.renew_contract"
+          >
+            <mat-icon>{{ getPrimaryMiniButtonName() }}</mat-icon>
+          </button>
+          <button
+            class="sm-hide"
+            type="button"
+            #tooltip="matTooltip"
+            [matTooltip]="getPrimaryActionButtonName()"
+            mat-raised-button
+            color="primary"
+            (click)="primaryAction()"
+            [disabled]="isPrimaryButtonDisabled()"
+            test-id="view_search_contract.searched_contract.renew_contract"
+          >
+            {{ getPrimaryActionButtonName() }}
+          </button>
+        </div>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

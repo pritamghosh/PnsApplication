@@ -33,7 +33,7 @@ export class CustomerFormComponent implements OnInit {
       region: new FormControl(null, [Validators.required]),
       address: new FormControl(null, [Validators.required]),
       pan: new FormControl(null, [
-        Validators.pattern("^[A-Za-z]{5}[0-9]{4}[A-Za-z]{5}$"),
+        Validators.pattern("^[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}$"),
       ]),
       gstinNo: new FormControl(null, [
         Validators.pattern(

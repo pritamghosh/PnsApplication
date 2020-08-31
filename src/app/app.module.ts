@@ -63,6 +63,12 @@ import { DisableControlDirective } from "./driectives/disable-control.directive"
 import { ContractApprovalComponent } from "./components/contract/contract-approval/contract-approval.component";
 import { ContractApprovalViewComponent } from "./components/contract/contract-approval-view/contract-approval-view.component";
 import { DiffrenceLabelComponent } from "./components/contract/contract-approval-view/diffrence-label/diffrence-label.component";
+import { ProfileComponent } from "./components/profile/profile.component";
+import { ProfileViewComponent } from "./components/profile/profile-view/profile-view.component";
+import { ProfileElementComponent } from "./components/profile/profile-view/profile-element/profile-element.component";
+import { ProfileFormComponent } from "./components/profile/profile-form/profile-form.component";
+import { HasRoleDirective } from "./driectives/has-role.directive";
+import { ContractDetailsViewComponent } from './components/contract/contract-details/contract-details-view/contract-details-view.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +92,12 @@ import { DiffrenceLabelComponent } from "./components/contract/contract-approval
     ContractApprovalComponent,
     ContractApprovalViewComponent,
     DiffrenceLabelComponent,
+    ProfileComponent,
+    ProfileViewComponent,
+    ProfileElementComponent,
+    ProfileFormComponent,
+    HasRoleDirective,
+    ContractDetailsViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,6 +116,7 @@ import { DiffrenceLabelComponent } from "./components/contract/contract-approval
     MatIconModule,
     MatCardModule,
     MatExpansionModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,

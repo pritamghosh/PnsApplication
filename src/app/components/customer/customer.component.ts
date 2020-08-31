@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { CustomerService } from "src/app/services/customer.service";
 import { CustomerModel } from "src/app/models/customer.model";
-import { RoleService } from "src/app/utility/services/role.service";
+import { RoleService } from "src/app/services/role.service";
 
 @Component({
   selector: "app-customer",

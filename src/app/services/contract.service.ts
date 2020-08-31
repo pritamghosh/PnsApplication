@@ -89,12 +89,18 @@ export class ContractService {
     });
   }
 
-  public approve(id: string) {
+  public approve(req: any, decline?: boolean) {
     return new Observable((observer) => {
-      this.http.patch(`${this.baseUrl}/approve/${id}`).subscribe((res: any) => {
-        this._snackBar.open("Contract  Approved Successfully", "x", {
-          duration: 3000,
-        });
+      this.http.patch(`${this.baseUrl}/approve`, req).subscribe((res: any) => {
+        this._snackBar.open(
+          decline
+            ? "Contract  Decliend Successfully"
+            : "Contract  Approved Successfully",
+          "x",
+          {
+            duration: 3000,
+          }
+        );
         observer.next(res);
         observer.complete();
       });

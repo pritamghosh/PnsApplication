@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from "@angular/core";
 import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
-import { ContractService } from "src/app/services/contract.service";
 import { EquipmentModel } from "src/app/models/equipment.model ";
 import { environment } from "src/environments/environment";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
@@ -15,6 +14,7 @@ import { FindCustomerComponent } from "./find-customer/find-customer.component";
 import { FindEquipmentComponent } from "./find-equipment/find-equipment.component";
 import { ContractModel } from "src/app/models/contract.model ";
 import { DatePipe } from "@angular/common";
+import { RoleService } from "src/app/services/role.service";
 
 @Component({
   selector: "app-contract-form",
@@ -36,8 +36,8 @@ export class ContractFormComponent implements OnInit {
   newUploaded = false;
   contractForm: FormGroup;
   constructor(
-    private service: ContractService,
-    public dialog: MatDialog,
+    private role: RoleService,
+    private dialog: MatDialog,
     private datePipe: DatePipe
   ) {}
   ngOnInit(): void {
@@ -64,7 +64,12 @@ export class ContractFormComponent implements OnInit {
         }),
         _id: new FormControl(null),
         serialNumber: new FormControl(
-          { value: null, disabled: this.contract != undefined },
+          {
+            value: null,
+            disabled: !(
+              this.contract == undefined || this.role.hasContractApprover()
+            ),
+          },
           [Validators.required]
         ),
       }),
@@ -131,6 +136,9 @@ export class ContractFormComponent implements OnInit {
     });
   }
 
+  get findDisable() {
+    return !this.role.hasContractApprover() || this.isRenew;
+  }
   get minEndDate() {
     return this.contractForm.get("amcStartDate").value;
   }

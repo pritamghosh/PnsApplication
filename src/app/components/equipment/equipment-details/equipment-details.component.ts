@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { EquipmentModel } from "src/app/models/equipment.model ";
 import { Router } from "@angular/router";
-import { RoleService } from "src/app/utility/services/role.service";
+import { RoleService } from "src/app/services/role.service";
 
 @Component({
   selector: "app-equipment-details",

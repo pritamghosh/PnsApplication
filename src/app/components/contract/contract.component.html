@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container container-tab">
   <mat-tab-group [(selectedIndex)]="selectedTab">
     <mat-tab label="View/Search Contract">
       <!-- search panel start -->
@@ -8,7 +8,7 @@
           aria-labelledby="pns-radio-group-label"
           class="pns-radio-group"
           [(ngModel)]="selectedOption"
-          style="flex-direction: row;"
+          style="flex-direction: row"
           test-id="view_search_contract.option_radio"
         >
           <mat-radio-button

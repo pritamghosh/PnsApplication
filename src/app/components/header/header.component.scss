@@ -22,3 +22,24 @@
 .menu-spacer {
   width: 10px;
 }
+#img {
+  img {
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    border-width: 2px;
+    border-color: white;
+    border-style: solid;
+  }
+
+  div {
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    border-width: 2px;
+    border-color: white;
+    border-style: solid;
+    background-color: orange;
+    color: var(--col1);
+  }
+}

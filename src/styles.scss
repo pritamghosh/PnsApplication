@@ -1,12 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-
+:root {
+  --col1: #05557b;
+  --col2: #6da943;
+}
 html,
 body {
   height: 100%;
-}
-body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  // background: -webkit-linear-gradient(left, #3931af, #00c6ff);
 }
 
 .pns-radio-group {
@@ -65,6 +67,7 @@ mat-form-field {
     display: none !important;
   }
 }
+
 .sm-center {
   @media (max-width: 765px) {
     text-align: center;

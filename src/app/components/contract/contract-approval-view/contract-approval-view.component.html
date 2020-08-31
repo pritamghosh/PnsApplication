@@ -1,0 +1,188 @@
+<div class="details">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ newContract.customer.name }}({{ newContract.customer.region }})
+        <label style="float: right; font-size: small; text-align: right"
+          ><span [ngClass]="typeClass">{{ type }}<br /></span
+          ><span [ngClass]="newContract.status">{{ status }}</span></label
+        >
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <hr />
+      <div [ngClass]="hideIcon">
+        <app-diffrence-label
+          labelName="Equipment Model: "
+          [oldValue]="oldContract?.equipmentItem.equipment.model"
+          [newValue]="newContract.equipmentItem.equipment.model"
+        ></app-diffrence-label>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <app-diffrence-label
+          labelName="Serial Number: "
+          [newValue]="newContract.equipmentItem.serialNumber"
+          [oldValue]="oldContract?.equipmentItem.serialNumber"
+        ></app-diffrence-label>
+        <br />
+        <app-diffrence-label
+          labelName="Description: "
+          [newValue]="newContract.equipmentItem.equipment.description"
+          [oldValue]="oldContract?.equipmentItem.equipment.description"
+        ></app-diffrence-label>
+        <hr />
+        <app-diffrence-label
+          labelName="Amc Start Date: "
+          [newValue]="newContract.amcStartDate | date"
+          [oldValue]="oldContract?.amcStartDate | date"
+        ></app-diffrence-label>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <app-diffrence-label
+          labelName="Amc End Date: "
+          [newValue]="newContract.amcEndDate | date"
+          [oldValue]="oldContract?.amcEndDate | date"
+        ></app-diffrence-label>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <app-diffrence-label
+          labelName="Billing Cycle: "
+          [newValue]="newContract.billingCycle"
+          [oldValue]="oldContract?.billingCycle"
+        ></app-diffrence-label>
+        <br />
+        <app-diffrence-label
+          labelName="Contract Date: "
+          [newValue]="newContract.contractDate | date"
+          [oldValue]="oldContract?.contractDate | date"
+        ></app-diffrence-label>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <app-diffrence-label
+          labelName="Basic Amount: "
+          [newValue]="newContract.amcBasicAmount"
+          [oldValue]="oldContract?.amcBasicAmount"
+        ></app-diffrence-label>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <app-diffrence-label
+          labelName="Tax: "
+          [newValue]="newContract.amcTax + '%'"
+          [oldValue]="oldContract?.amcTax + '%'"
+        ></app-diffrence-label>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <app-diffrence-label
+          labelName="Total Amount: "
+          [newValue]="newContract.amcTotalAmount"
+          [oldValue]="oldContract?.amcTotalAmount"
+        ></app-diffrence-label>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <app-diffrence-label
+          labelName="Proposal No: "
+          [newValue]="newContract.proposalNo"
+          [oldValue]="oldContract?.proposalNo"
+        ></app-diffrence-label>
+        <div *ngIf="newContract.note">
+          <hr />
+          <span id="key">Note: </span><span>{{ newContract.note }}</span>
+        </div>
+        <hr />
+        <mat-form-field>
+          <mat-label>Approver Comment</mat-label>
+          <textarea
+            matInput
+            [formControl]="comment"
+            test-id="approver.comment.view.text"
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        type="button"
+        mat-mini-fab
+        color="warn"
+        #tooltip="matTooltip"
+        matTooltip="Delete Contract"
+        (click)="onDelete()"
+        test-id="view_search_contract.searched_contract.delete"
+        class="m-r-20"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button
+        type="button"
+        mat-mini-fab
+        color="accent"
+        #tooltip="matTooltip"
+        matTooltip="View Purchase Order"
+        (click)="viewPo()"
+        [disabled]="newContract.poFileName == null"
+        test-id="view_search_contract.approve_contract.view_po"
+        class="m-r-20"
+      >
+        <mat-icon>description</mat-icon>
+      </button>
+      <button
+        mat-mini-fab
+        color="accent"
+        type="button"
+        #tooltip="matTooltip"
+        matTooltip="Download Contract Invoice"
+        (click)="downloadConract()"
+        test-id="view_search_contract.approve_contract.download_pdf"
+      >
+        <mat-icon>save_alt</mat-icon>
+      </button>
+      <div style="float: right; margin-top: 0px">
+        <button
+          class="sm-show m-r-20"
+          type="button"
+          mat-mini-fab
+          color="warn"
+          #tooltip="matTooltip"
+          matTooltip="Decline Contract"
+          (click)="decline()"
+          test-id="view_contract.decline_contract"
+          [disabled]="!comment.valid"
+        >
+          <mat-icon>thumb_down_alt</mat-icon>
+        </button>
+        <button
+          class="sm-show"
+          type="button"
+          #tooltip="matTooltip"
+          matTooltip="Approve Contract"
+          mat-mini-fab
+          color="primary"
+          (click)="approve()"
+          test-id="view_contract.approve_contract.approve_contract"
+          [disabled]="!comment.valid"
+        >
+          <mat-icon>thumb_up_alt</mat-icon>
+        </button>
+        <button
+          class="sm-hide"
+          type="button"
+          #tooltip="matTooltip"
+          matTooltip="Decline Contract"
+          mat-raised-button
+          color="warn"
+          (click)="decline()"
+          test-id="view_contract.approve_contract.decline_contract"
+          [disabled]="!comment.valid"
+        >
+          Decline
+        </button>
+        <button
+          class="sm-hide"
+          type="button"
+          #tooltip="matTooltip"
+          matTooltip="Approve Contract"
+          mat-raised-button
+          color="primary"
+          (click)="approve()"
+          test-id="view_contract.approve_contract.approve_contract"
+          [disabled]="!comment.valid"
+        >
+          Approve
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

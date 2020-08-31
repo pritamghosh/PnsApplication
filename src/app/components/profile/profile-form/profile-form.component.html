@@ -1,0 +1,219 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header class="center">
+      <mat-card-title>{{ title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="profileForm" #form="ngForm">
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <mat-form-field>
+              <mat-label>First Name</mat-label>
+              <input
+                matInput
+                formControlName="firstName"
+                test-id="profileform.firstname"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <mat-form-field>
+              <mat-label>Middle Name</mat-label>
+              <input
+                matInput
+                formControlName="middleName"
+                test-id="profileform.middleName"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <mat-form-field>
+              <mat-label>Family Name</mat-label>
+              <input
+                matInput
+                formControlName="familyName"
+                test-id="profileform.familyName"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="row">
+              <div class="col-md-6 col-sm-6">
+                <mat-form-field>
+                  <mat-label>Select Gender</mat-label>
+                  <mat-select
+                    formControlName="gender"
+                    test-id="profileform.gender"
+                  >
+                    <mat-option>Select One</mat-option>
+                    <mat-option value="Male">Male</mat-option>
+                    <mat-option value="Female">Female</mat-option>
+                    <mat-option value="Unknown">Unknown</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <mat-form-field>
+                  <mat-label>Select Blood Group</mat-label>
+                  <mat-select
+                    formControlName="bloodGroup"
+                    test-id="profileform.bloodGroup"
+                  >
+                    <mat-option>Select One</mat-option>
+                    <mat-option
+                      *ngFor="let item of bloodGroups"
+                      [value]="item"
+                      >{{ item }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <mat-form-field>
+              <mat-label>Address</mat-label>
+              <textarea
+                matInput
+                formControlName="address"
+                test-id="profileform.address"
+              ></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <mat-form-field>
+              <mat-label>Date of Birth</mat-label>
+              <input
+                matInput
+                readonly
+                [matDatepicker]="dob"
+                [max]="today"
+                formControlName="dateOfBirth"
+                readonly
+                test-id="profileform.dateOfBirth"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dob"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #dob></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <mat-form-field>
+              <mat-label>Date of Joining</mat-label>
+              <input
+                matInput
+                readonly
+                [matDatepicker]="doj"
+                [max]="today"
+                formControlName="dateOfJoining"
+                readonly
+                test-id="profileform.dateOfJoining"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="doj"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #doj></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <mat-form-field>
+              <mat-label>Base Location</mat-label>
+              <mat-select
+                formControlName="baseLocation"
+                test-id="profileform.baseLocation"
+              >
+                <mat-option>Select One</mat-option>
+                <mat-option *ngFor="let item of baseLocations" [value]="item">{{
+                  item
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <mat-form-field>
+              <mat-label>Industry Group</mat-label>
+              <input
+                matInput
+                formControlName="industry"
+                test-id="profileform.industry"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <mat-form-field>
+              <mat-label>Designation</mat-label>
+              <mat-select
+                formControlName="designation"
+                test-id="profileform.designation"
+              >
+                <mat-option>Select One</mat-option>
+                <mat-option *ngFor="let item of designations" [value]="item">{{
+                  item
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <mat-form-field>
+              <mat-label>Work Email</mat-label>
+              <input
+                matInput
+                formControlName="workEmail"
+                test-id="profileform.workEmail"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <mat-form-field>
+              <mat-label>Contact No.</mat-label>
+              <input
+                matInput
+                formControlName="mobileNo"
+                test-id="profileform.mobileNo"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <mat-form-field>
+              <mat-label>Work Phone No</mat-label>
+              <input
+                matInput
+                formControlName="workContactNo"
+                test-id="profileform.workContactNo"
+              />
+            </mat-form-field>
+          </div>
+          <!-- Button panel start -->
+          <div class="col-md-12 col-lg-12 col-sm-12">
+            <button
+              mat-flat-button
+              color="warn"
+              type="button"
+              (click)="secondAction()"
+              [disabled]="secondButtonDisable"
+              test-id="add_contract.reset-button"
+            >
+              {{ secondButtonName }}
+            </button>
+            <div style="float: right">
+              <button
+                mat-raised-button
+                color="primary"
+                [disabled]="!profileForm.valid"
+                type="button"
+                (click)="submitAction()"
+                test-id="add_contract.create_button"
+              >
+                {{ actionButtonName }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

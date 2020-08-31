@@ -4,7 +4,7 @@ import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { ContractModel } from "src/app/models/contract.model ";
 import { ActivatedRoute } from "@angular/router";
 import { DatePipe } from "@angular/common";
-import { RoleService } from "src/app/utility/services/role.service";
+import { RoleService } from "src/app/services/role.service";
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -179,6 +179,7 @@ export class ContractComponent implements OnInit {
           element.poFileContent = resp.poFileContent;
           element.poFileContentType = resp.poFileContentType;
           element.poFileName = resp.poFileName;
+          element.status = resp.status;
         }
       });
       this.cancelUpdate();

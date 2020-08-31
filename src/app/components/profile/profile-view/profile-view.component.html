@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="row emp-profile" *ngIf="profile">
+    <div class="col-md-4 col-sm-12 profile-img-outer">
+      <div class="profile-img">
+        <div id="img-c">
+          <img
+            id="img"
+            src="{{ image }}"
+            alt=""
+            *ngIf="image != null; else initialBlock"
+          />
+          <ng-template #initialBlock>
+            <div id="img" class="initial">
+              <p>{{ initial }}</p>
+            </div>
+          </ng-template>
+        </div>
+        <button
+          class="file"
+          [ngStyle]="{ opacity: opacity }"
+          (mouseenter)="opacity = 1"
+          (mouseleave)="opacity = 0"
+          test-id="profile.upload_image_button"
+          (click)="fileInput.click()"
+        >
+          <mat-icon>photo_camera</mat-icon>
+          <div>Update</div>
+        </button>
+        <input
+          #fileInput
+          [formControl]="imageFc"
+          id="uploadImage"
+          type="file"
+          accept="image/*"
+          test-id="profile.upload_image_file"
+          (change)="uploadImage($event)"
+          [hidden]="true"
+        />
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12">
+      <div class="profile-head">
+        <div id="name" style="margin-top: 10px">{{ name }}</div>
+        <div style="margin-top: 10px">
+          <span id="designation">{{ profile?.designation }}</span
+          ><button mat-flat-button type="button" id="edit" color="primary">
+            Edit Profile
+          </button>
+        </div>
+        <hr />
+        <div class="col-md-12 col-sm-12 profile-body">
+          <app-profile-element
+            attribute="Employee Id"
+            [value]="profile?.employeeId | uppercase"
+          ></app-profile-element>
+          <app-profile-element
+            attribute="Name"
+            [value]="name"
+          ></app-profile-element>
+          <app-profile-element
+            attribute="Mobile"
+            [value]="profile?.mobileNo"
+          ></app-profile-element>
+          <app-profile-element
+            attribute="Work Phone"
+            [value]="profile?.workContactNo"
+          ></app-profile-element>
+          <app-profile-element
+            attribute="Work Email Id"
+            [value]="profile?.workEmail"
+          ></app-profile-element>
+          <app-profile-element
+            attribute="Date of Joining"
+            [value]="profile?.dateOfJoining | date"
+          ></app-profile-element>
+          <app-profile-element
+            attribute="Designation"
+            [value]="profile?.designation"
+          ></app-profile-element>
+          <app-profile-element
+            attribute="Base Location"
+            [value]="profile?.baseLocation"
+          ></app-profile-element>
+          <app-profile-element
+            attribute="Date Of Birth"
+            [value]="profile?.dateOfBirth | date"
+          ></app-profile-element>
+          <app-profile-element
+            attribute="Gender"
+            [value]="profile?.gender"
+          ></app-profile-element>
+          <app-profile-element
+            attribute="Blood Group"
+            [value]="profile?.bloodGroup"
+          ></app-profile-element>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

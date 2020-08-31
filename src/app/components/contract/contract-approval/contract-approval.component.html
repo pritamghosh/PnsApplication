@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="center" *ngIf="!contractResp || contractResp.length == 0">
+    <app-no-records-found></app-no-records-found>
+  </div>
+  <div
+    class="col-md-12 col-sm-12 col-12"
+    *ngFor="let contracts of contractResp"
+  >
+    <app-contract-approval-view
+      (remove)="onRemove($event)"
+      [contracts]="contracts"
+    ></app-contract-approval-view>
+  </div>
+  <div class="paginationdiv center" *ngIf="pageCount > 0">
+    <ngb-pagination
+      class="d-flex justify-content-center"
+      [collectionSize]="pageCount"
+      [(page)]="page"
+      [pageSize]="1"
+      [maxSize]="5"
+      [boundaryLinks]="true"
+      (pageChange)="changePage($event)"
+    ></ngb-pagination>
+  </div>
+</div>

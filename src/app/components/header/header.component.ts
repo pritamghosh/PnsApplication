@@ -1,19 +1,26 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { KeycloakService } from "keycloak-angular";
 import { Router, NavigationStart } from "@angular/router";
+import { EmployeeProfileService } from "src/app/services/employee-profile.service";
+import { EmployeeProfileModel } from "src/app/models/employee.profile.model";
 
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"],
 })
-export class HeaderComponent implements OnInit {
-  constructor(private keacloak: KeycloakService, private router: Router) {}
+export class HeaderComponent implements OnInit, AfterViewInit {
+  constructor(
+    private keacloak: KeycloakService,
+    private router: Router,
+    private profileService: EmployeeProfileService
+  ) {}
   activeRoute: string;
-  username: string;
+  initial: string;
+  profile: EmployeeProfileModel;
   ngOnInit(): void {
     this.keacloak.loadUserProfile().then((res) => {
-      this.username = res.firstName + " " + res.lastName;
+      this.initial = "" + res.firstName?.charAt(0) + res.lastName?.charAt(0);
     });
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -24,6 +31,19 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.profileService
+      .getProfile(true)
+      .subscribe((p: EmployeeProfileModel) => (this.profile = p));
+  }
+
+  get image() {
+    if (this.profile?.image != null) {
+      return "data:image/bmp;base64," + this.profile?.image;
+    }
+    return null;
   }
 
   get isLoggedIn() {

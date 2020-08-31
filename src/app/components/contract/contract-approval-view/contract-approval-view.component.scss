@@ -1,0 +1,34 @@
+.mat-card-header-text {
+  width: 100% !important;
+}
+.new {
+  color: #3914cc;
+}
+.old {
+  color: #28a745;
+}
+.hideIcon {
+  ::ng-deep {
+    sup {
+      mat-icon {
+        display: none;
+      }
+    }
+  }
+}
+
+.APPROVED {
+  color: green;
+}
+
+.L1_APPROVED {
+  color: gold;
+}
+
+.PENDING {
+  color: red;
+}
+
+.MODIFICATION_REQUIRED {
+  color: red;
+}
