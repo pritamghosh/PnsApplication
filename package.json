@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy-config.json -o",
-    "build": "ng build --prod --base-href /portal/",
+    "build": "ng build",
     "build-prod": "ng build --prod --base-href /portal/ --output-path=/pns/portal/static",
     "test": "ng test",
     "lint": "ng lint",
@@ -25,8 +25,12 @@
     "@angular/router": "~9.0.5",
     "@ng-bootstrap/ng-bootstrap": "^6.2.0",
     "bootstrap": "^4.5.1",
+    "chart.js": "^2.7.3",
+    "d3": "4.2.6",
+    "d3-ng2-service": "^1.23.3",
     "keycloak-angular": "^8.0.1",
     "keycloak-js": "^10.0.2",
+    "ng-circle-progress": "^1.5.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

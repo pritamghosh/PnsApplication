@@ -187,6 +187,51 @@
               />
             </mat-form-field>
           </div>
+          <div class="col-md-6 col-sm-6" formGroupName="reportingManager">
+            <mat-form-field>
+              <mat-label>Reporting Manager</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="name"
+                test-id="profileform.rm"
+                (ngModelChange)="getMangers($event)"
+                [matAutocomplete]="rmauto"
+              />
+              <mat-autocomplete autoActiveFirstOption #rmauto="matAutocomplete">
+                <mat-option
+                  *ngFor="let rm of reportingMangers"
+                  [value]="rm.name"
+                  style="font-size: small"
+                >
+                  {{ rm.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6 col-sm-6" formGroupName="hrManager">
+            <mat-form-field>
+              <mat-label>HR Manager</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="name"
+                test-id="profileform.hr"
+                (ngModelChange)="getHrs($event)"
+                [matAutocomplete]="hrauto"
+              />
+              <mat-autocomplete autoActiveFirstOption #hrauto="matAutocomplete">
+                <mat-option
+                  *ngFor="let hm of hrMangers"
+                  [value]="hm.name"
+                  style="font-size: small"
+                >
+                  {{ hm.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
           <!-- Button panel start -->
           <div class="col-md-12 col-lg-12 col-sm-12">
             <button

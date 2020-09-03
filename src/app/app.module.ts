@@ -68,7 +68,16 @@ import { ProfileViewComponent } from "./components/profile/profile-view/profile-
 import { ProfileElementComponent } from "./components/profile/profile-view/profile-element/profile-element.component";
 import { ProfileFormComponent } from "./components/profile/profile-form/profile-form.component";
 import { HasRoleDirective } from "./driectives/has-role.directive";
-import { ContractDetailsViewComponent } from './components/contract/contract-details/contract-details-view/contract-details-view.component';
+import { ContractDetailsViewComponent } from "./components/contract/contract-details/contract-details-view/contract-details-view.component";
+import { HomeComponent } from "./components/home/home.component";
+import { ProfileCardComponent } from "./components/home/profile-card/profile-card.component";
+import { MyProfileComponent } from "./components/profile/my-profile/my-profile.component";
+import { OtherProfileComponent } from "./components/profile/other-profile/other-profile.component";
+import { HrCardComponent } from "./components/home/hr-card/hr-card.component";
+import { RmCardComponent } from "./components/home/rm-card/rm-card.component";
+import { LeaveCardComponent } from "./components/home/leave-card/leave-card.component";
+import { RadialProgressChartComponent } from "./components/home/leave-card/radial-progress-chart/radial-progress-chart.component";
+import { D3Service } from "d3-ng2-service";
 
 @NgModule({
   declarations: [
@@ -98,6 +107,14 @@ import { ContractDetailsViewComponent } from './components/contract/contract-det
     ProfileFormComponent,
     HasRoleDirective,
     ContractDetailsViewComponent,
+    HomeComponent,
+    ProfileCardComponent,
+    MyProfileComponent,
+    OtherProfileComponent,
+    HrCardComponent,
+    RmCardComponent,
+    LeaveCardComponent,
+    RadialProgressChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -141,6 +158,7 @@ import { ContractDetailsViewComponent } from './components/contract/contract-det
   ],
   providers: [
     DatePipe,
+    D3Service,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: PnsInterInterceptorService,
@@ -154,6 +172,7 @@ import { ContractDetailsViewComponent } from './components/contract/contract-det
     },
     { provide: ErrorHandler, useClass: PnsErrorService },
   ],
+  entryComponents: [AppComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

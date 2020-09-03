@@ -82,3 +82,15 @@
     font-size: 10px;
   }
 }
+
+.emp-profile {
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  // background: linear-gradient(to top, #05267b -1%, #43a983 100%);
+  box-shadow: 5px 4px 4px 2px rgba(0, 0, 0, 0.34);
+  @media (max-width: 645px) {
+    margin: 20px 3px;
+  }
+}

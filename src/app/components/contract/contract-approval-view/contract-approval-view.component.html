@@ -3,7 +3,7 @@
     <mat-card-header>
       <mat-card-title>
         {{ newContract.customer.name }}({{ newContract.customer.region }})
-        <label style="float: right; font-size: small; text-align: right"
+        <label class="indicator"
           ><span [ngClass]="typeClass">{{ type }}<br /></span
           ><span [ngClass]="newContract.status">{{ status }}</span></label
         >

@@ -19,9 +19,32 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   initial: string;
   profile: EmployeeProfileModel;
   ngOnInit(): void {
-    this.keacloak.loadUserProfile().then((res) => {
+    this.keacloak.loadUserProfile().then((res: any) => {
+      let profile: EmployeeProfileModel = {
+        firstName: res.firstName,
+        familyName: res.lastName,
+        employeeId: res.username,
+        designation: res.attributes?.designation[0],
+        workEmail: res.email,
+        _id: null,
+        middleName: res.attributes?.middleName,
+        address: null,
+        baseLocation: null,
+        mobileNo: null,
+        gender: null,
+        workContactNo: null,
+        bloodGroup: null,
+        dateOfBirth: null,
+        dateOfJoining: null,
+        image: null,
+        hrManager: null,
+        reportingManager: null,
+      };
+
+      this.profileService.setProfile(profile);
       this.initial = "" + res.firstName?.charAt(0) + res.lastName?.charAt(0);
     });
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         let arr: string[] = event.url.split("/");

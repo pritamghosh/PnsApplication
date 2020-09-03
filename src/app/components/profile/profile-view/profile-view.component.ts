@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { EmployeeProfileModel } from "src/app/models/employee.profile.model";
 import { EmployeeProfileService } from "src/app/services/employee-profile.service";
-import { Observable } from "rxjs";
+import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-profile-view",
@@ -11,10 +12,9 @@ import { Observable } from "rxjs";
 })
 export class ProfileViewComponent implements OnInit {
   opacity = 0;
-  //image = "/assets/images/gitdp.jpg";
-
-  profile: EmployeeProfileModel;
-
+  private paramSub: Subscription;
+  @Input("profile") profile: EmployeeProfileModel;
+  @Input("myProfile") myProfile = false;
   imageFc = new FormControl();
 
   get image() {
@@ -27,8 +27,8 @@ export class ProfileViewComponent implements OnInit {
   get name() {
     return (
       this.profile.firstName +
-      " " +
       (this.profile.middleName != null ? " " + this.profile?.middleName : "") +
+      " " +
       this.profile.familyName
     );
   }
@@ -40,13 +40,12 @@ export class ProfileViewComponent implements OnInit {
       this.profile?.familyName.charAt(0)
     );
   }
-  constructor(private service: EmployeeProfileService) {}
+  constructor(
+    private service: EmployeeProfileService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-    this.service.getProfile().subscribe((p: EmployeeProfileModel) => {
-      this.profile = p;
-    });
-  }
+  ngOnInit(): void {}
 
   uploadImage(event: any) {
     let files = event.target.files;
@@ -60,5 +59,9 @@ export class ProfileViewComponent implements OnInit {
     this.service
       .uploadImage(file)
       .subscribe((p: EmployeeProfileModel) => (this.profile = p));
+  }
+
+  openProfile(id: string) {
+    this.router.navigate([`profile/${id}`]);
   }
 }

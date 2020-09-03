@@ -16,6 +16,7 @@
           </ng-template>
         </div>
         <button
+          *ngIf="myProfile"
           class="file"
           [ngStyle]="{ opacity: opacity }"
           (mouseenter)="opacity = 1"
@@ -42,8 +43,14 @@
       <div class="profile-head">
         <div id="name" style="margin-top: 10px">{{ name }}</div>
         <div style="margin-top: 10px">
-          <span id="designation">{{ profile?.designation }}</span
-          ><button mat-flat-button type="button" id="edit" color="primary">
+          <span id="designation">{{ profile?.designation }}</span>
+          <button
+            *ngIf="myProfile"
+            mat-flat-button
+            type="button"
+            id="edit"
+            color="primary"
+          >
             Edit Profile
           </button>
         </div>
@@ -92,6 +99,18 @@
           <app-profile-element
             attribute="Blood Group"
             [value]="profile?.bloodGroup"
+          ></app-profile-element>
+          <app-profile-element
+            (action)="openProfile(profile?.reportingManager?.employeeId)"
+            attribute="Reporting Manager"
+            [value]="profile?.reportingManager?.name"
+            link="true"
+          ></app-profile-element>
+          <app-profile-element
+            (action)="openProfile(profile?.hrManager?.employeeId)"
+            attribute="HR Representative"
+            [value]="profile?.hrManager?.name"
+            link="true"
           ></app-profile-element>
         </div>
       </div>

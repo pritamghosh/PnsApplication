@@ -1,0 +1,44 @@
+<div class="row home-card">
+  <div class="col-md-12">
+    <span id="title">Leave Details</span>
+    <hr />
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-4" style="text-align: center">
+    <app-radial-progress-chart
+      [totalVal]="'20'"
+      [resValue]="'15'"
+      [progressColor]="'indigo'"
+    ></app-radial-progress-chart>
+    <div id="leave-type">Casual Leave</div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-4" style="text-align: center">
+    <app-radial-progress-chart
+      [totalVal]="'20'"
+      [resValue]="'18'"
+      [progressColor]="'green'"
+    ></app-radial-progress-chart>
+    <div id="leave-type">Privilleged Leave</div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-4" style="text-align: center">
+    <app-radial-progress-chart
+      [totalVal]="'10'"
+      [resValue]="'7'"
+      [progressColor]="'brown'"
+    ></app-radial-progress-chart>
+    <div id="leave-type">Sick Leave</div>
+  </div>
+  <div class="col-md-12">
+    <hr />
+  </div>
+  <div class="col-md-12" style="width: 100%; text-align: right">
+    <button
+      style="margin: 6px 0px"
+      mat-flat-button
+      type="button"
+      id="edit"
+      color="primary"
+    >
+      My Leaves
+    </button>
+  </div>
+</div>

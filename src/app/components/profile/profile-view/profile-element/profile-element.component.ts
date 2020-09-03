@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 
 @Component({
   selector: "app-profile-element",
@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from "@angular/core";
 export class ProfileElementComponent implements OnInit {
   @Input("attribute") attribute;
   @Input("value") value;
+  @Input("link") link = false;
+  @Output("action") action = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}

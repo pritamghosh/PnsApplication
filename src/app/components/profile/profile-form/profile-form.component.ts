@@ -10,6 +10,9 @@ import { FormGroup, FormControl, Validators, NgForm } from "@angular/forms";
 import { DatePipe } from "@angular/common";
 import { EmployeeProfileService } from "src/app/services/employee-profile.service";
 import { environment } from "src/environments/environment";
+import { EmployeeProfileModel } from "src/app/models/employee.profile.model";
+import { ManagerModel } from "src/app/models/manager.model";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-profile-form",
@@ -26,6 +29,10 @@ export class ProfileFormComponent implements OnInit {
   @Input("title") title: string = "Enter New Profile Details";
   today = new Date();
   bloodGroups = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
+  reportingMangers: ManagerModel[] = [];
+  hrMangers: ManagerModel[] = [];
+  rm = new FormControl();
+  hm = new FormControl();
   isCreate = true;
   constructor(
     private datePipe: DatePipe,
@@ -34,6 +41,18 @@ export class ProfileFormComponent implements OnInit {
 
   get designations() {
     return environment.designations;
+  }
+
+  getMangers(event: any) {
+    this.service
+      .searchManager(event, true)
+      .subscribe((p: ManagerModel[]) => (this.reportingMangers = p));
+  }
+
+  getHrs(event: any) {
+    this.service
+      .searchManager(event, true)
+      .subscribe((p: ManagerModel[]) => (this.hrMangers = p));
   }
 
   get baseLocations() {
@@ -59,7 +78,56 @@ export class ProfileFormComponent implements OnInit {
       mobileNo: new FormControl(null, [Validators.required]),
       workContactNo: new FormControl(),
       image: new FormControl(),
+      reportingManager: new FormGroup({
+        _id: new FormControl(null),
+        name: new FormControl(null, [
+          Validators.required,
+          this.invalidRm.bind(this),
+        ]),
+        employeeId: new FormControl(),
+      }),
+      hrManager: new FormGroup({
+        _id: new FormControl(null),
+        name: new FormControl(null, [
+          Validators.required,
+          this.invalidHr.bind(this),
+        ]),
+        employeeId: new FormControl(),
+      }),
     });
+  }
+
+  invalidHr(control: FormControl): { [s: string]: boolean } {
+    for (let index = 0; index < this.hrMangers.length; index++) {
+      const element = this.hrMangers[index];
+      if (element.name == control.value) {
+        this.profileForm.get("hrManager").get("_id").setValue(element._id);
+        this.profileForm
+          .get("hrManager")
+          .get("employeeId")
+          .setValue(element.employeeId);
+        return null;
+      }
+    }
+    return { invalidHr: true };
+  }
+
+  invalidRm(control: FormControl): { [s: string]: boolean } {
+    for (let index = 0; index < this.reportingMangers.length; index++) {
+      const element = this.reportingMangers[index];
+      if (element.name == control.value) {
+        this.profileForm
+          .get("reportingManager")
+          .get("_id")
+          .setValue(element._id);
+        this.profileForm
+          .get("reportingManager")
+          .get("employeeId")
+          .setValue(element.employeeId);
+        return null;
+      }
+    }
+    return { invalidRm: true };
   }
 
   get secondButtonDisable() {
@@ -78,19 +146,9 @@ export class ProfileFormComponent implements OnInit {
       "yyyy-MM-dd"
     );
     this.service.create(profileRaw).subscribe((p) => this.fromElement.reset());
-
-    // this.submitEmitter.emit({
-    //   profile: profileRaw,
-    //   formGroup: this.profileForm,
-    //   form: this.fromElement,
-    // });
   }
 
   secondAction() {
     this.fromElement.reset();
-    // this.secondActionEmitter.emit({
-    //   formGroup: this.profileForm,
-    //   form: this.fromElement,
-    // });
   }
 }

@@ -1,0 +1,40 @@
+<div class="row home-card" *ngIf="profile">
+  <div class="col-md-12">
+    <span id="title">Repoting Manager</span>
+    <hr />
+  </div>
+  <div class="col-lg-4 col-md-12 col-sm-4 profile-img-outer">
+    <div class="profile-img">
+      <div id="img-c">
+        <img
+          id="img"
+          src="{{ image }}"
+          alt=""
+          *ngIf="image != null; else initialBlock"
+        />
+        <ng-template #initialBlock>
+          <div id="img" class="initial">
+            <p>{{ initial }}</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-12 col-sm-8 profile-head">
+    <div id="name" class="link" style="margin-top: 10px">{{ name }}</div>
+    <div style="margin-top: 10px">
+      <span id="designation">{{ profile?.designation }}</span>
+    </div>
+    <hr id="hr" />
+    <div style="width: 100%">
+      <span>{{ profile?.mobileNo }}</span>
+      <span style="float: right"
+        ><a href="mailto:{{ profile.workEmail }}  " target="_blank"
+          ><mat-icon>email</mat-icon></a
+        >&nbsp;&nbsp;<a href="tel:{{ profile.mobileNo }}  " target="_blank"
+          ><mat-icon>call</mat-icon></a
+        >
+      </span>
+    </div>
+  </div>
+</div>

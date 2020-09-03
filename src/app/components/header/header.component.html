@@ -100,7 +100,7 @@
       <button mat-menu-item [routerLink]="['login']" [hidden]="isLoggedIn">
         Login
       </button>
-      <button mat-menu-item [routerLink]="['profile']" [hidden]="!isLoggedIn">
+      <button mat-menu-item [routerLink]="['myprofile']" [hidden]="!isLoggedIn">
         Profile
       </button>
       <button mat-menu-item (click)="signOut()" [hidden]="!isLoggedIn">

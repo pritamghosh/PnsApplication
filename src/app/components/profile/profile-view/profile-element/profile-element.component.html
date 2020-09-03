@@ -2,7 +2,10 @@
   <div class="col-md-4 col-sm-6 col-6">
     <label id="attribute">{{ attribute }}</label>
   </div>
-  <div class="col-md-8 col-sm-6 col-6">
+  <div class="col-md-8 col-sm-6 col-6" *ngIf="!link">
     <label id="value">{{ value }}</label>
+  </div>
+  <div class="col-md-8 col-sm-6 col-6" *ngIf="link">
+    <a id="value" (click)="action.emit()" class="stretched-link">{{ value }}</a>
   </div>
 </div>

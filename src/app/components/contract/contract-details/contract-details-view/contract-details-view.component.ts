@@ -27,7 +27,7 @@ export class ContractDetailsViewComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getStatus() {
+  get status() {
     return this.statusMap.get(this.contract.status) != null
       ? this.statusMap.get(this.contract.status)
       : this.contract.status;

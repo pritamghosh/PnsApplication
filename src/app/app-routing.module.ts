@@ -6,6 +6,9 @@ import { EquipmentComponent } from "./components/equipment/equipment.component";
 import { AuthGuardService } from "./services/auth.guard.service";
 import { ProfileViewComponent } from "./components/profile/profile-view/profile-view.component";
 import { ProfileFormComponent } from "./components/profile/profile-form/profile-form.component";
+import { HomeComponent } from "./components/home/home.component";
+import { MyProfileComponent } from "./components/profile/my-profile/my-profile.component";
+import { OtherProfileComponent } from "./components/profile/other-profile/other-profile.component";
 
 const routes: Routes = [
   {
@@ -27,16 +30,25 @@ const routes: Routes = [
     component: ContractComponent,
   },
   {
-    path: "profile",
+    path: "myprofile",
     canActivate: [AuthGuardService],
-    component: ProfileViewComponent,
+    component: MyProfileComponent,
+  },
+  {
+    path: "profile/:id",
+    canActivate: [AuthGuardService],
+    component: OtherProfileComponent,
   },
   {
     path: "employee/profile/create",
     canActivate: [AuthGuardService],
     component: ProfileFormComponent,
   },
-  { path: "", redirectTo: "contract", pathMatch: "full" },
+  {
+    path: "",
+    canActivate: [AuthGuardService],
+    component: HomeComponent,
+  },
 ];
 
 @NgModule({

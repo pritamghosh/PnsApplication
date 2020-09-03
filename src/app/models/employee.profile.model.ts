@@ -1,3 +1,5 @@
+import { ManagerModel } from "./manager.model";
+
 export interface EmployeeProfileModel {
   _id: string;
   employeeId: string;
@@ -15,4 +17,6 @@ export interface EmployeeProfileModel {
   dateOfBirth: Date;
   dateOfJoining: Date;
   image: any;
+  reportingManager: ManagerModel;
+  hrManager: ManagerModel;
 }

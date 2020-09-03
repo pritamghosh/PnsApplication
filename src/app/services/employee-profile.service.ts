@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { PnsHttpService } from "./pns-http.service";
 import { Observable } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { EmployeeProfileModel } from "../models/employee.profile.model";
 
 @Injectable({
   providedIn: "root",
@@ -9,6 +10,12 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class EmployeeProfileService {
   constructor(private http: PnsHttpService, private _snackBar: MatSnackBar) {}
   baseUrl = "/pns/employee/profile";
+
+  profile: EmployeeProfileModel;
+
+  setProfile(profile: EmployeeProfileModel) {
+    this.profile = profile;
+  }
 
   public create(req: any) {
     return new Observable((observer) => {
@@ -25,9 +32,33 @@ export class EmployeeProfileService {
   public getProfile(busydiplayhide?: boolean) {
     return new Observable((observer) => {
       this.http.get(this.baseUrl, busydiplayhide).subscribe((resp: any) => {
+        this.profile = resp;
         observer.next(resp);
         observer.complete();
       });
+    });
+  }
+
+  public getProfileByid(id: string, busydiplayhide?: boolean) {
+    return new Observable((observer) => {
+      this.http
+        .get(`${this.baseUrl}/${id}`, busydiplayhide)
+        .subscribe((resp: any) => {
+          observer.next(resp);
+          observer.complete();
+        });
+    });
+  }
+
+  public searchManager(key: string, busydiplayhide?: boolean) {
+    return new Observable((observer) => {
+      this.http
+        .get(`${this.baseUrl}/search/manager?query=${key}`, busydiplayhide)
+        .subscribe((resp: any) => {
+          this.profile = resp;
+          observer.next(resp);
+          observer.complete();
+        });
     });
   }
 
