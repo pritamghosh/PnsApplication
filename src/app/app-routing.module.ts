@@ -9,6 +9,7 @@ import { ProfileFormComponent } from "./components/profile/profile-form/profile-
 import { HomeComponent } from "./components/home/home.component";
 import { MyProfileComponent } from "./components/profile/my-profile/my-profile.component";
 import { OtherProfileComponent } from "./components/profile/other-profile/other-profile.component";
+import { ApplyLeaveComponent } from "./components/leave/apply-leave/apply-leave.component";
 
 const routes: Routes = [
   {
@@ -43,6 +44,11 @@ const routes: Routes = [
     path: "employee/profile/create",
     canActivate: [AuthGuardService],
     component: ProfileFormComponent,
+  },
+  {
+    path: "leave/apply",
+    canActivate: [AuthGuardService],
+    component: ApplyLeaveComponent,
   },
   {
     path: "",

@@ -1,0 +1,21 @@
+<div class="row home-card">
+  <div class="col-md-12">
+    <span id="title">Quick Links</span>
+    <hr />
+  </div>
+  <div
+    class="col-lg-4 col-md-6 col-sm-4 col-6"
+    *ngFor="let link of links"
+    style="text-align: center; margin: 10px 0px"
+  >
+    <button
+      style="margin: auto; width: 100px"
+      mat-raised-button
+      color="primary"
+      type="button"
+      [routerLink]="link.link"
+    >
+      {{ link.name }}
+    </button>
+  </div>
+</div>

@@ -21,7 +21,14 @@
     </div>
   </div>
   <div class="col-lg-8 col-md-12 col-sm-8 profile-head">
-    <div id="name" class="link" style="margin-top: 10px">{{ name }}</div>
+    <div
+      id="name"
+      class="link"
+      style="margin-top: 10px"
+      [routerLink]="'profile/' + profile.employeeId"
+    >
+      {{ name }}
+    </div>
     <div style="margin-top: 10px">
       <span id="designation">{{ profile?.designation }}</span>
     </div>

@@ -78,6 +78,8 @@ import { RmCardComponent } from "./components/home/rm-card/rm-card.component";
 import { LeaveCardComponent } from "./components/home/leave-card/leave-card.component";
 import { RadialProgressChartComponent } from "./components/home/leave-card/radial-progress-chart/radial-progress-chart.component";
 import { D3Service } from "d3-ng2-service";
+import { AppsCardComponent } from './components/home/apps-card/apps-card.component';
+import { ApplyLeaveComponent } from './components/leave/apply-leave/apply-leave.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +117,8 @@ import { D3Service } from "d3-ng2-service";
     RmCardComponent,
     LeaveCardComponent,
     RadialProgressChartComponent,
+    AppsCardComponent,
+    ApplyLeaveComponent,
   ],
   imports: [
     BrowserModule,
