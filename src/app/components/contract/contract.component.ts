@@ -6,6 +6,9 @@ import { ActivatedRoute } from "@angular/router";
 import { DatePipe } from "@angular/common";
 import { RoleService } from "src/app/services/role.service";
 import { environment } from "src/environments/environment";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { DomainDialogComponent } from "./domain-dialog/domain-dialog.component";
+import { DomainService } from "src/app/services/domain.service";
 
 @Component({
   selector: "app-contract",
@@ -30,13 +33,23 @@ export class ContractComponent implements OnInit {
   endDate = new FormControl(null, [Validators.required]);
   searchOption = environment.contractSearchOption;
 
+  currentDomain = "";
+
   selectedOption = this.searchOption[0];
   constructor(
     private service: ContractService,
     private route: ActivatedRoute,
     private datePipe: DatePipe,
-    public role: RoleService
-  ) {}
+    public role: RoleService,
+    public domainService: DomainService,
+    public dialog: MatDialog
+  ) {
+    this.currentDomain = this.domainService.getCurrentDomain();
+
+    if (this.currentDomain == "") {
+      this.changeDomain();
+    }
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -196,6 +209,29 @@ export class ContractComponent implements OnInit {
         this.contractResp = [];
         this.pageCount = 0;
         this.page = 0;
+      }
+    });
+  }
+
+  changeDomain() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      isDomainChanged: false,
+      currentDomain: this.currentDomain,
+    };
+    const dialogRef = this.dialog.open(DomainDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!dialogConfig.data.cancelled) {
+        this.currentDomain = dialogConfig.data.currentDomain;
+        this.domainService.setCurrentDomain(this.currentDomain);
+
+        if (this.isSearched && dialogConfig.data.isDomainChanged) {
+          this.changePage(1);
+        }
       }
     });
   }

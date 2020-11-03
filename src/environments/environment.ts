@@ -56,6 +56,8 @@ export const environment = {
   ],
 
   baseLocations: ["KOLKATA", "BHUBANESWAR"],
+
+  domains: ["PNS Proprietorship", "PNS Partnership"],
 };
 
 /*

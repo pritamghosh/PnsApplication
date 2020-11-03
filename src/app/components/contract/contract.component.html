@@ -1,5 +1,9 @@
 <div class="container container-tab">
-  <mat-tab-group [(selectedIndex)]="selectedTab">
+  <div class="domain">
+    Current Domain : <span class="current">{{ currentDomain }}</span>
+    <a (click)="changeDomain()">Change Domain</a>
+  </div>
+  <mat-tab-group [(selectedIndex)]="selectedTab" *ngIf="currentDomain">
     <mat-tab label="View/Search Contract">
       <!-- search panel start -->
       <div class="box">

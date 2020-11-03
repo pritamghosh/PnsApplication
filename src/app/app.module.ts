@@ -80,6 +80,7 @@ import { RadialProgressChartComponent } from "./components/home/leave-card/radia
 import { D3Service } from "d3-ng2-service";
 import { AppsCardComponent } from './components/home/apps-card/apps-card.component';
 import { ApplyLeaveComponent } from './components/leave/apply-leave/apply-leave.component';
+import { DomainDialogComponent } from './components/contract/domain-dialog/domain-dialog.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +120,7 @@ import { ApplyLeaveComponent } from './components/leave/apply-leave/apply-leave.
     RadialProgressChartComponent,
     AppsCardComponent,
     ApplyLeaveComponent,
+    DomainDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -122,3 +122,39 @@ mat-form-field {
   display: flex;
   flex-wrap: wrap;
 }
+
+.animated-background {
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 1000px 104px;
+  position: relative;
+  overflow: hidden;
+}
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.padTB20 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.padTB5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.padTB10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

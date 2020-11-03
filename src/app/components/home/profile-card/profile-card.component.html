@@ -1,11 +1,11 @@
-<div class="row home-card" *ngIf="profile">
+<div class="row home-card">
   <div class="col-md-12">
     <span id="title">My Profile</span>
     <hr />
   </div>
   <div class="col-lg-4 col-md-12 col-sm-4 profile-img-outer">
     <div class="profile-img">
-      <div id="img-c">
+      <div id="img-c" *ngIf="profile; else loadingImageBlock">
         <img
           id="img"
           src="{{ image }}"
@@ -18,13 +18,28 @@
           </div>
         </ng-template>
       </div>
+      <ng-template #loadingImageBlock>
+        <div id="img-c" class="animated-background"></div>
+      </ng-template>
     </div>
   </div>
   <div class="col-lg-8 col-md-12 col-sm-8 profile-head">
-    <div id="name" style="margin-top: 10px">{{ name }}</div>
-    <div style="margin-top: 10px">
+    <div
+      id="name"
+      style="margin-top: 10px"
+      *ngIf="profile; else loadingNameBlock"
+    >
+      {{ name }}
+    </div>
+    <ng-template #loadingNameBlock>
+      <div class="animated-background padTB10" style="margin-top: 10px"></div>
+    </ng-template>
+    <div style="margin-top: 10px" *ngIf="profile; else loadingDesignationBlock">
       <span id="designation">{{ profile?.designation }}</span>
     </div>
+    <ng-template #loadingDesignationBlock>
+      <div class="animated-background padTB5" style="margin: 10px 0px"></div>
+    </ng-template>
     <hr id="hr" />
     <div style="width: 100%; text-align: right">
       <button

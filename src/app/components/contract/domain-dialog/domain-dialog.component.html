@@ -1,0 +1,16 @@
+<h3 mat-dialog-title>Please Select a Domain</h3>
+<hr />
+
+<mat-dialog-actions align="end">
+  <div class="row">
+    <div
+      class="col-md-6 col-sm-6"
+      *ngFor="let domain of domains"
+      style="margin-bottom: 10px; text-align: center"
+    >
+      <button mat-raised-button color="primary" (click)="onSelection(domain)">
+        {{ domain }}
+      </button>
+    </div>
+  </div>
+</mat-dialog-actions>

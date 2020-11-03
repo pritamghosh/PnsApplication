@@ -50,4 +50,6 @@ export const environment = {
     "Operation Head",
   ],
   baseLocations: ["KOLKATA", "BHUBANESWAR"],
+
+  domains: ["PNS Proprietorship", "PNS Partnership"],
 };
