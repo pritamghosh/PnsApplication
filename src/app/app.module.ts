@@ -78,9 +78,18 @@ import { RmCardComponent } from "./components/home/rm-card/rm-card.component";
 import { LeaveCardComponent } from "./components/home/leave-card/leave-card.component";
 import { RadialProgressChartComponent } from "./components/home/leave-card/radial-progress-chart/radial-progress-chart.component";
 import { D3Service } from "d3-ng2-service";
-import { AppsCardComponent } from './components/home/apps-card/apps-card.component';
-import { ApplyLeaveComponent } from './components/leave/apply-leave/apply-leave.component';
-import { DomainDialogComponent } from './components/contract/domain-dialog/domain-dialog.component';
+import { AppsCardComponent } from "./components/home/apps-card/apps-card.component";
+import { ApplyLeaveComponent } from "./components/leave/apply-leave/apply-leave.component";
+import { DomainDialogComponent } from "./components/contract/domain-dialog/domain-dialog.component";
+import { SearchProfileComponent } from "./components/profile/search-profile/search-profile.component";
+import { ProfileSummaryCardComponent } from "./components/profile/search-profile/profile-summary-card/profile-summary-card.component";
+import { ProfileSummaryLoadingCardComponent } from "./components/profile/search-profile/profile-summary-loading-card/profile-summary-loading-card.component";
+import { LeaveComponent } from "./components/leave/leave.component";
+import { LeaveQuotaComponent } from "./components/leave/leave-quota/leave-quota.component";
+import { LeaveHistoryComponent } from "./components/leave/leave-history/leave-history.component";
+import { HolidayCalendarComponent } from "./components/leave/holiday-calendar/holiday-calendar.component";
+import { LeavePipe } from './pipes/leave.pipe';
+import { ApproveLeaveComponent } from './components/leave/approve-leave/approve-leave.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +130,15 @@ import { DomainDialogComponent } from './components/contract/domain-dialog/domai
     AppsCardComponent,
     ApplyLeaveComponent,
     DomainDialogComponent,
+    SearchProfileComponent,
+    ProfileSummaryCardComponent,
+    ProfileSummaryLoadingCardComponent,
+    LeaveComponent,
+    LeaveQuotaComponent,
+    LeaveHistoryComponent,
+    HolidayCalendarComponent,
+    LeavePipe,
+    ApproveLeaveComponent,
   ],
   imports: [
     BrowserModule,

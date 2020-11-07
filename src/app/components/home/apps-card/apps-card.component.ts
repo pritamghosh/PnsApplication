@@ -9,7 +9,7 @@ export class AppsCardComponent implements OnInit {
   links = [
     {
       name: "Leaves",
-      link: "",
+      link: "employee/leave",
     },
     {
       name: "Expense",

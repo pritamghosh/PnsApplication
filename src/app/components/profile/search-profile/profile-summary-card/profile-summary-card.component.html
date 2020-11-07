@@ -1,0 +1,44 @@
+<div class="row profile-card">
+  <div class="col-md-12">
+    <span id="name"> {{ name }}</span>
+    <hr />
+  </div>
+  <div class="col-lg-4 col-md-12 col-sm-4 profile-img-outer">
+    <div class="profile-img">
+      <div id="img-c">
+        <img
+          id="img"
+          src="{{ image }}"
+          alt=""
+          *ngIf="image != null; else initialBlock"
+        />
+        <ng-template #initialBlock>
+          <div id="img" class="initial">
+            <p>{{ initial }}</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-12 col-sm-8 profile-head">
+    <div id="designation" style="margin-top: 10px">
+      {{ profile?.designation }}
+    </div>
+    <div style="margin-top: 10px">
+      <span id="designation">{{ profile?.baseLocation }}</span>
+    </div>
+    <hr id="hr" />
+    <div style="width: 100%; text-align: right">
+      <button
+        style="margin: 6px 0px"
+        mat-flat-button
+        type="button"
+        id="edit"
+        color="primary"
+        (click)="openProfile()"
+      >
+        View Profile
+      </button>
+    </div>
+  </div>
+</div>

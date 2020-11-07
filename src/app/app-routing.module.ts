@@ -9,7 +9,8 @@ import { ProfileFormComponent } from "./components/profile/profile-form/profile-
 import { HomeComponent } from "./components/home/home.component";
 import { MyProfileComponent } from "./components/profile/my-profile/my-profile.component";
 import { OtherProfileComponent } from "./components/profile/other-profile/other-profile.component";
-import { ApplyLeaveComponent } from "./components/leave/apply-leave/apply-leave.component";
+import { SearchProfileComponent } from "./components/profile/search-profile/search-profile.component";
+import { LeaveComponent } from "./components/leave/leave.component";
 
 const routes: Routes = [
   {
@@ -41,15 +42,30 @@ const routes: Routes = [
     component: OtherProfileComponent,
   },
   {
-    path: "employee/profile/create",
+    path: "employee",
     canActivate: [AuthGuardService],
-    component: ProfileFormComponent,
+    children: [
+      {
+        path: "profile",
+        children: [
+          {
+            path: "create",
+            component: ProfileFormComponent,
+          },
+          {
+            path: "search",
+            component: SearchProfileComponent,
+          },
+        ],
+      },
+      {
+        path: "leave",
+        canActivate: [AuthGuardService],
+        component: LeaveComponent,
+      },
+    ],
   },
-  {
-    path: "leave/apply",
-    canActivate: [AuthGuardService],
-    component: ApplyLeaveComponent,
-  },
+
   {
     path: "",
     canActivate: [AuthGuardService],

@@ -110,10 +110,46 @@
     <mat-menu #employyeMenu="matMenu" class="primary">
       <button
         mat-menu-item
+        [matMenuTriggerFor]="profileMenu"
+        [ngStyle]="{ 'background-color': getBgColor('employee/profile') }"
+        test-id="employee-profile-menu-option"
+      >
+        Prolfile
+      </button>
+      <button mat-menu-item [routerLink]="['employee/leave']" class="primary">
+        Leave
+      </button>
+    </mat-menu>
+    <mat-menu #profileMenu="matMenu" class="primary">
+      <button
+        mat-menu-item
         [routerLink]="['employee/profile/create']"
         class="primary"
       >
         Create Profile
+      </button>
+      <button
+        mat-menu-item
+        [routerLink]="['employee/profile/search']"
+        class="primary"
+      >
+        Search Profile
+      </button>
+    </mat-menu>
+    <mat-menu #leavesMenu="matMenu" class="primary">
+      <button
+        mat-menu-item
+        [routerLink]="['employee/leave/apply']"
+        class="primary"
+      >
+        Apply Leave
+      </button>
+      <button
+        mat-menu-item
+        [routerLink]="['employee/leave/myleaves']"
+        class="primary"
+      >
+        My Leaves
       </button>
     </mat-menu>
   </mat-toolbar-row>

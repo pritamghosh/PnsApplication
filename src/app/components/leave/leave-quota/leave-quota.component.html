@@ -1,0 +1,41 @@
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="type">
+    <mat-header-cell *matHeaderCellDef> Leave Type </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.type | leave }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="deductableFrom">
+    <mat-header-cell *matHeaderCellDef> Deductable From </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.deductableFrom | date }}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="deductableTo">
+    <mat-header-cell *matHeaderCellDef> Deductable To </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.deductableTo | date }}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="entitlement">
+    <mat-header-cell *matHeaderCellDef> Entitlement </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.totalLeaves }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="used">
+    <mat-header-cell *matHeaderCellDef> Used Laeve </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.usedLeaves }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="approvalPending">
+    <mat-header-cell *matHeaderCellDef> Approval Pending </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.approvalPendingLeaves }}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="remainder">
+    <mat-header-cell *matHeaderCellDef>Remainder </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.reameningLeaves }}
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

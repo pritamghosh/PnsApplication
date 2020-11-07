@@ -12,7 +12,6 @@ import { Subscription } from "rxjs";
 })
 export class ProfileViewComponent implements OnInit {
   opacity = 0;
-  private paramSub: Subscription;
   @Input("profile") profile: EmployeeProfileModel;
   @Input("myProfile") myProfile = false;
   imageFc = new FormControl();

@@ -33,6 +33,6 @@ export class ProfileCardComponent implements OnInit {
       "" +
       this.profile?.firstName.charAt(0) +
       this.profile?.familyName.charAt(0)
-    );
+    ).toUpperCase();
   }
 }

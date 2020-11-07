@@ -62,6 +62,18 @@ export class EmployeeProfileService {
     });
   }
 
+  public search(url: string, busydiplayhide?: boolean) {
+    return new Observable((observer) => {
+      this.http
+        .get(`${this.baseUrl}/${url}`, busydiplayhide)
+        .subscribe((resp: any) => {
+          this.profile = resp;
+          observer.next(resp);
+          observer.complete();
+        });
+    });
+  }
+
   public uploadImage(image: File) {
     return new Observable((observer) => {
       const formData = new FormData();

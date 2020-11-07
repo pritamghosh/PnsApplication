@@ -1,0 +1,34 @@
+<div class="container">
+  <mat-tab-group [(selectedIndex)]="selectedTab">
+    <mat-tab label="My Leave">
+      <div class="box">
+        <app-apply-leave></app-apply-leave>
+        <hr />
+        <mat-card>
+          <mat-card-header class="center">
+            <mat-card-title>My Leave Details</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-tab-group>
+              <mat-tab label="Leave Quota">
+                <div class="box">
+                  <app-leave-quota></app-leave-quota>
+                </div>
+              </mat-tab>
+              <mat-tab label="Leave History">
+                <div class="box">
+                  <app-leave-history></app-leave-history>
+                </div>
+              </mat-tab>
+              <mat-tab label="Holiday Calender">
+                <div class="box">
+                  <app-holiday-calendar></app-holiday-calendar>
+                </div>
+              </mat-tab>
+            </mat-tab-group> </mat-card-content
+        ></mat-card></div
+    ></mat-tab>
+    <mat-tab label="Approve Leave" *ngIf="true">
+      <div class="box"></div> </mat-tab
+  ></mat-tab-group>
+</div>
